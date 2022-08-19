@@ -8,7 +8,6 @@ import fr.benco11.javaquarium.living.fish.SoleFish;
 import fr.benco11.javaquarium.living.kelp.Kelp;
 import fr.benco11.javaquarium.living.kelp.KelpBasic;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -60,12 +59,7 @@ public class JavaQuarium implements Aquarium {
 
         fishes.forEach(fish -> {
             tryToEatIfHungry(fish);
-            try {
-                tryToReproduce(fish).ifPresent(fishesToAdd::add);
-            } catch(InvocationTargetException | IllegalAccessException | NoSuchMethodException |
-                    InstantiationException e) {
-                throw new RuntimeException(e);
-            }
+            tryToReproduce(fish).ifPresent(fishesToAdd::add);
         });
 
         kelps.forEach(kelp -> tryToReproduce(kelp).ifPresent(kelpsToAdd::add));
@@ -79,15 +73,15 @@ public class JavaQuarium implements Aquarium {
     private void tryToEatIfHungry(Fish fish) {
         if(fish.hungry()) {
             if(fish instanceof Eater.Carnivorous carnivorous) {
-                randomFish(true).ifPresent(carnivorous::eat);
+                randomFishExcludingOne(true, fish).ifPresent(carnivorous::eat);
             } else if(fish instanceof Eater.Herbivorous herbivorous) {
                 randomKelp(true).ifPresent(herbivorous::eat);
             }
         }
     }
 
-    private Optional<Fish> tryToReproduce(Fish fish) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        Optional<Fish> other = randomFish(true);
+    private Optional<Fish> tryToReproduce(Fish fish) {
+        Optional<Fish> other = randomFishExcludingOne(true, fish);
         return other.isEmpty() ? Optional.empty() : other.get().reproduce(fish);
     }
 
@@ -95,16 +89,12 @@ public class JavaQuarium implements Aquarium {
         return kelp.reproduce();
     }
 
-    public Optional<Fish> randomFish(boolean living) {
-        return randomLiving(living, fishes);
+    public Optional<Fish> randomFishExcludingOne(boolean living, Fish excludeFish) {
+        return randomLiving(living, fishes.stream().filter(fish -> fish != excludeFish).toList());
     }
 
     public Optional<Kelp> randomKelp(boolean living) {
         return randomLiving(living, kelps);
-    }
-
-    public Optional<Living> randomLiving(boolean isLiving) {
-        return randomLiving(isLiving, Stream.concat(kelps.stream(), fishes.stream()).toList());
     }
 
     public <T extends Living> Optional<T> randomLiving(boolean isLiving, List<T> originalList) {

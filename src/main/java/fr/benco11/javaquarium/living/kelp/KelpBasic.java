@@ -28,13 +28,13 @@ public final class KelpBasic implements Kelp {
 
     @Override
     public void bitten() {
-        pv-=2;
+        pv -= 2;
     }
 
     @Override
     public Optional<Kelp> reproduce() {
         if(pv >= 10) {
-            pv/=2;
+            pv /= 2;
             return Optional.of(new KelpBasic(pv));
         }
         return Optional.empty();

@@ -4,7 +4,6 @@ import fr.benco11.javaquarium.living.Eater;
 import fr.benco11.javaquarium.living.Living;
 import fr.benco11.javaquarium.living.kelp.Kelp;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 import static fr.benco11.javaquarium.JavaQuarium.RANDOM;
@@ -14,8 +13,6 @@ public sealed class Fish implements Living {
     protected Sex sex;
     protected int age;
     protected int pv;
-
-    protected boolean hasEaten;
 
     protected Fish(String name, Sex sex) {
         this.name = name;
@@ -41,8 +38,7 @@ public sealed class Fish implements Living {
 
     @Override
     public boolean tick() {
-        if(!hasEaten) pv--;
-        hasEaten = false;
+        pv--;
         age++;
         return alive();
     }
@@ -62,7 +58,19 @@ public sealed class Fish implements Living {
     }
 
     public Optional<Fish> reproduce(Fish other) {
-        throw new UnsupportedOperationException("Reproduce method can only be implemented in subclasses");
+        throw new UnsupportedOperationException("Reproduce method can only be called and implemented in subclasses");
+    }
+
+    public enum Sex {
+        MALE, FEMALE;
+
+        public static Sex randomSex() {
+            return values()[RANDOM.nextInt(values().length)];
+        }
+
+        public static Sex opposite(Sex sex) {
+            return sex == MALE ? FEMALE : MALE;
+        }
     }
 
     static sealed class CarnivorousFish extends Fish implements Eater.Carnivorous permits ClownFish, GrouperFish, TunaFish {
@@ -72,11 +80,9 @@ public sealed class Fish implements Living {
 
         @Override
         public void eat(Fish fish) {
+            if(fish.getClass().equals(getClass())) return;
             fish.bitten();
-            if(fish.getClass().equals(getClass()) && fish != this) {
-                pv += 5;
-                hasEaten = true;
-            }
+            pv += 5;
         }
     }
 
@@ -89,19 +95,6 @@ public sealed class Fish implements Living {
         public void eat(Kelp kelp) {
             kelp.bitten();
             pv += 3;
-            hasEaten = true;
-        }
-    }
-
-    public enum Sex {
-        MALE, FEMALE;
-
-        public static Sex randomSex() {
-            return values()[RANDOM.nextInt(values().length)];
-        }
-
-        public static Sex opposite(Sex sex) {
-            return sex == MALE ? FEMALE : MALE;
         }
     }
 }

@@ -20,7 +20,7 @@ public final class BassFish extends Fish.HerbivorousFish {
 
     @Override
     public Optional<Fish> reproduce(Fish other) {
-        if(!(other instanceof BassFish) || other.sex() == sex) return Optional.empty();
+        if(!(other instanceof BassFish) || other.sex() == sex || other == this) return Optional.empty();
         return Optional.of(new BassFish("", Sex.randomSex()));
     }
 }
