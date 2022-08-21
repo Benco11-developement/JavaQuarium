@@ -1,37 +1,85 @@
 package fr.benco11.javaquarium;
 
+import fr.benco11.javaquarium.io.AquariumReader;
+import fr.benco11.javaquarium.io.AquariumWriter;
 import fr.benco11.javaquarium.living.Eater;
 import fr.benco11.javaquarium.living.Living;
 import fr.benco11.javaquarium.living.fish.Fish;
 import fr.benco11.javaquarium.living.fish.GrouperFish;
-import fr.benco11.javaquarium.living.fish.SoleFish;
+import fr.benco11.javaquarium.living.fish.TunaFish;
 import fr.benco11.javaquarium.living.kelp.Kelp;
 import fr.benco11.javaquarium.living.kelp.KelpBasic;
+import fr.benco11.javaquarium.options.OptionParseException;
+import fr.benco11.javaquarium.options.OptionsParser;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class JavaQuarium implements Aquarium {
     public static final Random RANDOM = new Random();
 
-    public static void main(String[] args) {
-        JavaQuarium javaQuarium = new JavaQuarium();
-        javaQuarium.add(new KelpBasic());
-        javaQuarium.add(new SoleFish("marcus", Fish.Sex.MALE));
-        javaQuarium.add(new GrouperFish("MAAARC", Fish.Sex.FEMALE));
-        for(int i = 0; i != 20; i++)
-            javaQuarium.update();
-    }
+    private final Map<Integer, List<Living>> livingsToAddPerRound;
 
     private List<Kelp> kelps;
     private List<Fish> fishes;
+    private int round;
 
     private JavaQuarium() {
         this.kelps = new ArrayList<>();
         this.fishes = new ArrayList<>();
+        this.livingsToAddPerRound = new HashMap<>();
+    }
+
+    public JavaQuarium(List<Kelp> kelps, List<Fish> fishes, Map<Integer, List<Living>> livingsToAddPerRound) {
+        this.kelps = kelps;
+        this.fishes = fishes;
+        this.livingsToAddPerRound = livingsToAddPerRound;
+    }
+
+    public static void main(String[] args) {
+        OptionsParser options = new OptionsParser(args);
+        Aquarium aquarium;
+        if(options.isPresent("i")) {
+            try(AquariumReader reader = new AquariumReader(new FileReader(options.option("i", String.class, new OptionParseException("i"))))) {
+                aquarium = reader.readAquarium();
+            } catch(IOException e) {
+                throw new OptionParseException("Erreur de lecture du fichier de l'argument 'i'", e);
+            }
+        } else {
+            aquarium = new JavaQuarium();
+            aquarium.add(new GrouperFish("Baptiste", Fish.Sex.MALE));
+            aquarium.add(new GrouperFish("Criquette", Fish.Sex.FEMALE));
+            aquarium.add(new TunaFish("Méchant", Fish.Sex.MALE));
+            aquarium.add(new TunaFish("Halo", Fish.Sex.MALE));
+            aquarium.add(new TunaFish("Hérésie", Fish.Sex.MALE));
+            aquarium.add(new TunaFish("Décadence", Fish.Sex.MALE));
+            aquarium.add(new KelpBasic());
+        }
+
+        int rounds = (options.isPresent("r")) ? options.option("r", Integer.class, new OptionParseException("r")) : 20;
+        Optional<File> output = (options.isPresent("o"))
+                ? Optional.of(new File(options.option("o", String.class, new OptionParseException("o"))))
+                : Optional.empty();
+
+        int outputRound = (options.isPresent("oR")) ? options.option("oR", Integer.class, new OptionParseException("oR")) : rounds;
+
+        for(int round = 1; round <= rounds; round++) {
+            aquarium.update();
+            if(round == outputRound && output.isPresent()) {
+                try(AquariumWriter writer = new AquariumWriter(new FileWriter(output.get()))) {
+                    writer.writeAquarium(aquarium);
+                    writer.flush();
+                } catch(IOException e) {
+                    throw new OptionParseException("Erreur d'écriture du fichier de l'argument 'o'", e);
+                }
+            }
+        }
+
     }
 
     @Override
@@ -54,8 +102,10 @@ public class JavaQuarium implements Aquarium {
 
     @Override
     public void update() {
-        List<Fish> fishesToAdd = new ArrayList<>();
-        List<Kelp> kelpsToAdd = new ArrayList<>();
+        round++;
+        List<Living> livingsToAdd = livingsToAddPerRound.getOrDefault(round, new ArrayList<>());
+        List<Fish> fishesToAdd = livingsToAdd.stream().filter(Fish.class::isInstance).map(Fish.class::cast).collect(Collectors.toList());
+        List<Kelp> kelpsToAdd = livingsToAdd.stream().filter(Kelp.class::isInstance).map(Kelp.class::cast).collect(Collectors.toList());
 
         fishes.forEach(fish -> {
             tryToEatIfHungry(fish);
@@ -104,8 +154,24 @@ public class JavaQuarium implements Aquarium {
 
     @Override
     public void census() {
-        System.out.println("Il y a actuellement "+kelps.size()+" algue"+(kelps.size() > 1 ? "s" : "")+" dans l'aquarium");
-        System.out.println("\nRecensement des poissons :\n");
-        fishes.forEach(fish -> System.out.println(fish.name()+" : "+fish.sex()));
+        System.out.println("\n----- Tour "+round+" -----");
+        System.out.println("\nIl y a actuellement "+kelps.size()+" algue"+(kelps.size() > 1 ? "s" : "")+" dans l'aquarium");
+        System.out.println("Recensement des poissons :\n");
+        fishes.forEach(fish -> System.out.println(fish.name()+" est "+fish.sex()+" et agé(e) de "+fish.age()+"ans"));
+    }
+
+    @Override
+    public List<Kelp> kelps() {
+        return kelps;
+    }
+
+    @Override
+    public List<Fish> fishes() {
+        return fishes;
+    }
+
+    @Override
+    public Map<Integer, List<Living>> remainingLivingsToAdd() {
+        return livingsToAddPerRound.entrySet().stream().filter(entry -> entry.getKey() > round).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }

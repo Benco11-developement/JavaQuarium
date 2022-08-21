@@ -1,5 +1,7 @@
 package fr.benco11.javaquarium.living.fish;
 
+import fr.benco11.javaquarium.utils.NameUtils;
+
 import java.util.Optional;
 
 /**
@@ -8,6 +10,10 @@ import java.util.Optional;
 public final class GrouperFish extends Fish.CarnivorousFish {
     public GrouperFish(String name, Sex sex) {
         super(name, sex);
+    }
+
+    public GrouperFish(String name, Sex sex, int age) {
+        super(name, sex, age);
     }
 
     @Override
@@ -20,6 +26,6 @@ public final class GrouperFish extends Fish.CarnivorousFish {
     @Override
     public Optional<Fish> reproduce(Fish other) {
         if(!(other instanceof GrouperFish) || other.sex() == sex || other == this) return Optional.empty();
-        return Optional.of(new GrouperFish("", Fish.Sex.randomSex()));
+        return Optional.of(new GrouperFish(NameUtils.getName(this), Fish.Sex.randomSex()));
     }
 }

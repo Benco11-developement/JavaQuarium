@@ -4,12 +4,31 @@ import fr.benco11.javaquarium.living.Eater;
 import fr.benco11.javaquarium.living.Living;
 import fr.benco11.javaquarium.living.kelp.Kelp;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static fr.benco11.javaquarium.JavaQuarium.RANDOM;
 
-public sealed class Fish implements Living {
-    protected String name;
+public abstract sealed class Fish implements Living {
+    protected final String name;
+
+    protected Fish(String name, Sex sex, int age) {
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+    }
+
+    public static String species(Fish fish) {
+        return switch(fish) {
+            case ClownFish ignored -> "Poisson-Clown";
+            case GrouperFish ignored -> "Mérou";
+            case TunaFish ignored -> "Thon";
+            case BassFish ignored -> "Bar";
+            case CarpFish ignored -> "Carpe";
+            case SoleFish ignored -> "Sole";
+        };
+    }
+
     protected Sex sex;
     protected int age;
     protected int pv;
@@ -18,6 +37,18 @@ public sealed class Fish implements Living {
         this.name = name;
         this.sex = sex;
         pv = 10;
+    }
+
+    public static Fish reInstantiateFish(String species, String name, Sex sex, int age, RuntimeException toThrow) {
+        return switch(species) {
+            case "Bar" -> new BassFish(name, sex, age);
+            case "Carpe" -> new CarpFish(name, sex, age);
+            case "Poisson-Clown" -> new ClownFish(name, sex, age);
+            case "Mérou" -> new GrouperFish(name, sex, age);
+            case "Sole" -> new SoleFish(name, sex, age);
+            case "Thon" -> new TunaFish(name, sex, age);
+            default -> throw toThrow;
+        };
     }
 
     public String name() {
@@ -57,9 +88,7 @@ public sealed class Fish implements Living {
         return pv <= 5;
     }
 
-    public Optional<Fish> reproduce(Fish other) {
-        throw new UnsupportedOperationException("Reproduce method can only be called and implemented in subclasses");
-    }
+    public abstract Optional<Fish> reproduce(Fish other);
 
     public enum Sex {
         MALE, FEMALE;
@@ -71,11 +100,19 @@ public sealed class Fish implements Living {
         public static Sex opposite(Sex sex) {
             return sex == MALE ? FEMALE : MALE;
         }
+
+        public static Optional<Sex> of(String s) {
+            return Arrays.stream(values()).filter(v -> v.name().equalsIgnoreCase(s)).findAny();
+        }
     }
 
-    static sealed class CarnivorousFish extends Fish implements Eater.Carnivorous permits ClownFish, GrouperFish, TunaFish {
+    public abstract static sealed class CarnivorousFish extends Fish implements Eater.Carnivorous permits ClownFish, GrouperFish, TunaFish {
         protected CarnivorousFish(String name, Sex sex) {
             super(name, sex);
+        }
+
+        protected CarnivorousFish(String name, Sex sex, int age) {
+            super(name, sex, age);
         }
 
         @Override
@@ -86,9 +123,13 @@ public sealed class Fish implements Living {
         }
     }
 
-    public static sealed class HerbivorousFish extends Fish implements Eater.Herbivorous permits BassFish, CarpFish, SoleFish {
+    public abstract static sealed class HerbivorousFish extends Fish implements Eater.Herbivorous permits BassFish, CarpFish, SoleFish {
         protected HerbivorousFish(String name, Sex sex) {
             super(name, sex);
+        }
+
+        protected HerbivorousFish(String name, Sex sex, int age) {
+            super(name, sex, age);
         }
 
         @Override

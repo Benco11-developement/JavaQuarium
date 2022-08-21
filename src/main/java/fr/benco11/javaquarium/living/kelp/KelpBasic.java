@@ -39,4 +39,9 @@ public final class KelpBasic implements Kelp {
         }
         return Optional.empty();
     }
+
+    @Override
+    public int age() {
+        return age;
+    }
 }

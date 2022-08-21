@@ -9,6 +9,8 @@ version '1.0'
 targetCompatibility = sourceCompatibility = 17
 compileJava.options.encoding = 'UTF-8'
 
+mainClassName = "fr.benco11.javaquarium.JavaQuarium"
+
 repositories {
     mavenCentral()
 }
@@ -22,6 +24,12 @@ test {
     useJUnitPlatform()
 }
 
-tasks.withType(JavaCompile).each {
-    it.options.compilerArgs.add('--enable-preview')
+tasks.withType(JavaCompile) {
+    options.compilerArgs += "--enable-preview"
+}
+tasks.withType(Test) {
+    jvmArgs += "--enable-preview"
+}
+tasks.withType(JavaExec) {
+    jvmArgs += "--enable-preview"
 }

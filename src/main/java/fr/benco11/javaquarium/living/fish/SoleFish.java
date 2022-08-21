@@ -1,5 +1,7 @@
 package fr.benco11.javaquarium.living.fish;
 
+import fr.benco11.javaquarium.utils.NameUtils;
+
 import java.util.Optional;
 
 /**
@@ -10,10 +12,14 @@ public final class SoleFish extends Fish.HerbivorousFish {
         super(name, sex);
     }
 
+    public SoleFish(String name, Sex sex, int age) {
+        super(name, sex, age);
+    }
+
     @Override
     public Optional<Fish> reproduce(Fish other) {
         if(!(other instanceof SoleFish) || other == this) return Optional.empty();
         sex = Fish.Sex.opposite(other.sex());
-        return Optional.of(new SoleFish("", Fish.Sex.randomSex()));
+        return Optional.of(new SoleFish(NameUtils.getName(this), Fish.Sex.randomSex()));
     }
 }

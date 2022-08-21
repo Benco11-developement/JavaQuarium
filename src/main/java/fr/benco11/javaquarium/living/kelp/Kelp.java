@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public sealed interface Kelp extends Living permits KelpBasic {
     Optional<Kelp> reproduce();
+
+    int age();
 }
