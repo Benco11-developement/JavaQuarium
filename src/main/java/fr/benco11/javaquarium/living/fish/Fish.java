@@ -10,14 +10,6 @@ import java.util.Optional;
 import static fr.benco11.javaquarium.JavaQuarium.RANDOM;
 
 public abstract sealed class Fish implements Living {
-    protected final String name;
-
-    protected Fish(String name, Sex sex, int age) {
-        this.name = name;
-        this.sex = sex;
-        this.age = age;
-    }
-
     public static String species(Fish fish) {
         return switch(fish) {
             case ClownFish ignored -> "Poisson-Clown";
@@ -27,16 +19,6 @@ public abstract sealed class Fish implements Living {
             case CarpFish ignored -> "Carpe";
             case SoleFish ignored -> "Sole";
         };
-    }
-
-    protected Sex sex;
-    protected int age;
-    protected int pv;
-
-    protected Fish(String name, Sex sex) {
-        this.name = name;
-        this.sex = sex;
-        pv = 10;
     }
 
     public static Fish reInstantiateFish(String species, String name, Sex sex, int age, RuntimeException toThrow) {
@@ -49,6 +31,24 @@ public abstract sealed class Fish implements Living {
             case "Thon" -> new TunaFish(name, sex, age);
             default -> throw toThrow;
         };
+    }
+
+    protected final String name;
+    protected Sex sex;
+    protected int age;
+    protected int pv;
+
+    protected Fish(String name, Sex sex) {
+        this.name = name;
+        this.sex = sex;
+        pv = 10;
+    }
+
+    protected Fish(String name, Sex sex, int age) {
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+        pv = 10;
     }
 
     public String name() {
@@ -75,13 +75,13 @@ public abstract sealed class Fish implements Living {
     }
 
     @Override
-    public void bitten() {
-        pv -= 4;
+    public boolean alive() {
+        return pv > 0 && age <= 20;
     }
 
     @Override
-    public boolean alive() {
-        return pv > 0 && age <= 20;
+    public void bitten() {
+        pv -= 4;
     }
 
     public boolean hungry() {

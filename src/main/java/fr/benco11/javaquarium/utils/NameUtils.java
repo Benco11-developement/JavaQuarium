@@ -21,10 +21,10 @@ public class NameUtils {
         }
     }
 
-    private NameUtils() {
-    }
-
     public static String getName(Fish parent) {
         return NAMES.get(Math.abs(parent.name().hashCode()%NAMES.size()));
+    }
+
+    private NameUtils() {
     }
 }

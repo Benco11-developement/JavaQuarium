@@ -24,24 +24,6 @@ public class JavaQuarium implements Aquarium {
     public static final Random RANDOM = new Random();
     public static final int DEFAULT_ROUND_NUMBER = 20;
 
-    private final Map<Integer, List<Living>> livingsToAddPerRound;
-
-    private List<Kelp> kelps;
-    private List<Fish> fishes;
-    private int round;
-
-    private JavaQuarium() {
-        this.kelps = new ArrayList<>();
-        this.fishes = new ArrayList<>();
-        this.livingsToAddPerRound = new HashMap<>();
-    }
-
-    public JavaQuarium(List<Kelp> kelps, List<Fish> fishes, Map<Integer, List<Living>> livingsToAddPerRound) {
-        this.kelps = kelps;
-        this.fishes = fishes;
-        this.livingsToAddPerRound = livingsToAddPerRound;
-    }
-
     public static void main(String[] args) {
         OptionsParser options = new OptionsParser(args);
         Aquarium aquarium;
@@ -83,6 +65,23 @@ public class JavaQuarium implements Aquarium {
 
     }
 
+    private final Map<Integer, List<Living>> livingsToAddPerRound;
+    private List<Kelp> kelps;
+    private List<Fish> fishes;
+    private int round;
+
+    private JavaQuarium() {
+        this.kelps = new ArrayList<>();
+        this.fishes = new ArrayList<>();
+        this.livingsToAddPerRound = new HashMap<>();
+    }
+
+    public JavaQuarium(List<Kelp> kelps, List<Fish> fishes, Map<Integer, List<Living>> livingsToAddPerRound) {
+        this.kelps = kelps;
+        this.fishes = fishes;
+        this.livingsToAddPerRound = livingsToAddPerRound;
+    }
+
     @Override
     public void add(Living living) {
         if(living instanceof Kelp kelp) {
@@ -121,6 +120,30 @@ public class JavaQuarium implements Aquarium {
         census();
     }
 
+    @Override
+    public void census() {
+        System.out.println("\n----- Tour "+round+" -----");
+        System.out.println("\nIl y a actuellement "+kelps.size()+" algue"+(kelps.size() > 1 ? "s" : "")+" dans l'aquarium");
+        System.out.println("Il y a actuellement "+fishes.size()+" poisson"+(fishes.size() > 1 ? "s" : "")+" dans l'aquarium");
+        System.out.println("Recensement des poissons :\n");
+        fishes.forEach(fish -> System.out.println(fish.name()+" est "+fish.sex()+" "+Fish.species(fish)+" et agé(e) de "+fish.age()+"ans avec "+fish.pv()+" pv"));
+    }
+
+    @Override
+    public Map<Integer, List<Living>> remainingLivingsToAdd() {
+        return livingsToAddPerRound.entrySet().stream().filter(entry -> entry.getKey() > round).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    @Override
+    public List<Kelp> kelps() {
+        return kelps;
+    }
+
+    @Override
+    public List<Fish> fishes() {
+        return fishes;
+    }
+
     private void tryToEatIfHungry(Fish fish) {
         if(fish.hungry()) {
             if(fish instanceof Eater.Carnivorous carnivorous) {
@@ -151,28 +174,5 @@ public class JavaQuarium implements Aquarium {
     public <T extends Living> Optional<T> randomLiving(boolean isLiving, List<T> originalList) {
         List<T> livingFiltered = originalList.stream().filter(living -> !isLiving || living.alive()).toList();
         return (livingFiltered.isEmpty()) ? Optional.empty() : Optional.of(livingFiltered.get(RANDOM.nextInt(livingFiltered.size())));
-    }
-
-    @Override
-    public void census() {
-        System.out.println("\n----- Tour "+round+" -----");
-        System.out.println("\nIl y a actuellement "+kelps.size()+" algue"+(kelps.size() > 1 ? "s" : "")+" dans l'aquarium");
-        System.out.println("Recensement des poissons :\n");
-        fishes.forEach(fish -> System.out.println(fish.name()+" est "+fish.sex()+" et agé(e) de "+fish.age()+"ans"));
-    }
-
-    @Override
-    public List<Kelp> kelps() {
-        return kelps;
-    }
-
-    @Override
-    public List<Fish> fishes() {
-        return fishes;
-    }
-
-    @Override
-    public Map<Integer, List<Living>> remainingLivingsToAdd() {
-        return livingsToAddPerRound.entrySet().stream().filter(entry -> entry.getKey() > round).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }

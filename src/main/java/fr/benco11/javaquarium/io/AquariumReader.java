@@ -20,7 +20,7 @@ public class AquariumReader extends BufferedReader {
     private static final Pattern PATTERN_KELP = Pattern.compile("(\\d+) algues (\\d+) ans");
     private static final Pattern PATTERN_FISH = Pattern.compile("(\\D+), (\\D+), (\\w+), (\\d+) ans");
 
-    private static final Pattern PATTERN_ROUND = Pattern.compile("===== Tours (\\d+) =====");
+    private static final Pattern PATTERN_ROUND = Pattern.compile("===== Tour (\\d+) =====");
 
     public AquariumReader(Reader in) {
         super(in);

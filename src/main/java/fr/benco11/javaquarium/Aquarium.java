@@ -16,9 +16,9 @@ public interface Aquarium {
 
     void census();
 
+    Map<Integer, List<Living>> remainingLivingsToAdd();
+
     List<Kelp> kelps();
 
     List<Fish> fishes();
-
-    Map<Integer, List<Living>> remainingLivingsToAdd();
 }

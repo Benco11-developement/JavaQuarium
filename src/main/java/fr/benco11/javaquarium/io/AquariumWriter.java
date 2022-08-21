@@ -20,7 +20,7 @@ public class AquariumWriter extends BufferedWriter {
 
     private static final String FISHES_HELP = """
             // Poissons
-            // Format : [nom], [race], [âge] ans (= tours)
+            // Format : [nom], [race], [sexe], [âge] ans (= tours)
             """;
 
     public AquariumWriter(Writer out) {
