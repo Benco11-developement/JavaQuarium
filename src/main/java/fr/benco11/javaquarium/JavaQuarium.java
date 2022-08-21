@@ -22,6 +22,7 @@ import java.util.stream.Stream;
 
 public class JavaQuarium implements Aquarium {
     public static final Random RANDOM = new Random();
+    public static final int DEFAULT_ROUND_NUMBER = 20;
 
     private final Map<Integer, List<Living>> livingsToAddPerRound;
 
@@ -61,7 +62,7 @@ public class JavaQuarium implements Aquarium {
             aquarium.add(new KelpBasic());
         }
 
-        int rounds = (options.isPresent("r")) ? options.option("r", Integer.class, new OptionParseException("r")) : 20;
+        int rounds = (options.isPresent("r")) ? options.option("r", Integer.class, new OptionParseException("r")) : DEFAULT_ROUND_NUMBER;
         Optional<File> output = (options.isPresent("o"))
                 ? Optional.of(new File(options.option("o", String.class, new OptionParseException("o"))))
                 : Optional.empty();
