@@ -17,8 +17,8 @@ import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class AquariumReader extends BufferedReader {
-    private static final Pattern PATTERN_KELP = Pattern.compile("(\\d+) algues (\\d+) ans");
-    private static final Pattern PATTERN_FISH = Pattern.compile("(\\D+), (\\D+), (\\w+), (\\d+) ans");
+    private static final Pattern PATTERN_KELP = Pattern.compile("(\\d+) algue(s)? (\\d+) an(s)?");
+    private static final Pattern PATTERN_FISH = Pattern.compile("(\\D+), (\\D+), (\\w+), (\\d+) an(s)?");
 
     private static final Pattern PATTERN_ROUND = Pattern.compile("===== Tour (\\d+) =====");
 
@@ -68,7 +68,7 @@ public class AquariumReader extends BufferedReader {
 
     private void matchKelp(Matcher matcherKelp, List<Kelp> kelps, Map<Integer, List<Living>> livingsToAdd, AtomicInteger round, AtomicInteger lineIndex) {
         Optional<Integer> count = IntegerUtils.of(matcherKelp.group(1));
-        Optional<Integer> age = IntegerUtils.of(matcherKelp.group(2));
+        Optional<Integer> age = IntegerUtils.of(matcherKelp.group(3));
         if(count.isEmpty())
             throw new AquariumReadException("Erreur de lecture du nombres d'algues à la ligne "+lineIndex.get());
         if(age.isEmpty())

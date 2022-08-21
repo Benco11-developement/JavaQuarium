@@ -1,6 +1,6 @@
 package fr.benco11.javaquarium.living.fish;
 
-import fr.benco11.javaquarium.utils.NameUtils;
+import fr.benco11.javaquarium.utils.StringUtils;
 
 import java.util.Optional;
 
@@ -27,6 +27,6 @@ public final class BassFish extends Fish.HerbivorousFish {
     @Override
     public Optional<Fish> reproduce(Fish other) {
         if(!(other instanceof BassFish) || other.sex() == sex || other == this) return Optional.empty();
-        return Optional.of(new BassFish(NameUtils.getName(this), Sex.randomSex()));
+        return Optional.of(new BassFish(StringUtils.getFishName(this), Sex.randomSex()));
     }
 }

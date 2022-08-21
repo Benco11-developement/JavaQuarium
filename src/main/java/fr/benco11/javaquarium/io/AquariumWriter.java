@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static fr.benco11.javaquarium.utils.StringUtils.pluralInsert;
+
 public class AquariumWriter extends BufferedWriter {
     private static final String KELPS_HELP = """
             // Algues
@@ -46,11 +48,11 @@ public class AquariumWriter extends BufferedWriter {
 
     public void writeFishes(List<Fish> fishes) throws IOException {
         for(Fish fish : fishes)
-            write(fish.name()+", "+Fish.species(fish)+", "+fish.sex().toString()+", "+fish.age()+" ans\n");
+            write(fish.name()+", "+Fish.species(fish)+", "+fish.sex().toString()+", "+pluralInsert("an", fish.age())+"\n");
     }
 
     public void writeKelps(List<Kelp> kelps) throws IOException {
         for(Map.Entry<Integer, Long> kelpsByAge : kelps.stream().collect(Collectors.groupingBy(Kelp::age, Collectors.counting())).entrySet())
-            write(kelpsByAge.getValue()+" algues "+kelpsByAge.getKey()+" ans\n");
+            write(pluralInsert("algue", kelpsByAge.getValue())+" "+pluralInsert("an", kelpsByAge.getKey())+"\n");
     }
 }

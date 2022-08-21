@@ -56,10 +56,10 @@ Les fichiers d'entrées et de sorties doivent avoir la forme suivante :
 // Ceci est un commentaire
 
 // Algues
-// Format : [Nombre d'algues] algues [âge] ans (= tours)
+// Format : [Nombre d'algues] algue(s) [âge] an(s) (= tours)
 
 3 algues 2 ans
-1 algues 9 ans
+1 algue 9 ans
 
 // Poissons
 // Format : [nom], [race], [sexe], [âge] ans (= tours)
@@ -71,7 +71,7 @@ pieutez, Bar, FEMALE, 3 ans
 ===== Tour 10 =====
 
 // Seront ajoutés à ce tour :
-1 algues 4 ans
+1 algue 4 ans
 Baton, Mérou, MALE, 2 ans
 
 ```

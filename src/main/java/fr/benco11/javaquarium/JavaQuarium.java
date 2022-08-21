@@ -20,6 +20,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static fr.benco11.javaquarium.utils.StringUtils.*;
+
 public class JavaQuarium implements Aquarium {
     public static final Random RANDOM = new Random();
     public static final int DEFAULT_ROUND_NUMBER = 20;
@@ -70,7 +72,7 @@ public class JavaQuarium implements Aquarium {
     private List<Fish> fishes;
     private int round;
 
-    private JavaQuarium() {
+    public JavaQuarium() {
         this.kelps = new ArrayList<>();
         this.fishes = new ArrayList<>();
         this.livingsToAddPerRound = new HashMap<>();
@@ -123,10 +125,11 @@ public class JavaQuarium implements Aquarium {
     @Override
     public void census() {
         System.out.println("\n----- Tour "+round+" -----");
-        System.out.println("\nIl y a actuellement "+kelps.size()+" algue"+(kelps.size() > 1 ? "s" : "")+" dans l'aquarium");
-        System.out.println("Il y a actuellement "+fishes.size()+" poisson"+(fishes.size() > 1 ? "s" : "")+" dans l'aquarium");
+        System.out.println("\nIl y a actuellement "+pluralInsert("algue", kelps.size())+" dans l'aquarium");
+        System.out.println("Il y a actuellement "+pluralInsert("poisson", fishes.size())+" dans l'aquarium");
         System.out.println("Recensement des poissons :\n");
-        fishes.forEach(fish -> System.out.println(fish.name()+" est "+fish.sex()+" "+Fish.species(fish)+" et agé(e) de "+fish.age()+"ans avec "+fish.pv()+" pv"));
+        fishes.forEach(fish -> System.out.println(fish.name()+" est "+indefiniteArticleAppend(fish.sex().name(), fish.sex())+" "+
+                Fish.species(fish)+" "+sex("âgé", fish.sex())+" de "+pluralInsert("an", fish.age())+" avec "+pluralInsert("pv", fish.pv())));
     }
 
     @Override
