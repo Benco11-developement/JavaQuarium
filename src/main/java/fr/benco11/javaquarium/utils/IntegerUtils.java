@@ -4,6 +4,7 @@ import java.util.Optional;
 
 public class IntegerUtils {
     public static Optional<Integer> of(String s) {
+        if(s == null) return Optional.empty();
         try {
             return Optional.of(Integer.parseInt(s));
         } catch(NumberFormatException e) {

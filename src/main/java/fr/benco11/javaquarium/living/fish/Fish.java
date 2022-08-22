@@ -45,10 +45,8 @@ public abstract sealed class Fish implements Living {
     }
 
     protected Fish(String name, Sex sex, int age) {
-        this.name = name;
-        this.sex = sex;
+        this(name, sex);
         this.age = age;
-        pv = 10;
     }
 
     public String name() {

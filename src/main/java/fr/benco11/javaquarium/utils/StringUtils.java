@@ -45,6 +45,10 @@ public class StringUtils {
         return word+((sex == Fish.Sex.MALE) ? "" : "e");
     }
 
+    public static boolean nullOrEmpty(String s) {
+        return s == null || s.isEmpty();
+    }
+
     private StringUtils() {
     }
 }

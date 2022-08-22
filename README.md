@@ -74,7 +74,67 @@ pieutez, Bar, FEMALE, 3 ans
 1 algue 4 ans
 Baton, Mérou, MALE, 2 ans
 
+===== Tour 17 =====
+
+// Seront ajoutés à ce tour :
+10 algues 8 ans
+Halo, Carpe, FEMALE, 0 ans
+Magnifique, Thon, FEMALE, 3 ans
+ Carotte, Poisson-Clown, MALE, 11 ans
+
+
+===== Tour 20 =====
+// Supprime au tour 20 :
+// Algues : -[x]? algue(s) [x]? an(s)
+
+// Toutes les algues de 11 ans
+-algues 11 ans
+
+// 10 algues de 1 an
+-10 algues 1 an
+
+// 1 algue 
+-1 algue
+
+// Poissons : -poisson [n:x]?, [sp:x]?, [sx:x]?, [a:x]? 
+// (n: nom, sp: sexe, sx: sexe, a: âge)
+// Attention, l'ordre est important ! 
+
+// Toutes les carpes (Halo)
+-poisson sp:Carpe
+
+// Tous les poissons avec pour nom "Magnifique"
+-poisson n:Magnifique
+
+// Tous les poissons de 14 ans (Carotte)
+-poisson a:14 ans
+
+// Tous les bars mâles
+-poisson sp:Bar, sx:MALE
+
+// Toutes les carpes de 12 ans
+-poisson sp:Carpe, a:12 ans
+
+===== Tour 22 =====
+
+// Retire toutes les femêles (Baton)
+-poisson sx:FEMALE
 ```
+
+### Table
+
+| Instruction                                                       | Description, Arguments                                                                   |
+|-------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| -poisson                                                          | Retire des poissons selon certains filtres <ins>(l'ordre est important)</ins> :<br/>**n: |
+| x** -> Nom du poisson<br/>**sp:
+x** -> Espèce du poisson<br/>**sx: |                                                                                          |
+| x** -> Sexe du poisson<br/>**a:                                   |                                                                                          |
+| x** -> Âge du poisson                                             |                                                                                          |
+| -algue                                                            | Retire des algues selon certains filtres :<br/> -**[x]                                   |
+| ?** algue(s) **[x]                                                |                                                                                          |
+| ?** an(s)                                                         |                                                                                          |
+| algue                                                             | Ajoute des algues :<br/>**[x]** algue(s) **[x]** an(s)                                   |
+| poisson                                                           | Ajoute un poisson :<br/>**[nom]**, **[espèce]**, **[sexe]**, **[age]**                   |
 
 ### Modifications
 
