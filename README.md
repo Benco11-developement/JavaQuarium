@@ -30,7 +30,7 @@ cd JavaQuarium
 Il est possible de rajouter des arguments à l'exécution du programme de cette manière :
 
 ```bash
-java --enable-preview -jar JavaQuarium-1.0.jar -ARGUMENT_ID 'ARGUMENT_VALUE'
+java --enable-preview -jar JavaQuarium-1.0.jar -ARGUMENT_ID "ARGUMENT_VALUE"
 ```
 
 Les différents arguments disponibles sont :
@@ -45,7 +45,7 @@ Les différents arguments disponibles sont :
 _Exemple: Simuler pendant 30 tours l'aquarium de aquarium.txt puis sauvegarder_
 
 ```bash
-java --enable-preview -jar JavaQuarium-1.0.jar -i aquarium.txt -o aquarium.txt -r 30
+java --enable-preview -jar JavaQuarium-1.0.jar -i "aquarium.txt" -o "aquarium.txt" -r 30
 ```
 
 ### Fichiers d'entrées et de sorties
@@ -78,9 +78,9 @@ Baton, Mérou, MALE, 2 ans
 
 // Seront ajoutés à ce tour :
 10 algues 8 ans
-Halo, Carpe, FEMALE, 0 ans
-Magnifique, Thon, FEMALE, 3 ans
- Carotte, Poisson-Clown, MALE, 11 ans
+Halo, Carpe,  FEMALE, 0 ans
+Magnifique, Thon,  FEMALE, 3 ans
+Carotte, Poisson-Clown,  MALE, 11 ans
 
 
 ===== Tour 20 =====
@@ -113,7 +113,7 @@ Magnifique, Thon, FEMALE, 3 ans
 -poisson sp:Bar, sx:MALE
 
 // Toutes les carpes de 12 ans
--poisson sp:Carpe, a:12 ans
+-poisson sp:Carpe, a:12
 
 ===== Tour 22 =====
 
@@ -141,7 +141,8 @@ x** -> Espèce du poisson<br/>**sx: |                                           
 Liste des modifications par rapport à l'énoncé original :
 
 - Le sexe est spécifié dans les fichiers aquarium
-- Le nom des nouveaux-nés est sélectionné à partir du nom du parent qui est allé se reproduire dans le dictionnaire
-  français
+- Le nom des nouveaux-nés est sélectionné à partir du nom du parent qui est allé se reproduire dans le dictionnaire français
 - Le nombre de poissons est affiché à la fin de chaque tour
-- À la fin de chaque tour, pour chaque poisson, le nom, l'âge, le sexe, la race et le nombre de pv sont affichés
+- À la fin de chaque tour, pour chaque poisson, le nom, l'âge, le sexe, la race et le nombre de pvs sont affichés
+- Il est possible du supprimer des êtres vivants selon certain critères
+- La syntaxe des fichiers est plus souple

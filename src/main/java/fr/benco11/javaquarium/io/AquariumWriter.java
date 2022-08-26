@@ -4,7 +4,7 @@ import fr.benco11.javaquarium.Aquarium;
 import fr.benco11.javaquarium.living.Living;
 import fr.benco11.javaquarium.living.fish.Fish;
 import fr.benco11.javaquarium.living.kelp.Kelp;
-import fr.benco11.javaquarium.utils.Options;
+import fr.benco11.javaquarium.options.Options;
 import fr.benco11.javaquarium.utils.Pair;
 
 import java.io.BufferedWriter;
@@ -43,7 +43,7 @@ public class AquariumWriter extends BufferedWriter {
         Set<Integer> rounds = new HashSet<>(aquarium.remainingLivingsToAdd().keySet());
         rounds.addAll(aquarium.remainingRemoveOptions().keySet());
         for(int round : rounds) {
-            write("===== Tours "+round+" =====\n");
+            write("===== Tour "+round+" =====\n");
 
             List<Living> toAdd = aquarium.remainingLivingsToAdd().getOrDefault(round, new ArrayList<>());
             writeFishes(toAdd.stream().filter(Fish.class::isInstance).map(Fish.class::cast).toList());
@@ -67,11 +67,23 @@ public class AquariumWriter extends BufferedWriter {
 
     public void writeRemoveFishes(List<Options> options) throws IOException {
         for(Options option : options)
-            write("-poisson n:"+option.get(0).get()+", sp:"+option.get(1)+", sx:"+option.get(2)+", a:"+option.get(3));
+            write("-poisson" + ifPresent(option, "n", " n:") + ifPresent(option, "sp", " sp:") + ifPresent(option, "sx", " sx:") + ifPresent(option, "a", " a:")+"\n");
     }
 
     public void writeRemoveKelps(List<Options> options) throws IOException {
         for(Options option : options)
-            write("-"+((option.get(0).isPresent()) ? "algue"+option.get(0, Integer.class).orElseThrow() : "")+" "+((option.get(1).isPresent()) ? pluralInsert("an", option.get(1, Integer.class).orElseThrow()) : "")+"\n");
+            write("-"+ ifPresentPlural(option, "amount", "algue", "") + ifPresentPluralOr(option, "a", "an", " ", "") + "\n");
+    }
+
+    private String ifPresentPluralOr(Options option, String id, String word, String prefix, String or) {
+            return option.ifPresentOr(id, v -> prefix + pluralInsert(word, v), Integer.class, or);
+    }
+
+    private String ifPresentPlural(Options option, String id, String word, String prefix) {
+            return ifPresentPluralOr(option, id, word, prefix, word);
+    }
+
+    private String ifPresent(Options option, String id, String prefix) {
+            return option.ifPresentOr(id, v -> prefix + v, Object.class, "");
     }
 }

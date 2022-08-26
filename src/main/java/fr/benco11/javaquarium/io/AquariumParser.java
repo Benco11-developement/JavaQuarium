@@ -7,7 +7,7 @@ import fr.benco11.javaquarium.living.fish.Fish;
 import fr.benco11.javaquarium.living.kelp.Kelp;
 import fr.benco11.javaquarium.living.kelp.KelpBasic;
 import fr.benco11.javaquarium.utils.IntegerUtils;
-import fr.benco11.javaquarium.utils.Options;
+import fr.benco11.javaquarium.options.Options;
 import fr.benco11.javaquarium.utils.Pair;
 
 import java.io.BufferedReader;
@@ -24,8 +24,8 @@ public class AquariumParser {
     private static final Pattern PATTERN_KELP = Pattern.compile("(\\d+)\\s*algues?\\s*(\\d+)\\s*ans?");
     private static final Pattern PATTERN_FISH = Pattern.compile("(\\D+)\\s*,\\s*(\\D+)\\s*,\\s*(\\w+)\\s*,\\s*(\\d+)\\s*ans?");
     private static final Pattern PATTERN_REMOVE_KELP = Pattern.compile("-\\s*(\\d+)?\\s*algues?\\s*((\\d+)?\\s*ans?)?");
-    private static final Pattern PATTERN_REMOVE_FISH = Pattern.compile("-poisson (n:(\\w+))?\\s*,?\\s*(sp:([A-zÀ-ú]+))?\\s*,?\\s*(sx:([A-Z]+))?\\s*,?\\s*(a:(\\d+)(\\s+an(s)?)?)?");
-    private static final Pattern PATTERN_ROUND = Pattern.compile("=====\s+Tour\s+(\\d+)\s+=====");
+    private static final Pattern PATTERN_REMOVE_FISH = Pattern.compile("-poisson\\s+(n:(\\w+))?\\s*,?\\s*(sp:([A-zÀ-ú]+))?\\s*,?\\s*(sx:([A-Z]+))?\\s*,?\\s*(a:(\\d+)(\\s+an(s)?)?)?");
+    private static final Pattern PATTERN_ROUND = Pattern.compile("=====\\s+Tour\\s+(\\d+)\\s+=====");
 
 
     private final BufferedReader in;
@@ -95,7 +95,7 @@ public class AquariumParser {
         Optional<Integer> age = IntegerUtils.of(matcherKelp.group(3));
         if(count.isEmpty() && age.isEmpty())
             throw new AquariumReadException("Erreur de lecture de(s) l'algue(s) à supprimer à la ligne "+lineIndex.get());
-        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).first().add(new Options(count, age));
+        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).first().add(new Options(Map.of("amount", count, "a", age)));
     }
 
     private void parseFishRemove(Matcher matcherFish, Map<Integer, Pair<List<Options>, List<Options>>> removeOptions, AtomicInteger round, AtomicInteger lineIndex) {
@@ -106,13 +106,7 @@ public class AquariumParser {
 
         if(name.isEmpty() && species.isEmpty() && sex.isEmpty() && age.isEmpty())
             throw new AquariumReadException("Erreur de lecture du/des poisson(s) à supprimer à la ligne "+lineIndex.get());
-        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).second().add(new Options(name, species, sex, age));
-
-        /**livings -> {
-         List<? extends Living> fishesToRemove = livings.stream().filter(l -> l instanceof Fish fish && filter(Fish.species(fish), species) && filter(fish.sex(), sex)
-         && filter(fish.age(), age) && filter(fish.name(), name)).toList();
-         return livings.stream().filter(l -> !fishesToRemove.contains(l)).toList();
-         });**/
+        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).second().add(new Options(Map.of("n", name, "sp", species, "sx", sex, "a", age)));
     }
 
     private void parseLineAdd(String line, List<Kelp> kelps, List<Fish> fishes, Map<Integer, List<Living>> livingsToAdd, AtomicInteger round, AtomicInteger lineIndex) {

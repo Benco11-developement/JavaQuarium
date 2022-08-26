@@ -12,7 +12,7 @@ import fr.benco11.javaquarium.living.kelp.KelpBasic;
 import fr.benco11.javaquarium.options.OptionParseException;
 import fr.benco11.javaquarium.options.OptionsParser;
 import fr.benco11.javaquarium.utils.ListUtils;
-import fr.benco11.javaquarium.utils.Options;
+import fr.benco11.javaquarium.options.Options;
 import fr.benco11.javaquarium.utils.Pair;
 
 import java.io.File;
@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static fr.benco11.javaquarium.utils.Options.filter;
+import static fr.benco11.javaquarium.options.Options.equalsOrNull;
 import static fr.benco11.javaquarium.utils.StringUtils.*;
 
 public class JavaQuarium implements Aquarium {
@@ -31,10 +31,10 @@ public class JavaQuarium implements Aquarium {
     public static final int DEFAULT_ROUND_NUMBER = 20;
 
     public static void main(String[] args) {
-        OptionsParser options = new OptionsParser(args);
+        Options options = new OptionsParser().parse(args);
         Aquarium aquarium;
         if(options.isPresent("i")) {
-            try(FileReader reader = new FileReader(options.option("i", String.class, new OptionParseException("i")))) {
+            try(FileReader reader = new FileReader(options.option("i", String.class).orElseThrow(() -> new OptionParseException("i")))) {
                 AquariumParser parser = new AquariumParser(reader);
                 aquarium = parser.parseAquarium();
             } catch(IOException e) {
@@ -51,16 +51,16 @@ public class JavaQuarium implements Aquarium {
             aquarium.add(new KelpBasic());
         }
 
-        int rounds = (options.isPresent("r")) ? options.option("r", Integer.class, new OptionParseException("r")) : DEFAULT_ROUND_NUMBER;
-        Optional<File> output = (options.isPresent("o"))
-                ? Optional.of(new File(options.option("o", String.class, new OptionParseException("o"))))
-                : Optional.empty();
+        int rounds = (options.isPresent("r")) ? options.option("r", Integer.class).orElseThrow(() -> new OptionParseException("r")) : DEFAULT_ROUND_NUMBER;
+        Optional<File> output = options.option("o", String.class).map(File::new);
+        if(options.isPresent("o") && output.isEmpty()) throw new OptionParseException("o");
 
-        int outputRound = (options.isPresent("oR")) ? options.option("oR", Integer.class, new OptionParseException("oR")) : rounds;
+        Optional<Integer> outputRound = options.option("oR", Integer.class);
+        if(options.isPresent("oR") && outputRound.isEmpty()) throw new OptionParseException("oR");
 
         for(int round = 1; round <= rounds; round++) {
             aquarium.update();
-            if(round == outputRound && output.isPresent()) {
+            if(round == outputRound.orElse(rounds) && output.isPresent()) {
                 try(AquariumWriter writer = new AquariumWriter(new FileWriter(output.get()))) {
                     writer.writeAquarium(aquarium);
                     writer.flush();
@@ -199,11 +199,11 @@ public class JavaQuarium implements Aquarium {
     }
 
     private void removeKelp(Options options, List<Kelp> kelps) {
-        List<Kelp> kelpsFiltered = kelps.stream().filter(kelp -> filter(kelp.age(), options.get(1))).toList();
-        kelps.removeAll(ListUtils.pickRandoms(kelpsFiltered, options.get(0, Integer.class).orElse(kelpsFiltered.size())));
+        List<Kelp> kelpsFiltered = kelps.stream().filter(kelp -> equalsOrNull(kelp.age(), options.option("a"))).toList();
+        kelps.removeAll(ListUtils.pickRandoms(kelpsFiltered, options.option("amount", Integer.class).orElse(kelpsFiltered.size())));
     }
 
     private void removeFish(Options options, List<Fish> fishes) {
-        fishes.removeIf(fish -> filter(fish.name(), options.get(0)) && filter(Fish.species(fish), options.get(1)) && filter(fish.sex(), options.get(2)) && filter(fish.age(), options.get(3)));
+        fishes.removeIf(fish -> equalsOrNull(fish.name(), options.option("n")) && equalsOrNull(Fish.species(fish), options.option("sp")) && equalsOrNull(fish.sex(), options.option("sx")) && equalsOrNull(fish.age(), options.option("a")));
     }
 }
