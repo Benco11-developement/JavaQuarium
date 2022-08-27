@@ -15,21 +15,20 @@ public class OptionsParser {
             "r", true
     );
 
-    private static final Pattern OPTIONS_REGEX = Pattern.compile("-([a-zA-Z]{1,3})\\s+\"((\\\\\"|[^\"])+)\"");
+    private static final Pattern OPTIONS_ID_REGEX = Pattern.compile("-([a-zA-Z]{1,3})");
 
     public Options parse(String... args) {
             Options options = new Options();
-            String optionString = String.join(" ", args);
-            Matcher matcher = OPTIONS_REGEX.matcher(optionString);
-            while(matcher.find()) {
-                    String optionId = matcher.group(1);
-                    if(!OPTIONS_ARGUMENTS_LIST.containsKey(optionId)) throw new OptionParseException(optionId);
-                    Optional<?> value = Optional.of(true);
-                    if(matcher.groupCount() > 1) {
-                            Optional<Integer> intValue;
-                            value = (intValue = IntegerUtils.of(matcher.group(2))).isPresent() ? intValue : Optional.of(matcher.group(2));
-                    }
-                    options.add(optionId, value);
+            for(int i = 0; i < args.length; i++) {
+
+                    Matcher matcher = OPTIONS_ID_REGEX.matcher(args[i]);
+                    if(!matcher.find()) continue;
+                    String id = matcher.group(1);
+                    if(!OPTIONS_ARGUMENTS_LIST.containsKey(id)) throw new OptionParseException(id);
+                    Optional<?> value = (i+1 >= args.length) ? Optional.of(true) : IntegerUtils.of(args[i+1]);
+                    if(value.isEmpty()) value = Optional.of(args[i+1]);
+                    
+                    options.add(id, value);
             }
             return options;
     }

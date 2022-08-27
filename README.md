@@ -30,7 +30,7 @@ cd JavaQuarium
 Il est possible de rajouter des arguments à l'exécution du programme de cette manière :
 
 ```bash
-java --enable-preview -jar JavaQuarium-1.0.jar -ARGUMENT_ID "ARGUMENT_VALUE"
+java --enable-preview -jar JavaQuarium-1.0.jar -ARGUMENT_ID ARGUMENT_VALUE
 ```
 
 Les différents arguments disponibles sont :
@@ -45,7 +45,7 @@ Les différents arguments disponibles sont :
 _Exemple: Simuler pendant 30 tours l'aquarium de aquarium.txt puis sauvegarder_
 
 ```bash
-java --enable-preview -jar JavaQuarium-1.0.jar -i "aquarium.txt" -o "aquarium.txt" -r 30
+java --enable-preview -jar JavaQuarium-1.0.jar -i aquarium.txt -o "aquarium 2.txt" -r 30
 ```
 
 ### Fichiers d'entrées et de sorties
@@ -125,15 +125,9 @@ Carotte, Poisson-Clown,  MALE, 11 ans
 
 | Instruction                                                       | Description, Arguments                                                                   |
 |-------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| -poisson                                                          | Retire des poissons selon certains filtres <ins>(l'ordre est important)</ins> :<br/>**n: |
-| x** -> Nom du poisson<br/>**sp:
-x** -> Espèce du poisson<br/>**sx: |                                                                                          |
-| x** -> Sexe du poisson<br/>**a:                                   |                                                                                          |
-| x** -> Âge du poisson                                             |                                                                                          |
-| -algue                                                            | Retire des algues selon certains filtres :<br/> -**[x]                                   |
-| ?** algue(s) **[x]                                                |                                                                                          |
-| ?** an(s)                                                         |                                                                                          |
-| algue                                                             | Ajoute des algues :<br/>**[x]** algue(s) **[x]** an(s)                                   |
+| -poisson                                                          | Retire des poissons selon certains filtres <ins>(l'ordre est important)</ins> :<br/>**n:x** -> Nom du poisson<br/>**sp:x** -> Espèce du poisson<br/>**sx:x** -> Sexe du poisson<br/>**a:x** -> Âge du poisson
+| -algue                                                            | Retire des algues selon certains filtres :<br/> -**[x]?** algue(s) **[x]?** an(s)
+| algue                                                             | Ajoute des algues :<br/>**[x]** algue(s) **[x]** an(s)        
 | poisson                                                           | Ajoute un poisson :<br/>**[nom]**, **[espèce]**, **[sexe]**, **[age]**                   |
 
 ### Modifications
