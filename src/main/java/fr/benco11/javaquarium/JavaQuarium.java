@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static fr.benco11.javaquarium.options.Options.equalsOrNull;
+import static fr.benco11.javaquarium.options.Options.*;
 import static fr.benco11.javaquarium.utils.StringUtils.*;
 
 public class JavaQuarium implements Aquarium {
@@ -32,31 +32,15 @@ public class JavaQuarium implements Aquarium {
 
     public static void main(String[] args) {
         Options options = new OptionsParser().parse(args);
-        Aquarium aquarium;
-        if(options.isPresent("i")) {
-            try(FileReader reader = new FileReader(options.option("i", String.class).orElseThrow(() -> new OptionParseException("i")))) {
-                AquariumParser parser = new AquariumParser(reader);
-                aquarium = parser.parseAquarium();
-            } catch(IOException e) {
-                throw new OptionParseException("Erreur de lecture du fichier de l'argument 'i'", e);
-            }
-        } else {
-            aquarium = new JavaQuarium();
-            aquarium.add(new GrouperFish("Baptiste", Fish.Sex.MALE));
-            aquarium.add(new GrouperFish("Criquette", Fish.Sex.FEMALE));
-            aquarium.add(new TunaFish("Méchant", Fish.Sex.MALE));
-            aquarium.add(new TunaFish("Halo", Fish.Sex.MALE));
-            aquarium.add(new TunaFish("Hérésie", Fish.Sex.MALE));
-            aquarium.add(new TunaFish("Décadence", Fish.Sex.MALE));
-            aquarium.add(new KelpBasic());
-        }
+        
+        Aquarium aquarium = loadAquarium(options);
 
-        int rounds = (options.isPresent("r")) ? options.option("r", Integer.class).orElseThrow(() -> new OptionParseException("r")) : DEFAULT_ROUND_NUMBER;
-        Optional<File> output = options.option("o", String.class).map(File::new);
-        if(options.isPresent("o") && output.isEmpty()) throw new OptionParseException("o");
+        int rounds = (options.isPresent(ROUNDS_OPTION)) ? options.option(ROUNDS_OPTION, Integer.class).orElseThrow(() -> new OptionParseException(ROUNDS_OPTION)) : DEFAULT_ROUND_NUMBER;
+        Optional<File> output = options.option(OUTPUT_OPTION, String.class).map(File::new);
+        if(options.isPresent(OUTPUT_OPTION) && output.isEmpty()) throw new OptionParseException(OUTPUT_OPTION);
 
-        Optional<Integer> outputRound = options.option("oR", Integer.class);
-        if(options.isPresent("oR") && outputRound.isEmpty()) throw new OptionParseException("oR");
+        Optional<Integer> outputRound = options.option(OUTPUT_ROUND_OPTION, Integer.class);
+        if(options.isPresent(OUTPUT_ROUND_OPTION) && outputRound.isEmpty()) throw new OptionParseException(OUTPUT_ROUND_OPTION);
 
         for(int round = 1; round <= rounds; round++) {
             aquarium.update();
@@ -65,11 +49,33 @@ public class JavaQuarium implements Aquarium {
                     writer.writeAquarium(aquarium);
                     writer.flush();
                 } catch(IOException e) {
-                    throw new OptionParseException("Erreur d'écriture du fichier de l'argument 'o'", e);
+                    throw new OptionParseException("Erreur d'écriture du fichier '" + output.get().getPath() + "'", e);
                 }
             }
         }
 
+    }
+
+    private static Aquarium loadAquarium(Options options) {
+            Aquarium aquarium;
+            if(options.isPresent(INPUT_OPTION)) {
+                    try(FileReader reader = new FileReader(options.option(INPUT_OPTION, String.class).orElseThrow(() -> new OptionParseException(INPUT_OPTION)))) {
+                            AquariumParser parser = new AquariumParser(reader);
+                            aquarium = parser.parseAquarium();
+                    } catch(IOException e) {
+                            throw new OptionParseException("Erreur de lecture du fichier '" + options.option(INPUT_OPTION).get() + "'", e);
+                    }
+            } else {
+                    aquarium = new JavaQuarium();
+                    aquarium.add(new GrouperFish("Baptiste", Fish.Sex.MALE));
+                    aquarium.add(new GrouperFish("Criquette", Fish.Sex.FEMALE));
+                    aquarium.add(new TunaFish("Méchant", Fish.Sex.MALE));
+                    aquarium.add(new TunaFish("Halo", Fish.Sex.MALE));
+                    aquarium.add(new TunaFish("Hérésie", Fish.Sex.MALE));
+                    aquarium.add(new TunaFish("Décadence", Fish.Sex.MALE));
+                    aquarium.add(new KelpBasic());
+            }
+            return aquarium;
     }
 
     private final Map<Integer, List<Living>> livingsToAddPerRound;
@@ -199,11 +205,15 @@ public class JavaQuarium implements Aquarium {
     }
 
     private void removeKelp(Options options, List<Kelp> kelps) {
-        List<Kelp> kelpsFiltered = kelps.stream().filter(kelp -> equalsOrNull(kelp.age(), options.option("a"))).toList();
-        kelps.removeAll(ListUtils.pickRandoms(kelpsFiltered, options.option("amount", Integer.class).orElse(kelpsFiltered.size())));
+        List<Kelp> kelpsFiltered = kelps.stream().filter(kelp -> filterRemove(kelp.age(), AGE_OPTION, options)).toList();
+        kelps.removeAll(ListUtils.pickRandoms(kelpsFiltered, options.option(AMOUNT_OPTION, Integer.class).orElse(kelpsFiltered.size())));
     }
 
     private void removeFish(Options options, List<Fish> fishes) {
-        fishes.removeIf(fish -> equalsOrNull(fish.name(), options.option("n")) && equalsOrNull(Fish.species(fish), options.option("sp")) && equalsOrNull(fish.sex(), options.option("sx")) && equalsOrNull(fish.age(), options.option("a")));
+        fishes.removeIf(fish -> filterRemove(fish.name(), NAME_OPTION, options) && filterRemove(Fish.species(fish), SPECIES_OPTION, options) && filterRemove(fish.sex(), SEX_OPTION, options) && filterRemove(fish.age(), AGE_OPTION, options));
+    }
+
+    private boolean filterRemove(Object f, String optionId, Options options) {
+            return equalsOrEmpty(f, options.option(optionId));
     }
 }

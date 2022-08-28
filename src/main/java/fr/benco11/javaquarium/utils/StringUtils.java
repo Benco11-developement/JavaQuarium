@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class StringUtils {
+public final class StringUtils {
     private static final List<String> NAMES = new ArrayList<>();
 
     static {

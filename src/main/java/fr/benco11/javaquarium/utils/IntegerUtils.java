@@ -2,7 +2,7 @@ package fr.benco11.javaquarium.utils;
 
 import java.util.Optional;
 
-public class IntegerUtils {
+public final class IntegerUtils {
     public static Optional<Integer> of(String s) {
         if(s == null) return Optional.empty();
         try {

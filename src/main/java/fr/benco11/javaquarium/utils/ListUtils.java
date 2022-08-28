@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ListUtils {
+public final class ListUtils {
     public static <T> List<T> pickRandoms(List<T> list, int n) {
         List<T> copy = new ArrayList<>(list);
         Collections.shuffle(copy);

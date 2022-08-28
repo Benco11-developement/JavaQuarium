@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+import static fr.benco11.javaquarium.options.Options.*;
 import static fr.benco11.javaquarium.utils.StringUtils.nullOrEmpty;
 
 public class AquariumParser {
@@ -95,7 +96,7 @@ public class AquariumParser {
         Optional<Integer> age = IntegerUtils.of(matcherKelp.group(3));
         if(count.isEmpty() && age.isEmpty())
             throw new AquariumReadException("Erreur de lecture de(s) l'algue(s) à supprimer à la ligne "+lineIndex.get());
-        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).first().add(new Options(Map.of("amount", count, "a", age)));
+        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).first().add(new Options(Map.of(AMOUNT_OPTION, count, AGE_OPTION, age)));
     }
 
     private void parseFishRemove(Matcher matcherFish, Map<Integer, Pair<List<Options>, List<Options>>> removeOptions, AtomicInteger round, AtomicInteger lineIndex) {
@@ -106,7 +107,7 @@ public class AquariumParser {
 
         if(name.isEmpty() && species.isEmpty() && sex.isEmpty() && age.isEmpty())
             throw new AquariumReadException("Erreur de lecture du/des poisson(s) à supprimer à la ligne "+lineIndex.get());
-        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).second().add(new Options(Map.of("n", name, "sp", species, "sx", sex, "a", age)));
+        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).second().add(new Options(Map.of(NAME_OPTION, name, SPECIES_OPTION, species, SEX_OPTION, sex, AGE_OPTION, age)));
     }
 
     private void parseLineAdd(String line, List<Kelp> kelps, List<Fish> fishes, Map<Integer, List<Living>> livingsToAdd, AtomicInteger round, AtomicInteger lineIndex) {

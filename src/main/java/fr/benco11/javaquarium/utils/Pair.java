@@ -1,6 +1,6 @@
 package fr.benco11.javaquarium.utils;
 
-public class Pair<A, B> {
+public final class Pair<A, B> {
     private A a;
     private B b;
 
