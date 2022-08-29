@@ -10,9 +10,9 @@ import fr.benco11.javaquarium.living.fish.TunaFish;
 import fr.benco11.javaquarium.living.kelp.Kelp;
 import fr.benco11.javaquarium.living.kelp.KelpBasic;
 import fr.benco11.javaquarium.options.OptionParseException;
+import fr.benco11.javaquarium.options.Options;
 import fr.benco11.javaquarium.options.OptionsParser;
 import fr.benco11.javaquarium.utils.ListUtils;
-import fr.benco11.javaquarium.options.Options;
 import fr.benco11.javaquarium.utils.Pair;
 
 import java.io.File;
@@ -23,7 +23,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static fr.benco11.javaquarium.options.Options.*;
+import static fr.benco11.javaquarium.options.Options.AquariumOption.*;
+import static fr.benco11.javaquarium.options.Options.LivingOption.*;
+import static fr.benco11.javaquarium.options.Options.equalsOrEmpty;
 import static fr.benco11.javaquarium.utils.StringUtils.*;
 
 public class JavaQuarium implements Aquarium {
@@ -32,15 +34,16 @@ public class JavaQuarium implements Aquarium {
 
     public static void main(String[] args) {
         Options options = new OptionsParser().parse(args);
-        
+
         Aquarium aquarium = loadAquarium(options);
 
-        int rounds = (options.isPresent(ROUNDS_OPTION)) ? options.option(ROUNDS_OPTION, Integer.class).orElseThrow(() -> new OptionParseException(ROUNDS_OPTION)) : DEFAULT_ROUND_NUMBER;
-        Optional<File> output = options.option(OUTPUT_OPTION, String.class).map(File::new);
-        if(options.isPresent(OUTPUT_OPTION) && output.isEmpty()) throw new OptionParseException(OUTPUT_OPTION);
+        int rounds = (options.isPresent(ROUNDS)) ? options.option(ROUNDS, Integer.class).orElseThrow(() -> new OptionParseException(ROUNDS)) : DEFAULT_ROUND_NUMBER;
+        Optional<File> output = options.option(OUTPUT, String.class).map(File::new);
+        if(options.isPresent(OUTPUT) && output.isEmpty()) throw new OptionParseException(OUTPUT);
 
-        Optional<Integer> outputRound = options.option(OUTPUT_ROUND_OPTION, Integer.class);
-        if(options.isPresent(OUTPUT_ROUND_OPTION) && outputRound.isEmpty()) throw new OptionParseException(OUTPUT_ROUND_OPTION);
+        Optional<Integer> outputRound = options.option(OUTPUT_ROUND, Integer.class);
+        if(options.isPresent(OUTPUT_ROUND) && outputRound.isEmpty())
+            throw new OptionParseException(OUTPUT_ROUND);
 
         for(int round = 1; round <= rounds; round++) {
             aquarium.update();
@@ -49,7 +52,7 @@ public class JavaQuarium implements Aquarium {
                     writer.writeAquarium(aquarium);
                     writer.flush();
                 } catch(IOException e) {
-                    throw new OptionParseException("Erreur d'écriture du fichier '" + output.get().getPath() + "'", e);
+                    throw new OptionParseException("Erreur d'écriture du fichier '"+output.get().getPath()+"'", e);
                 }
             }
         }
@@ -57,32 +60,32 @@ public class JavaQuarium implements Aquarium {
     }
 
     private static Aquarium loadAquarium(Options options) {
-            Aquarium aquarium;
-            if(options.isPresent(INPUT_OPTION)) {
-                    try(FileReader reader = new FileReader(options.option(INPUT_OPTION, String.class).orElseThrow(() -> new OptionParseException(INPUT_OPTION)))) {
-                            AquariumParser parser = new AquariumParser(reader);
-                            aquarium = parser.parseAquarium();
-                    } catch(IOException e) {
-                            throw new OptionParseException("Erreur de lecture du fichier '" + options.option(INPUT_OPTION).get() + "'", e);
-                    }
-            } else {
-                    aquarium = new JavaQuarium();
-                    aquarium.add(new GrouperFish("Baptiste", Fish.Sex.MALE));
-                    aquarium.add(new GrouperFish("Criquette", Fish.Sex.FEMALE));
-                    aquarium.add(new TunaFish("Méchant", Fish.Sex.MALE));
-                    aquarium.add(new TunaFish("Halo", Fish.Sex.MALE));
-                    aquarium.add(new TunaFish("Hérésie", Fish.Sex.MALE));
-                    aquarium.add(new TunaFish("Décadence", Fish.Sex.MALE));
-                    aquarium.add(new KelpBasic());
+        Aquarium aquarium;
+        if(options.isPresent(INPUT)) {
+            try(FileReader reader = new FileReader(options.option(INPUT, String.class).orElseThrow(() -> new OptionParseException(INPUT)))) {
+                AquariumParser parser = new AquariumParser(reader);
+                aquarium = parser.parseAquarium();
+            } catch(IOException e) {
+                throw new OptionParseException("Erreur de lecture du fichier '"+options.option(INPUT).orElse(null)+"'", e);
             }
-            return aquarium;
+        } else {
+            aquarium = new JavaQuarium();
+            aquarium.add(new GrouperFish("Baptiste", Fish.Sex.MALE));
+            aquarium.add(new GrouperFish("Criquette", Fish.Sex.FEMALE));
+            aquarium.add(new TunaFish("Méchant", Fish.Sex.MALE));
+            aquarium.add(new TunaFish("Halo", Fish.Sex.MALE));
+            aquarium.add(new TunaFish("Hérésie", Fish.Sex.MALE));
+            aquarium.add(new TunaFish("Décadence", Fish.Sex.MALE));
+            aquarium.add(new KelpBasic());
+        }
+        return aquarium;
     }
 
     private final Map<Integer, List<Living>> livingsToAddPerRound;
+    private final Map<Integer, Pair<List<Options>, List<Options>>> removeOptionsPerRound;
     private List<Kelp> kelps;
     private List<Fish> fishes;
     private int round;
-    private final Map<Integer, Pair<List<Options>, List<Options>>> removeOptionsPerRound;
 
     public JavaQuarium() {
         this(new ArrayList<>(), new ArrayList<>(), new HashMap<>(), new HashMap<>());
@@ -120,8 +123,8 @@ public class JavaQuarium implements Aquarium {
 
         // Initialise des listes avec les poissons et algues à ajouter à la fin du tour
         List<Living> livingsToAdd = livingsToAddPerRound.getOrDefault(round, new ArrayList<>());
-        List<Fish> fishesToAdd = livingsToAdd.stream().filter(Fish.class::isInstance).map(Fish.class::cast).collect(Collectors.toList());
-        List<Kelp> kelpsToAdd = livingsToAdd.stream().filter(Kelp.class::isInstance).map(Kelp.class::cast).collect(Collectors.toList());
+        List<Fish> fishesToAdd = new ArrayList<>(livingsToAdd.stream().filter(Fish.class::isInstance).map(Fish.class::cast).toList());
+        List<Kelp> kelpsToAdd = new ArrayList<>(livingsToAdd.stream().filter(Kelp.class::isInstance).map(Kelp.class::cast).toList());
 
         fishes.forEach(fish -> {
             tryToEatIfHungry(fish);
@@ -205,15 +208,15 @@ public class JavaQuarium implements Aquarium {
     }
 
     private void removeKelp(Options options, List<Kelp> kelps) {
-        List<Kelp> kelpsFiltered = kelps.stream().filter(kelp -> filterRemove(kelp.age(), AGE_OPTION, options)).toList();
-        kelps.removeAll(ListUtils.pickRandoms(kelpsFiltered, options.option(AMOUNT_OPTION, Integer.class).orElse(kelpsFiltered.size())));
+        List<Kelp> kelpsFiltered = kelps.stream().filter(kelp -> filterRemove(kelp.age(), AGE, options)).toList();
+        kelps.removeAll(ListUtils.pickRandoms(kelpsFiltered, options.option(AMOUNT, Integer.class).orElse(kelpsFiltered.size())));
     }
 
     private void removeFish(Options options, List<Fish> fishes) {
-        fishes.removeIf(fish -> filterRemove(fish.name(), NAME_OPTION, options) && filterRemove(Fish.species(fish), SPECIES_OPTION, options) && filterRemove(fish.sex(), SEX_OPTION, options) && filterRemove(fish.age(), AGE_OPTION, options));
+        fishes.removeIf(fish -> filterRemove(fish.name(), NAME, options) && filterRemove(Fish.species(fish), SPECIES, options) && filterRemove(fish.sex(), SEX, options) && filterRemove(fish.age(), AGE, options));
     }
 
-    private boolean filterRemove(Object f, String optionId, Options options) {
-            return equalsOrEmpty(f, options.option(optionId));
+    private boolean filterRemove(Object f, Options.StandardOption optionId, Options options) {
+        return equalsOrEmpty(f, options.option(optionId));
     }
 }

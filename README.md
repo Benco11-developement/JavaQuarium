@@ -50,7 +50,7 @@ java --enable-preview -jar JavaQuarium-1.0.jar -i aquarium.txt -o "aquarium 2.tx
 
 ### Fichiers d'entrées et de sorties
 
-Les fichiers d'entrées et de sorties doivent avoir la forme suivante :
+Les fichiers d'entrée et de sortie doivent avoir la forme suivante :
 
 ```
 // Ceci est un commentaire
@@ -98,7 +98,6 @@ Carotte, Poisson-Clown,  MALE, 11 ans
 
 // Poissons : -poisson [n:x]?, [sp:x]?, [sx:x]?, [a:x]? 
 // (n: nom, sp: sexe, sx: sexe, a: âge)
-// Attention, l'ordre est important ! 
 
 // Toutes les carpes (Halo)
 -poisson sp:Carpe
@@ -109,8 +108,8 @@ Carotte, Poisson-Clown,  MALE, 11 ans
 // Tous les poissons de 14 ans (Carotte)
 -poisson a:14 ans
 
-// Tous les bars mâles
--poisson sp:Bar, sx:MALE
+// Tous les mâles bars
+-poisson sx:MALE, sp:Bar
 
 // Toutes les carpes de 12 ans
 -poisson sp:Carpe, a:12
@@ -123,12 +122,12 @@ Carotte, Poisson-Clown,  MALE, 11 ans
 
 ### Table
 
-| Instruction                                                       | Description, Arguments                                                                   |
-|-------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| -poisson                                                          | Retire des poissons selon certains filtres <ins>(l'ordre est important)</ins> :<br/>**n:x** -> Nom du poisson<br/>**sp:x** -> Espèce du poisson<br/>**sx:x** -> Sexe du poisson<br/>**a:x** -> Âge du poisson
-| -algue                                                            | Retire des algues selon certains filtres :<br/> -**[x]?** algue(s) **[x]?** an(s)
-| algue                                                             | Ajoute des algues :<br/>**[x]** algue(s) **[x]** an(s)        
-| poisson                                                           | Ajoute un poisson :<br/>**[nom]**, **[espèce]**, **[sexe]**, **[age]**                   |
+| Instruction | Description, Arguments                                                                                                                                                     |
+|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -poisson    | Retire des poissons selon certains filtres :<br/>**n:x** -> Nom du poisson<br/>**sp:x** -> Espèce du poisson<br/>**sx:x** -> Sexe du poisson<br/>**a:x** -> Âge du poisson |
+| -algue      | Retire des algues selon certains filtres :<br/> -**[x]?** algue(s) **[x]?** an(s)                                                                                          |
+| algue       | Ajoute des algues :<br/>**[x]** algue(s) **[x]** an(s)                                                                                                                     |
+| poisson     | Ajoute un poisson :<br/>**[nom]**, **[espèce]**, **[sexe]**, **[age]**                                                                                                     |
 
 ### Modifications
 
@@ -138,5 +137,5 @@ Liste des modifications par rapport à l'énoncé original :
 - Le nom des nouveaux-nés est sélectionné à partir du nom du parent qui est allé se reproduire dans le dictionnaire français
 - Le nombre de poissons est affiché à la fin de chaque tour
 - À la fin de chaque tour, pour chaque poisson, le nom, l'âge, le sexe, la race et le nombre de pvs sont affichés
-- Il est possible du supprimer des êtres vivants selon certain critères
+- Il est possible de supprimer des êtres vivants selon certains critères
 - La syntaxe des fichiers est plus souple

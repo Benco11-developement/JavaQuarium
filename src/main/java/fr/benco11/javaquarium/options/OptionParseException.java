@@ -5,7 +5,11 @@ public class OptionParseException extends RuntimeException {
         super("Erreur de parsing de l'option '"+optionName+"'");
     }
 
-    public OptionParseException(String optionName, Exception exception) {
-        super("Erreur de parsing de l'option '"+optionName+"'", exception);
+    public OptionParseException(Options.StandardOption option) {
+        this(option.id());
+    }
+
+    public OptionParseException(String message, Exception exception) {
+        super(message, exception);
     }
 }
