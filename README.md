@@ -48,7 +48,7 @@ _Exemple: Simuler pendant 30 tours l'aquarium de aquarium.txt puis sauvegarder_
 java --enable-preview -jar JavaQuarium-1.0.jar -i aquarium.txt -o "aquarium 2.txt" -r 30
 ```
 
-### Fichiers d'entrées et de sorties
+### Fichiers d'entrée et de sortie
 
 Les fichiers d'entrée et de sortie doivent avoir la forme suivante :
 
