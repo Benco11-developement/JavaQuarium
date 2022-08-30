@@ -13,8 +13,8 @@ public final class ClownFish extends Fish.CarnivorousFish {
         super(name, sex);
     }
 
-    public ClownFish(String name, Sex sex, int age) {
-        super(name, sex, age);
+    public ClownFish(String name, Sex sex, int age, int pv) {
+        super(name, sex, age, pv);
     }
 
     @Override

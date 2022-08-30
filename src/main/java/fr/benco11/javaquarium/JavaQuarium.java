@@ -24,7 +24,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static fr.benco11.javaquarium.options.Options.AquariumOption.*;
-import static fr.benco11.javaquarium.options.Options.LivingOption.*;
+import static fr.benco11.javaquarium.options.Options.LivingOption.AGE;
+import static fr.benco11.javaquarium.options.Options.LivingOption.AMOUNT;
 import static fr.benco11.javaquarium.options.Options.equalsOrEmpty;
 import static fr.benco11.javaquarium.utils.StringUtils.*;
 
@@ -213,10 +214,19 @@ public class JavaQuarium implements Aquarium {
     }
 
     private void removeFish(Options options, List<Fish> fishes) {
-        fishes.removeIf(fish -> filterRemove(fish.name(), NAME, options) && filterRemove(Fish.species(fish), SPECIES, options) && filterRemove(fish.sex(), SEX, options) && filterRemove(fish.age(), AGE, options));
+        fishes.removeIf(fish -> Arrays.stream(Options.LivingOption.values()).allMatch(o -> filterRemove(
+                switch(o) {
+                    case SEX -> fish.sex();
+                    case PV -> fish.pv();
+                    case NAME -> fish.name();
+                    case AGE -> fish.age();
+                    case SPECIES -> Fish.species(fish);
+                    case AMOUNT -> null;
+                }
+                , o, options)));
     }
 
     private boolean filterRemove(Object f, Options.StandardOption optionId, Options options) {
-        return equalsOrEmpty(f, options.option(optionId));
+        return f == null || equalsOrEmpty(f, options.option(optionId));
     }
 }

@@ -12,8 +12,8 @@ public final class SoleFish extends Fish.HerbivorousFish {
         super(name, sex);
     }
 
-    public SoleFish(String name, Sex sex, int age) {
-        super(name, sex, age);
+    public SoleFish(String name, Sex sex, int age, int pv) {
+        super(name, sex, age, pv);
     }
 
     @Override

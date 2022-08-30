@@ -13,8 +13,8 @@ public final class BassFish extends Fish.HerbivorousFish {
         super(name, sex);
     }
 
-    public BassFish(String name, Sex sex, int age) {
-        super(name, sex, age);
+    public BassFish(String name, Sex sex, int age, int pv) {
+        super(name, sex, age, pv);
     }
 
     @Override

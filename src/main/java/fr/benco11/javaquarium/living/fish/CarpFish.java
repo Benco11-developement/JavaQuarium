@@ -12,8 +12,8 @@ public final class CarpFish extends Fish.HerbivorousFish {
         super(name, sex);
     }
 
-    public CarpFish(String name, Sex sex, int age) {
-        super(name, sex, age);
+    public CarpFish(String name, Sex sex, int age, int pv) {
+        super(name, sex, age, pv);
     }
 
     @Override

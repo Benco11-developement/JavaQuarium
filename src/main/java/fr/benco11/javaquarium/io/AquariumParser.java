@@ -24,7 +24,7 @@ import static fr.benco11.javaquarium.utils.StringUtils.nullOrEmpty;
 
 public class AquariumParser {
     private static final Pattern PATTERN_KELP = Pattern.compile("(\\d+)\\s*algues?\\s*(\\d+)\\s*ans?");
-    private static final Pattern PATTERN_FISH = Pattern.compile("(\\D+)\\s*,\\s*(\\D+)\\s*,\\s*(\\w+)\\s*,\\s*(\\d+)\\s*ans?");
+    private static final Pattern PATTERN_FISH = Pattern.compile("([^,\\s]+)\\s*,\\s*([^,\\s]+)\\s*,\\s*([^,\\s]+)\\s*(,\\s*(\\d+)\\s*ans?\\s*)?(,\\s*(\\d+)\\s*pvs?)?");
     private static final Pattern PATTERN_REMOVE_KELP = Pattern.compile("-\\s*(\\d+)?\\s*algues?\\s*((\\d+)?\\s*ans?)?");
     private static final Pattern PATTERN_REMOVE_FISH_OPTION = Pattern.compile("([a-zA-Z]+):([^,]+)");
     private static final Pattern PATTERN_ROUND = Pattern.compile("=====\\s+Tour\\s+(\\d+)\\s+=====");
@@ -108,7 +108,7 @@ public class AquariumParser {
 
             Options.LivingOption id = Options.LivingOption.of(idString).orElseThrow(() -> new AquariumReadException("Erreur de lecture de l'option '"+idString+"' à la ligne "+lineIndex.get()));
             Optional<?> value = switch(id) {
-                case AGE -> IntegerUtils.of(valueString.replaceAll("\\s+ans", ""));
+                case AGE, PV -> IntegerUtils.of(valueString.replaceAll("\\D+", ""));
                 case NAME, SPECIES -> Optional.of(valueString).filter(n -> !nullOrEmpty(n));
                 case SEX -> Fish.Sex.of(valueString);
                 case AMOUNT ->
@@ -162,10 +162,11 @@ public class AquariumParser {
         Optional<Fish.Sex> sex = Fish.Sex.of(matcherFish.group(3));
         if(sex.isEmpty()) throw new AquariumReadException("Erreur de lecture du sexe à la ligne "+lineIndex.get());
 
-        Optional<Integer> age = IntegerUtils.of(matcherFish.group(4));
-        if(age.isEmpty()) throw new AquariumReadException("Erreur de lecture de l'âge à la ligne "+lineIndex.get());
+        int age = IntegerUtils.of(matcherFish.group(5)).orElse(0);
 
-        Fish fish = Fish.reInstantiateFish(species, name, sex.get(), age.get(), new AquariumReadException("Erreur de lecture de l'espèce '"+species+"' à la ligne "+lineIndex.get()));
+        int pv = IntegerUtils.of(matcherFish.group(7)).orElse(Fish.DEFAULT_PV);
+
+        Fish fish = Fish.reInstantiateFish(species, name, sex.get(), age, pv, new AquariumReadException("Erreur de lecture de l'espèce '"+species+"' à la ligne "+lineIndex.get()));
         if(round.get() == -1) fishes.add(fish);
         else livingsToAdd.computeIfAbsent(round.get(), k -> new ArrayList<>()).add(fish);
     }

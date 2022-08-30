@@ -62,10 +62,11 @@ Les fichiers d'entrée et de sortie doivent avoir la forme suivante :
 1 algue 9 ans
 
 // Poissons
-// Format : [nom], [race], [sexe], [âge] ans (= tours)
+// Format : [nom], [race], [sexe], [âge]? ans (= tours), [pv]? pvs
+// L'ordre est important !
 
 Criquette, Mérou, MALE, 10 ans
-pieutez, Bar, FEMALE, 3 ans
+pieutez, Bar, FEMALE, 3 ans, 12 pvs
 
 // Spécifie des ajouts à ce tour précisément
 ===== Tour 10 =====
@@ -78,8 +79,8 @@ Baton, Mérou, MALE, 2 ans
 
 // Seront ajoutés à ce tour :
 10 algues 8 ans
-Halo, Carpe,  FEMALE, 0 ans
-Magnifique, Thon,  FEMALE, 3 ans
+Halo, Carpe,  FEMALE
+Magnifique, Thon,  FEMALE, 1 pv
 Carotte, Poisson-Clown,  MALE, 11 ans
 
 
@@ -127,13 +128,13 @@ Carotte, Poisson-Clown,  MALE, 11 ans
 | -poisson    | Retire des poissons selon certains filtres :<br/>**n:x** -> Nom du poisson<br/>**sp:x** -> Espèce du poisson<br/>**sx:x** -> Sexe du poisson<br/>**a:x** -> Âge du poisson |
 | -algue      | Retire des algues selon certains filtres :<br/> -**[x]?** algue(s) **[x]?** an(s)                                                                                          |
 | algue       | Ajoute des algues :<br/>**[x]** algue(s) **[x]** an(s)                                                                                                                     |
-| poisson     | Ajoute un poisson :<br/>**[nom]**, **[espèce]**, **[sexe]**, **[age]**                                                                                                     |
+| poisson     | Ajoute un poisson :<br/>**[nom]**, **[espèce]**, **[sexe]**, **[age]**?, **[pv]**?                                                                                         |
 
 ### Modifications
 
 Liste des modifications par rapport à l'énoncé original :
 
-- Le sexe est spécifié dans les fichiers aquarium
+- Le sexe et le nombre de pvs sont spécifiés dans les fichiers aquarium
 - Le nom des nouveaux-nés est sélectionné à partir du nom du parent qui est allé se reproduire dans le dictionnaire français
 - Le nombre de poissons est affiché à la fin de chaque tour
 - À la fin de chaque tour, pour chaque poisson, le nom, l'âge, le sexe, la race et le nombre de pvs sont affichés

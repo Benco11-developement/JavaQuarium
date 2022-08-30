@@ -10,6 +10,7 @@ import java.util.Optional;
 import static fr.benco11.javaquarium.JavaQuarium.RANDOM;
 
 public abstract sealed class Fish implements Living {
+    public static final int DEFAULT_PV = 10;
     public static String species(Fish fish) {
         return switch(fish) {
             case ClownFish ignored -> "Poisson-Clown";
@@ -21,14 +22,14 @@ public abstract sealed class Fish implements Living {
         };
     }
 
-    public static Fish reInstantiateFish(String species, String name, Sex sex, int age, RuntimeException toThrow) {
+    public static Fish reInstantiateFish(String species, String name, Sex sex, int age, int pv, RuntimeException toThrow) {
         return switch(species) {
-            case "Bar" -> new BassFish(name, sex, age);
-            case "Carpe" -> new CarpFish(name, sex, age);
-            case "Poisson-Clown" -> new ClownFish(name, sex, age);
-            case "Mérou" -> new GrouperFish(name, sex, age);
-            case "Sole" -> new SoleFish(name, sex, age);
-            case "Thon" -> new TunaFish(name, sex, age);
+            case "Bar" -> new BassFish(name, sex, age, pv);
+            case "Carpe" -> new CarpFish(name, sex, age, pv);
+            case "Poisson-Clown" -> new ClownFish(name, sex, age, pv);
+            case "Mérou" -> new GrouperFish(name, sex, age, pv);
+            case "Sole" -> new SoleFish(name, sex, age, pv);
+            case "Thon" -> new TunaFish(name, sex, age, pv);
             default -> throw toThrow;
         };
     }
@@ -41,12 +42,13 @@ public abstract sealed class Fish implements Living {
     protected Fish(String name, Sex sex) {
         this.name = name;
         this.sex = sex;
-        pv = 10;
+        pv = DEFAULT_PV;
     }
 
-    protected Fish(String name, Sex sex, int age) {
+    protected Fish(String name, Sex sex, int age, int pv) {
         this(name, sex);
         this.age = age;
+        this.pv = pv;
     }
 
     public String name() {
@@ -109,8 +111,8 @@ public abstract sealed class Fish implements Living {
             super(name, sex);
         }
 
-        protected CarnivorousFish(String name, Sex sex, int age) {
-            super(name, sex, age);
+        protected CarnivorousFish(String name, Sex sex, int age, int pv) {
+            super(name, sex, age, pv);
         }
 
         @Override
@@ -126,8 +128,8 @@ public abstract sealed class Fish implements Living {
             super(name, sex);
         }
 
-        protected HerbivorousFish(String name, Sex sex, int age) {
-            super(name, sex, age);
+        protected HerbivorousFish(String name, Sex sex, int age, int pv) {
+            super(name, sex, age, pv);
         }
 
         @Override

@@ -3,11 +3,12 @@ package fr.benco11.javaquarium.living.kelp;
 import java.util.Optional;
 
 public final class KelpBasic implements Kelp {
+    public static final int DEFAULT_PV = 10;
     private int pv;
     private int age;
 
     public KelpBasic() {
-        this.pv = 10;
+        this.pv = DEFAULT_PV;
     }
 
     public KelpBasic(int pv) {

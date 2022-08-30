@@ -69,7 +69,7 @@ public class Options {
     }
 
     public enum LivingOption implements StandardOption {
-        SEX("sx"), NAME("n"), SPECIES("sp"), AGE("a"), AMOUNT("amount");
+        SEX("sx"), NAME("n"), SPECIES("sp"), AGE("a"), AMOUNT("amount"), PV("pv");
 
         public static Optional<LivingOption> of(String id) {
             return Arrays.stream(values()).filter(o -> o.id().equals(id)).findAny();

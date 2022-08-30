@@ -12,8 +12,8 @@ public final class TunaFish extends Fish.CarnivorousFish {
         super(name, sex);
     }
 
-    public TunaFish(String name, Sex sex, int age) {
-        super(name, sex, age);
+    public TunaFish(String name, Sex sex, int age, int pv) {
+        super(name, sex, age, pv);
     }
 
     @Override
