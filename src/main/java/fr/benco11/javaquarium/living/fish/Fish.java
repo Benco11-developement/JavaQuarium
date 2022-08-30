@@ -11,26 +11,15 @@ import static fr.benco11.javaquarium.JavaQuarium.RANDOM;
 
 public abstract sealed class Fish implements Living {
     public static final int DEFAULT_PV = 10;
-    public static String species(Fish fish) {
-        return switch(fish) {
-            case ClownFish ignored -> "Poisson-Clown";
-            case GrouperFish ignored -> "Mérou";
-            case TunaFish ignored -> "Thon";
-            case BassFish ignored -> "Bar";
-            case CarpFish ignored -> "Carpe";
-            case SoleFish ignored -> "Sole";
-        };
-    }
 
-    public static Fish reInstantiateFish(String species, String name, Sex sex, int age, int pv, RuntimeException toThrow) {
+    public static Fish reInstantiateFish(Species species, String name, Sex sex, int age, int pv) {
         return switch(species) {
-            case "Bar" -> new BassFish(name, sex, age, pv);
-            case "Carpe" -> new CarpFish(name, sex, age, pv);
-            case "Poisson-Clown" -> new ClownFish(name, sex, age, pv);
-            case "Mérou" -> new GrouperFish(name, sex, age, pv);
-            case "Sole" -> new SoleFish(name, sex, age, pv);
-            case "Thon" -> new TunaFish(name, sex, age, pv);
-            default -> throw toThrow;
+            case BASS -> new BassFish(name, sex, age, pv);
+            case CARP -> new CarpFish(name, sex, age, pv);
+            case CLOWN_FISH -> new ClownFish(name, sex, age, pv);
+            case GROUPER -> new GrouperFish(name, sex, age, pv);
+            case SOLE -> new SoleFish(name, sex, age, pv);
+            case TUNA -> new TunaFish(name, sex, age, pv);
         };
     }
 
@@ -103,6 +92,35 @@ public abstract sealed class Fish implements Living {
 
         public static Optional<Sex> of(String s) {
             return Arrays.stream(values()).filter(v -> v.name().equalsIgnoreCase(s)).findAny();
+        }
+    }
+
+    public enum Species {
+        BASS("Bar"), CARP("Carpe"), CLOWN_FISH("Poisson-Clown"), GROUPER("Mérou"), SOLE("Sole"), TUNA("Thon");
+
+        public static Species of(Fish fish) {
+            return switch(fish) {
+                case ClownFish ignored -> CLOWN_FISH;
+                case GrouperFish ignored -> GROUPER;
+                case TunaFish ignored -> TUNA;
+                case BassFish ignored -> BASS;
+                case CarpFish ignored -> CARP;
+                case SoleFish ignored -> SOLE;
+            };
+        }
+
+        public static Optional<Species> of(String species) {
+            return Arrays.stream(values()).filter(sp -> sp.species().equals(species)).findAny();
+        }
+
+        private final String name;
+
+        Species(String name) {
+            this.name = name;
+        }
+
+        public String species() {
+            return name;
         }
     }
 

@@ -59,7 +59,7 @@ public class AquariumWriter extends BufferedWriter {
 
     public void writeFishes(List<Fish> fishes) throws IOException {
         for(Fish fish : fishes)
-            write(fish.name()+", "+Fish.species(fish)+", "+fish.sex().toString()+", "+pluralInsert("an", fish.age())+", "+pluralInsert("pv", fish.pv())+"\n");
+            write(fish.name()+", "+Fish.Species.of(fish).species()+", "+fish.sex().toString()+", "+pluralInsert("an", fish.age())+", "+pluralInsert("pv", fish.pv())+"\n");
     }
 
     public void writeKelps(List<Kelp> kelps) throws IOException {

@@ -155,8 +155,8 @@ public class AquariumParser {
         if(nullOrEmpty(name))
             throw new AquariumReadException("Erreur de lecture du nom du poisson à la ligne "+lineIndex.get());
 
-        String species = matcherFish.group(2);
-        if(nullOrEmpty(species))
+        Optional<Fish.Species> species = Optional.of(matcherFish.group(2)).filter(sp -> !nullOrEmpty(sp)).flatMap(Fish.Species::of);
+        if(species.isEmpty())
             throw new AquariumReadException("Erreur de lecture de l'espèce du poisson à la ligne "+lineIndex.get());
 
         Optional<Fish.Sex> sex = Fish.Sex.of(matcherFish.group(3));
@@ -166,7 +166,7 @@ public class AquariumParser {
 
         int pv = IntegerUtils.of(matcherFish.group(7)).orElse(Fish.DEFAULT_PV);
 
-        Fish fish = Fish.reInstantiateFish(species, name, sex.get(), age, pv, new AquariumReadException("Erreur de lecture de l'espèce '"+species+"' à la ligne "+lineIndex.get()));
+        Fish fish = Fish.reInstantiateFish(species.get(), name, sex.get(), age, pv);
         if(round.get() == -1) fishes.add(fish);
         else livingsToAdd.computeIfAbsent(round.get(), k -> new ArrayList<>()).add(fish);
     }

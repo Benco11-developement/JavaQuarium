@@ -153,7 +153,7 @@ public class JavaQuarium implements Aquarium {
         System.out.println("Il y a actuellement "+pluralInsert("poisson", fishes.size())+" dans l'aquarium");
         System.out.println("Recensement des poissons :\n");
         fishes.forEach(fish -> System.out.println(fish.name()+" est "+indefiniteArticleAppend(fish.sex().name(), fish.sex())+" "+
-                Fish.species(fish)+" "+sex("âgé", fish.sex())+" de "+pluralInsert("an", fish.age())+" avec "+pluralInsert("pv", fish.pv())));
+                Fish.Species.of(fish).species()+" "+sex("âgé", fish.sex())+" de "+pluralInsert("an", fish.age())+" avec "+pluralInsert("pv", fish.pv())));
     }
 
     @Override
@@ -220,7 +220,7 @@ public class JavaQuarium implements Aquarium {
                     case PV -> fish.pv();
                     case NAME -> fish.name();
                     case AGE -> fish.age();
-                    case SPECIES -> Fish.species(fish);
+                    case SPECIES -> Fish.Species.of(fish).species();
                     case AMOUNT -> null;
                 }
                 , o, options)));
