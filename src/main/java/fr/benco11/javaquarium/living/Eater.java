@@ -16,9 +16,15 @@ public interface Eater<T extends Living> {
      */
     void eat(T food);
 
+    /**
+     * Être carnivore
+     */
     interface Carnivorous extends Eater<Fish> {
     }
 
+    /**
+     * Être herbivore
+     */
     interface Herbivorous extends Eater<Kelp> {
     }
 }

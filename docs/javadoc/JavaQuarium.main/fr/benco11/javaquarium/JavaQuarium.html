@@ -93,6 +93,7 @@ loadScripts(document, 'script');</script>
                                                                 href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html"
                                                                 title="class or interface in java.lang">Object</a>
 implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">Aquarium</a></span></div>
+                <div class="block">JavaQuarium, implémentation par défaut de <code>Aquarium</code></div>
             </section>
             <section class="summary">
                 <ul class="summary-list">
@@ -109,14 +110,18 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                 <div class="col-second even-row-color"><code><a class="member-name-link"
                                                                                 href="#DEFAULT_ROUND_NUMBER">DEFAULT_ROUND_NUMBER</a></code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Nombre de tours de l'aquarium par défaut</div>
+                                </div>
                                 <div class="col-first odd-row-color"><code>static final <a class="external-link"
                                                                                            href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html"
                                                                                            title="class or interface in java.util">Random</a></code>
                                 </div>
                                 <div class="col-second odd-row-color"><code><a class="member-name-link" href="#RANDOM">RANDOM</a></code>
                                 </div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block"><code>RANDOM</code> unique du projet</div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -131,7 +136,9 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                 <div class="col-constructor-name even-row-color"><code><a class="member-name-link"
                                                                                           href="#%3Cinit%3E()">JavaQuarium</a>()</code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Constructeur par défaut</div>
+                                </div>
                                 <div class="col-constructor-name odd-row-color"><code><a class="member-name-link"
                                                                                          href="#%3Cinit%3E(java.util.List,java.util.List,java.util.Map,java.util.Map)">JavaQuarium</a>
                                     <wbr>
@@ -172,7 +179,11 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                        title="class or interface in java.util">List</a>&lt;<a
                                             href="options/Options.html" title="class in fr.benco11.javaquarium.options">Options</a>&gt;&gt;&gt;&nbsp;removeOptionsPerRound)</code>
                                 </div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Constructeur à partir de la liste des poissons et algues, des
+                                        êtres à ajouter par tour et des filtres de suppression par tour
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -263,60 +274,9 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                                     title="class or interface in java.lang">String</a>[]&nbsp;args)</code>
                                         </div>
                                         <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Méthode d'entrée du programme</div>
                                         </div>
                                         <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            <code><a class="external-link"
-                                                     href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html"
-                                                     title="class or interface in java.util">Optional</a>&lt;<a
-                                                    href="living/fish/Fish.html"
-                                                    title="class in fr.benco11.javaquarium.living.fish">Fish</a>&gt;</code>
-                                        </div>
-                                        <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            <code><a class="member-name-link"
-                                                     href="#randomFishExcludingOne(boolean,fr.benco11.javaquarium.living.fish.Fish)">randomFishExcludingOne</a>
-                                                <wbr>
-                                                (boolean&nbsp;living,
-                                                <a href="living/fish/Fish.html"
-                                                   title="class in fr.benco11.javaquarium.living.fish">Fish</a>&nbsp;excludeFish)</code>
-                                        </div>
-                                        <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            <code><a class="external-link"
-                                                     href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html"
-                                                     title="class or interface in java.util">Optional</a>&lt;<a
-                                                    href="living/kelp/Kelp.html"
-                                                    title="interface in fr.benco11.javaquarium.living.kelp">Kelp</a>&gt;</code>
-                                        </div>
-                                        <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            <code><a class="member-name-link" href="#randomKelp(boolean)">randomKelp</a>
-                                                <wbr>
-                                                (boolean&nbsp;living)</code></div>
-                                        <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            <code>&lt;T extends <a href="living/Living.html"
-                                                                   title="interface in fr.benco11.javaquarium.living">Living</a>&gt;<br><a
-                                                    class="external-link"
-                                                    href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html"
-                                                    title="class or interface in java.util">Optional</a>&lt;T&gt;</code>
-                                        </div>
-                                        <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            <code><a class="member-name-link"
-                                                     href="#randomLiving(boolean,java.util.List)">randomLiving</a>
-                                                <wbr>
-                                                (boolean&nbsp;isLiving,
-                                                <a class="external-link"
-                                                   href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html"
-                                                   title="class or interface in java.util">List</a>&lt;T&gt;&nbsp;originalList)</code>
-                                        </div>
-                                        <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="external-link"
                                                      href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html"
                                                      title="class or interface in java.util">Map</a>&lt;<a
@@ -330,15 +290,15 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                                         href="living/Living.html"
                                                         title="interface in fr.benco11.javaquarium.living">Living</a>&gt;&gt;</code>
                                         </div>
-                                        <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="member-name-link" href="#remainingLivingsToAdd()">remainingLivingsToAdd</a>()</code>
                                         </div>
-                                        <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <div class="block">Donne la liste des êtres vivants qui n'ont pas encore été
                                                 ajoutés
                                             </div>
                                         </div>
-                                        <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="external-link"
                                                      href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html"
                                                      title="class or interface in java.util">Map</a>&lt;<a
@@ -359,33 +319,33 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                                         href="options/Options.html"
                                                         title="class in fr.benco11.javaquarium.options">Options</a>&gt;&gt;&gt;</code>
                                         </div>
-                                        <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="member-name-link" href="#remainingRemoveOptions()">remainingRemoveOptions</a>()</code>
                                         </div>
-                                        <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <div class="block">Donne la liste des filtres de suppression d'êtres vivants
                                                 qui n'ont pas encore été appliqués
                                             </div>
                                         </div>
-                                        <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>void</code></div>
-                                        <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="member-name-link"
                                                      href="#remove(fr.benco11.javaquarium.living.Living)">remove</a>
                                                 <wbr>
                                                 (<a href="living/Living.html"
                                                     title="interface in fr.benco11.javaquarium.living">Living</a>&nbsp;living)</code>
                                         </div>
-                                        <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <div class="block">Supprime un être vivant s'il est présent dans
                                                 l'aquarium
                                             </div>
                                         </div>
-                                        <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>void</code></div>
-                                        <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="member-name-link" href="#update()">update</a>()</code></div>
-                                        <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+                                        <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <div class="block">Avance et simule d'un tour l'aquarium puis met à jour la
                                                 liste des poissons et algues
                                             </div>
@@ -445,6 +405,7 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                                                        href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html"
                                                                        title="class or interface in java.util">Random</a></span>&nbsp;<span
                                                 class="element-name">RANDOM</span></div>
+                                        <div class="block"><code>RANDOM</code> unique du projet</div>
                                     </section>
                                 </li>
                                 <li>
@@ -453,6 +414,7 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                         <div class="member-signature"><span class="modifiers">public static final</span>&nbsp;<span
                                                 class="return-type">int</span>&nbsp;<span class="element-name">DEFAULT_ROUND_NUMBER</span>
                                         </div>
+                                        <div class="block">Nombre de tours de l'aquarium par défaut</div>
                                         <dl class="notes">
                                             <dt>See Also:</dt>
                                             <dd>
@@ -479,6 +441,7 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                         <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
                                                 class="element-name">JavaQuarium</span>()
                                         </div>
+                                        <div class="block">Constructeur par défaut</div>
                                     </section>
                                 </li>
                                 <li>
@@ -522,6 +485,20 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                                         href="options/Options.html"
                                                         title="class in fr.benco11.javaquarium.options">Options</a>&gt;&gt;&gt;&nbsp;removeOptionsPerRound)</span>
                                         </div>
+                                        <div class="block">Constructeur à partir de la liste des poissons et algues, des
+                                            êtres à ajouter par tour et des filtres de suppression par tour
+                                        </div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>kelps</code> - liste des algues</dd>
+                                            <dd><code>fishes</code> - liste des poissons</dd>
+                                            <dd><code>livingsToAddPerRound</code> - liste des êtres vivants à ajouter
+                                                par tour
+                                            </dd>
+                                            <dd><code>removeOptionsPerRound</code> - liste des filtres de suppression
+                                                par tour
+                                            </dd>
+                                        </dl>
                                     </section>
                                 </li>
                             </ul>
@@ -543,6 +520,14 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html"
                                                                          title="class or interface in java.lang">String</a>[]&nbsp;args)</span>
                                         </div>
+                                        <div class="block">Méthode d'entrée du programme</div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>args</code> - différents arguments (voir <a
+                                                    href="options/Options.AquariumOption.html"
+                                                    title="enum class in fr.benco11.javaquarium.options"><code>Options.AquariumOption</code></a>)
+                                            </dd>
+                                        </dl>
                                     </section>
                                 </li>
                                 <li>
@@ -760,53 +745,6 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
                                             <dt>Returns:</dt>
                                             <dd>liste des poissons</dd>
                                         </dl>
-                                    </section>
-                                </li>
-                                <li>
-                                    <section class="detail"
-                                             id="randomFishExcludingOne(boolean,fr.benco11.javaquarium.living.fish.Fish)">
-                                        <h3>randomFishExcludingOne</h3>
-                                        <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
-                                                class="return-type"><a class="external-link"
-                                                                       href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html"
-                                                                       title="class or interface in java.util">Optional</a>&lt;<a
-                                                href="living/fish/Fish.html"
-                                                title="class in fr.benco11.javaquarium.living.fish">Fish</a>&gt;</span>&nbsp;<span
-                                                class="element-name">randomFishExcludingOne</span>
-                                            <wbr>
-                                            <span class="parameters">(boolean&nbsp;living,
- <a href="living/fish/Fish.html" title="class in fr.benco11.javaquarium.living.fish">Fish</a>&nbsp;excludeFish)</span>
-                                        </div>
-                                    </section>
-                                </li>
-                                <li>
-                                    <section class="detail" id="randomKelp(boolean)">
-                                        <h3>randomKelp</h3>
-                                        <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
-                                                class="return-type"><a class="external-link"
-                                                                       href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html"
-                                                                       title="class or interface in java.util">Optional</a>&lt;<a
-                                                href="living/kelp/Kelp.html"
-                                                title="interface in fr.benco11.javaquarium.living.kelp">Kelp</a>&gt;</span>&nbsp;<span
-                                                class="element-name">randomKelp</span>
-                                            <wbr>
-                                            <span class="parameters">(boolean&nbsp;living)</span></div>
-                                    </section>
-                                </li>
-                                <li>
-                                    <section class="detail" id="randomLiving(boolean,java.util.List)">
-                                        <h3>randomLiving</h3>
-                                        <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
-                                                class="type-parameters">&lt;T extends <a href="living/Living.html"
-                                                                                         title="interface in fr.benco11.javaquarium.living">Living</a>&gt;</span>&nbsp;<span
-                                                class="return-type"><a class="external-link"
-                                                                       href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html"
-                                                                       title="class or interface in java.util">Optional</a>&lt;T&gt;</span>&nbsp;<span
-                                                class="element-name">randomLiving</span>
-                                            <wbr>
-                                            <span class="parameters">(boolean&nbsp;isLiving,
- <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html"
-    title="class or interface in java.util">List</a>&lt;T&gt;&nbsp;originalList)</span></div>
                                     </section>
                                 </li>
                             </ul>

@@ -95,6 +95,7 @@ loadScripts(document, 'script');</script>
                                                                 href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html"
                                                                 title="class or interface in java.lang">Object</a>
 implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living.kelp">Kelp</a></span></div>
+                <div class="block">Implémentation par défaut de l'algue</div>
             </section>
             <section class="summary">
                 <ul class="summary-list">
@@ -128,12 +129,16 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
                                 <div class="col-constructor-name even-row-color"><code><a class="member-name-link"
                                                                                           href="#%3Cinit%3E()">KelpBasic</a>()</code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Constructeur par défaut</div>
+                                </div>
                                 <div class="col-constructor-name odd-row-color"><code><a class="member-name-link"
                                                                                          href="#%3Cinit%3E(int)">KelpBasic</a>
                                     <wbr>
                                     (int&nbsp;pv)</code></div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Constructeur à partir du nombre de pvs</div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -177,7 +182,7 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
                                         <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="member-name-link" href="#alive()">alive</a>()</code></div>
                                         <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            <div class="block">Renvoie vrai si l'être vivant est encore en vie</div>
+                                            <div class="block">Renvoie vrai si l'être est encore en vie</div>
                                         </div>
                                         <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>void</code></div>
@@ -293,6 +298,7 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
                                         <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
                                                 class="element-name">KelpBasic</span>()
                                         </div>
+                                        <div class="block">Constructeur par défaut</div>
                                     </section>
                                 </li>
                                 <li>
@@ -302,6 +308,11 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
                                                 class="element-name">KelpBasic</span>
                                             <wbr>
                                             <span class="parameters">(int&nbsp;pv)</span></div>
+                                        <div class="block">Constructeur à partir du nombre de pvs</div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>pv</code> - nombre de pvs</dd>
+                                        </dl>
                                     </section>
                                 </li>
                             </ul>
@@ -342,13 +353,15 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
                                         </div>
                                         <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
                                                 href="../Living.html#alive()">Living</a></code></span></div>
-                                        <div class="block">Renvoie vrai si l'être vivant est encore en vie</div>
+                                        <div class="block">Renvoie vrai si l'être est encore en vie</div>
                                         <dl class="notes">
                                             <dt>Specified by:</dt>
                                             <dd><code><a href="../Living.html#alive()">alive</a></code>&nbsp;in
                                                 interface&nbsp;<code><a href="../Living.html"
                                                                         title="interface in fr.benco11.javaquarium.living">Living</a></code>
                                             </dd>
+                                            <dt>Returns:</dt>
+                                            <dd>si l'être est vivant</dd>
                                         </dl>
                                     </section>
                                 </li>
@@ -412,6 +425,8 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
                                                     href="../Living.html"
                                                     title="interface in fr.benco11.javaquarium.living">Living</a></code>
                                             </dd>
+                                            <dt>Returns:</dt>
+                                            <dd>l'âge de l'être</dd>
                                         </dl>
                                     </section>
                                 </li>
@@ -430,6 +445,8 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
                                                     href="../Living.html"
                                                     title="interface in fr.benco11.javaquarium.living">Living</a></code>
                                             </dd>
+                                            <dt>Returns:</dt>
+                                            <dd>le nombre de pvs</dd>
                                         </dl>
                                     </section>
                                 </li>

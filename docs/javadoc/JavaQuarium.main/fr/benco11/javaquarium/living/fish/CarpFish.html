@@ -100,7 +100,7 @@ loadScripts(document, 'script');</script>
                     <span class="extends-implements">extends <a href="Fish.HerbivorousFish.html"
                                                                 title="class in fr.benco11.javaquarium.living.fish">Fish.HerbivorousFish</a></span>
                 </div>
-                <div class="block">Carp (carpe)</div>
+                <div class="block">Carpe</div>
             </section>
             <section class="summary">
                 <ul class="summary-list">
@@ -164,7 +164,9 @@ loadScripts(document, 'script');</script>
                                         title="class or interface in java.lang">String</a>&nbsp;name,
                                     <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex)</code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Constructeur à partir d'un nom et d'un sexe</div>
+                                </div>
                                 <div class="col-constructor-name odd-row-color"><code><a class="member-name-link"
                                                                                          href="#%3Cinit%3E(java.lang.String,fr.benco11.javaquarium.living.fish.Fish.Sex,int,int)">CarpFish</a>
                                     <wbr>
@@ -174,7 +176,11 @@ loadScripts(document, 'script');</script>
                                     <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex,
                                     int&nbsp;age,
                                     int&nbsp;pv)</code></div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Constructeur à partir d'un nom, d'un sexe, de l'âge et du nombre
+                                        de pvs
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -221,7 +227,7 @@ loadScripts(document, 'script');</script>
                                                     title="class in fr.benco11.javaquarium.living.fish">Fish</a>&nbsp;other)</code>
                                         </div>
                                         <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Tente de se reproduire avec un autre poisson</div>
                                         </div>
                                     </div>
                                 </div>
@@ -299,6 +305,12 @@ loadScripts(document, 'script');</script>
                                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html"
                                                                          title="class or interface in java.lang">String</a>&nbsp;name,
  <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex)</span></div>
+                                        <div class="block">Constructeur à partir d'un nom et d'un sexe</div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>name</code> - nom</dd>
+                                            <dd><code>sex</code> - sexe</dd>
+                                        </dl>
                                     </section>
                                 </li>
                                 <li>
@@ -314,6 +326,16 @@ loadScripts(document, 'script');</script>
  <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex,
  int&nbsp;age,
  int&nbsp;pv)</span></div>
+                                        <div class="block">Constructeur à partir d'un nom, d'un sexe, de l'âge et du
+                                            nombre de pvs
+                                        </div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>name</code> - nom</dd>
+                                            <dd><code>sex</code> - sexe</dd>
+                                            <dd><code>age</code> - âge</dd>
+                                            <dd><code>pv</code> - nombre de pvs</dd>
+                                        </dl>
                                     </section>
                                 </li>
                             </ul>
@@ -337,6 +359,10 @@ loadScripts(document, 'script');</script>
                                             <span class="parameters">(<a href="Fish.html"
                                                                          title="class in fr.benco11.javaquarium.living.fish">Fish</a>&nbsp;other)</span>
                                         </div>
+                                        <div class="block"><span class="descfrm-type-label">Description copied from class:&nbsp;<code><a
+                                                href="Fish.html#reproduce(fr.benco11.javaquarium.living.fish.Fish)">Fish</a></code></span>
+                                        </div>
+                                        <div class="block">Tente de se reproduire avec un autre poisson</div>
                                         <dl class="notes">
                                             <dt>Specified by:</dt>
                                             <dd><code><a
@@ -344,6 +370,10 @@ loadScripts(document, 'script');</script>
                                                 class&nbsp;<code><a href="Fish.html"
                                                                     title="class in fr.benco11.javaquarium.living.fish">Fish</a></code>
                                             </dd>
+                                            <dt>Parameters:</dt>
+                                            <dd><code>other</code> - autre poisson avec qui se reproduire</dd>
+                                            <dt>Returns:</dt>
+                                            <dd>un <code>Optional</code> contenant ou non un nouveau poisson</dd>
                                         </dl>
                                     </section>
                                 </li>

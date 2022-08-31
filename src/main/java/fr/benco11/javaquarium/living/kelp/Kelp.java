@@ -4,6 +4,9 @@ import fr.benco11.javaquarium.living.Living;
 
 import java.util.Optional;
 
+/**
+ * Algue
+ */
 public sealed interface Kelp extends Living permits KelpBasic {
     /**
      * Essaye de se reproduire (division)

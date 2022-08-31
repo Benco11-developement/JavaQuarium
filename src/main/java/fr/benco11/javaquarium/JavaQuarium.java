@@ -29,24 +29,42 @@ import static fr.benco11.javaquarium.options.Options.LivingOption.AMOUNT;
 import static fr.benco11.javaquarium.options.Options.equalsOrEmpty;
 import static fr.benco11.javaquarium.utils.StringUtils.*;
 
+/**
+ * JavaQuarium, implémentation par défaut de <code>Aquarium</code>
+ */
 public class JavaQuarium implements Aquarium {
+    /**
+     * <code>RANDOM</code> unique du projet
+     */
     public static final Random RANDOM = new Random();
+
+    /**
+     * Nombre de tours de l'aquarium par défaut
+     */
     public static final int DEFAULT_ROUND_NUMBER = 20;
 
+    /**
+     * Méthode d'entrée du programme
+     *
+     * @param args différents arguments (voir {@link fr.benco11.javaquarium.options.Options.AquariumOption})
+     */
     public static void main(String[] args) {
         Options options = new OptionsParser().parse(args);
 
         Aquarium aquarium = loadAquarium(options);
 
+        // Récupère le nombre de rounds et le fichier de sortie
         int rounds = (options.isPresent(ROUNDS)) ? options.option(ROUNDS, Integer.class).orElseThrow(() -> new OptionParseException(ROUNDS)) : DEFAULT_ROUND_NUMBER;
         Optional<File> output = options.option(OUTPUT, String.class).map(File::new);
         if(options.isPresent(OUTPUT) && output.isEmpty()) throw new OptionParseException(OUTPUT);
 
+        // Récupère le tour de sauvegarde, par défaut le nombre de rounds de simulation
         Optional<Integer> outputRound = options.option(OUTPUT_ROUND, Integer.class);
         if(options.isPresent(OUTPUT_ROUND) && outputRound.isEmpty())
             throw new OptionParseException(OUTPUT_ROUND);
 
         for(int round = 1; round <= rounds; round++) {
+            // À chaque tour, simule un nouveau tour de l'aquarium et si c'est le tour d'enregistrement, enregistre dans le fichier de sortie
             aquarium.update();
             if(round == outputRound.orElse(rounds) && output.isPresent()) {
                 try(AquariumWriter writer = new AquariumWriter(new FileWriter(output.get()))) {
@@ -60,6 +78,12 @@ public class JavaQuarium implements Aquarium {
 
     }
 
+    /**
+     * Charge l'aquarium à partir des options d'aquarium
+     *
+     * @param options options d'aquarium
+     * @return l'aquarium
+     */
     private static Aquarium loadAquarium(Options options) {
         Aquarium aquarium;
         if(options.isPresent(INPUT)) {
@@ -88,10 +112,21 @@ public class JavaQuarium implements Aquarium {
     private List<Fish> fishes;
     private int round;
 
+    /**
+     * Constructeur par défaut
+     */
     public JavaQuarium() {
         this(new ArrayList<>(), new ArrayList<>(), new HashMap<>(), new HashMap<>());
     }
 
+    /**
+     * Constructeur à partir de la liste des poissons et algues, des êtres à ajouter par tour et des filtres de suppression par tour
+     *
+     * @param kelps                 liste des algues
+     * @param fishes                liste des poissons
+     * @param livingsToAddPerRound  liste des êtres vivants à ajouter par tour
+     * @param removeOptionsPerRound liste des filtres de suppression par tour
+     */
     public JavaQuarium(List<Kelp> kelps, List<Fish> fishes, Map<Integer, List<Living>> livingsToAddPerRound,
                        Map<Integer, Pair<List<Options>, List<Options>>> removeOptionsPerRound) {
         this.kelps = kelps;
@@ -176,6 +211,11 @@ public class JavaQuarium implements Aquarium {
         return fishes;
     }
 
+    /**
+     * Le poisson essaye de manger s'il a faim
+     *
+     * @param fish poisson
+     */
     private void tryToEatIfHungry(Fish fish) {
         if(fish.hungry()) {
             if(fish instanceof Eater.Carnivorous carnivorous) {
@@ -186,33 +226,78 @@ public class JavaQuarium implements Aquarium {
         }
     }
 
+    /**
+     * Le poisson essaye de se reproduire avec un autre poisson au hasard
+     *
+     * @param fish poisson
+     * @return un <code>Optional</code> contenant ou non un nouveau poisson
+     */
     private Optional<Fish> tryToReproduce(Fish fish) {
         Optional<Fish> other = randomFishExcludingOne(true, fish);
         return other.isEmpty() ? Optional.empty() : other.get().reproduce(fish);
     }
 
+    /**
+     * L'algue essaye de se reproduire (diviser)
+     *
+     * @param kelp algue
+     * @return un <code>Optional</code> contenant ou non une nouvelle algue
+     */
     private Optional<Kelp> tryToReproduce(Kelp kelp) {
         return kelp.reproduce();
     }
 
-    public Optional<Fish> randomFishExcludingOne(boolean living, Fish excludeFish) {
+    /**
+     * Renvoie un poisson au hasard en excluant un
+     *
+     * @param living      si le poisson tiré doit être vivant
+     * @param excludeFish poisson à exclure
+     * @return un <code>Optional</code> contenant ou non un poisson
+     */
+    private Optional<Fish> randomFishExcludingOne(boolean living, Fish excludeFish) {
         return randomLiving(living, fishes.stream().filter(fish -> fish != excludeFish).toList());
     }
 
-    public Optional<Kelp> randomKelp(boolean living) {
+    /**
+     * Renvoie une algue au hasard
+     *
+     * @param living si l'algue tirée doit être vivante
+     * @return un <code>Optional</code> contenant ou non une algue
+     */
+    private Optional<Kelp> randomKelp(boolean living) {
         return randomLiving(living, kelps);
     }
 
-    public <T extends Living> Optional<T> randomLiving(boolean isLiving, List<T> originalList) {
+    /**
+     * Renvoie un être vivant au hasard
+     *
+     * @param isLiving     si l'être tiré doit être vivant
+     * @param originalList liste des êtres parmis lequel l'être sera tiré
+     * @param <T>          type de l'être
+     * @return un <code>Optional</code> contenant ou non un être
+     */
+    private <T extends Living> Optional<T> randomLiving(boolean isLiving, List<T> originalList) {
         List<T> livingFiltered = originalList.stream().filter(living -> !isLiving || living.alive()).toList();
         return (livingFiltered.isEmpty()) ? Optional.empty() : Optional.of(livingFiltered.get(RANDOM.nextInt(livingFiltered.size())));
     }
 
+    /**
+     * Filtre les algues en retirant celles qui passent les filtres
+     *
+     * @param options filtres de suppression d'algues
+     * @param kelps   liste des algues
+     */
     private void removeKelp(Options options, List<Kelp> kelps) {
         List<Kelp> kelpsFiltered = kelps.stream().filter(kelp -> filterRemove(kelp.age(), AGE, options)).toList();
         kelps.removeAll(ListUtils.pickRandoms(kelpsFiltered, options.option(AMOUNT, Integer.class).orElse(kelpsFiltered.size())));
     }
 
+    /**
+     * Filtre les poissons en retirant ceux qui passent les filtres
+     *
+     * @param options filtres de suppression de poissons
+     * @param fishes  liste des poissons
+     */
     private void removeFish(Options options, List<Fish> fishes) {
         fishes.removeIf(fish -> Arrays.stream(Options.LivingOption.values()).allMatch(o -> filterRemove(
                 switch(o) {
@@ -226,6 +311,14 @@ public class JavaQuarium implements Aquarium {
                 , o, options)));
     }
 
+    /**
+     * Renvoie vrai si l'objet passe dans le filtre de suppression de l'option
+     *
+     * @param f        objet
+     * @param optionId id de l'option
+     * @param options  options
+     * @return si l'objet est <code>null</code> ou si l'objet correspond à l'option ou si l'option est vide
+     */
     private boolean filterRemove(Object f, Options.StandardOption optionId, Options options) {
         return f == null || equalsOrEmpty(f, options.option(optionId));
     }

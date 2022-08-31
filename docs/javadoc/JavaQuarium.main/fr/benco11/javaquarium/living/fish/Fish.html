@@ -103,6 +103,7 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                      title="class in fr.benco11.javaquarium.living.fish">Fish.HerbivorousFish</a>, <a
                             href="Fish.CarnivorousFish.html" title="class in fr.benco11.javaquarium.living.fish">Fish.CarnivorousFish</a></span>
                 </div>
+                <div class="block">Poisson</div>
             </section>
             <section class="summary">
                 <ul class="summary-list">
@@ -120,13 +121,17 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                                                 href="Fish.CarnivorousFish.html"
                                                                                 title="class in fr.benco11.javaquarium.living.fish">Fish.CarnivorousFish</a></code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Poisson carnivore</div>
+                                </div>
                                 <div class="col-first odd-row-color"><code>static class&nbsp;</code></div>
                                 <div class="col-second odd-row-color"><code><a class="type-name-link"
                                                                                href="Fish.HerbivorousFish.html"
                                                                                title="class in fr.benco11.javaquarium.living.fish">Fish.HerbivorousFish</a></code>
                                 </div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Poisson herbivore</div>
+                                </div>
                                 <div class="col-first even-row-color"><code>static enum&nbsp;</code></div>
                                 <div class="col-second even-row-color"><code><a class="type-name-link"
                                                                                 href="Fish.Sex.html"
@@ -158,7 +163,9 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                 <div class="col-first even-row-color"><code>protected int</code></div>
                                 <div class="col-second even-row-color"><code><a class="member-name-link"
                                                                                 href="#age">age</a></code></div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Âge du poisson</div>
+                                </div>
                                 <div class="col-first odd-row-color"><code>static final int</code></div>
                                 <div class="col-second odd-row-color"><code><a class="member-name-link"
                                                                                href="#DEFAULT_PV">DEFAULT_PV</a></code>
@@ -172,17 +179,23 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                 </div>
                                 <div class="col-second even-row-color"><code><a class="member-name-link" href="#name">name</a></code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Nom du poisson</div>
+                                </div>
                                 <div class="col-first odd-row-color"><code>protected int</code></div>
                                 <div class="col-second odd-row-color"><code><a class="member-name-link"
                                                                                href="#pv">pv</a></code></div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Nombre de pvs du poisson</div>
+                                </div>
                                 <div class="col-first even-row-color"><code>protected <a href="Fish.Sex.html"
                                                                                          title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a></code>
                                 </div>
                                 <div class="col-second even-row-color"><code><a class="member-name-link"
                                                                                 href="#sex">sex</a></code></div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Sexe du poisson</div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -204,7 +217,9 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                         title="class or interface in java.lang">String</a>&nbsp;name,
                                     <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex)</code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Constructeur à partir d'un nom et d'un sexe</div>
+                                </div>
                                 <div class="col-first odd-row-color"><code>protected </code></div>
                                 <div class="col-constructor-name odd-row-color"><code><a class="member-name-link"
                                                                                          href="#%3Cinit%3E(java.lang.String,fr.benco11.javaquarium.living.fish.Fish.Sex,int,int)">Fish</a>
@@ -215,7 +230,11 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                     <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex,
                                     int&nbsp;age,
                                     int&nbsp;pv)</code></div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Constructeur à partir d'un nom, d'un sexe, de l'âge et du nombre
+                                        de pvs
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -269,7 +288,7 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                         <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="member-name-link" href="#alive()">alive</a>()</code></div>
                                         <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            <div class="block">Renvoie vrai si l'être vivant est encore en vie</div>
+                                            <div class="block">Renvoie vrai si l'être est encore en vie</div>
                                         </div>
                                         <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>void</code></div>
@@ -283,7 +302,8 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                         <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="member-name-link" href="#hungry()">hungry</a>()</code></div>
                                         <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Renvoie vrai si le poisson a faim et cherche à manger
+                                            </div>
                                         </div>
                                         <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="external-link"
@@ -292,7 +312,7 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                         <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="member-name-link" href="#name()">name</a>()</code></div>
                                         <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Renvoie le nom du poisson</div>
                                         </div>
                                         <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>int</code></div>
@@ -336,7 +356,7 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                     title="class in fr.benco11.javaquarium.living.fish">Fish</a>&nbsp;other)</code>
                                         </div>
                                         <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-                                            &nbsp;
+                                            <div class="block">Tente de se reproduire avec un autre poisson</div>
                                         </div>
                                         <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a href="Fish.Sex.html"
@@ -345,7 +365,7 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                         <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code><a class="member-name-link" href="#sex()">sex</a>()</code></div>
                                         <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Renvoie le sexe du poisson</div>
                                         </div>
                                         <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>boolean</code></div>
@@ -428,6 +448,7 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                                        href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html"
                                                                        title="class or interface in java.lang">String</a></span>&nbsp;<span
                                                 class="element-name">name</span></div>
+                                        <div class="block">Nom du poisson</div>
                                     </section>
                                 </li>
                                 <li>
@@ -438,6 +459,7 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                 href="Fish.Sex.html"
                                                 title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a></span>&nbsp;<span
                                                 class="element-name">sex</span></div>
+                                        <div class="block">Sexe du poisson</div>
                                     </section>
                                 </li>
                                 <li>
@@ -447,6 +469,7 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                 class="modifiers">protected</span>&nbsp;<span
                                                 class="return-type">int</span>&nbsp;<span
                                                 class="element-name">age</span></div>
+                                        <div class="block">Âge du poisson</div>
                                     </section>
                                 </li>
                                 <li>
@@ -456,6 +479,7 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                 class="modifiers">protected</span>&nbsp;<span
                                                 class="return-type">int</span>&nbsp;<span class="element-name">pv</span>
                                         </div>
+                                        <div class="block">Nombre de pvs du poisson</div>
                                     </section>
                                 </li>
                             </ul>
@@ -478,6 +502,12 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html"
                                                                          title="class or interface in java.lang">String</a>&nbsp;name,
  <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex)</span></div>
+                                        <div class="block">Constructeur à partir d'un nom et d'un sexe</div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>name</code> - nom</dd>
+                                            <dd><code>sex</code> - sexe</dd>
+                                        </dl>
                                     </section>
                                 </li>
                                 <li>
@@ -494,6 +524,16 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
  <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex,
  int&nbsp;age,
  int&nbsp;pv)</span></div>
+                                        <div class="block">Constructeur à partir d'un nom, d'un sexe, de l'âge et du
+                                            nombre de pvs
+                                        </div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>name</code> - nom</dd>
+                                            <dd><code>sex</code> - sexe</dd>
+                                            <dd><code>age</code> - âge</dd>
+                                            <dd><code>pv</code> - nombre de pvs</dd>
+                                        </dl>
                                     </section>
                                 </li>
                             </ul>
@@ -542,6 +582,11 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                                        title="class or interface in java.lang">String</a></span>&nbsp;<span
                                                 class="element-name">name</span>()
                                         </div>
+                                        <div class="block">Renvoie le nom du poisson</div>
+                                        <dl class="notes">
+                                            <dt>Returns:</dt>
+                                            <dd>le nom</dd>
+                                        </dl>
                                     </section>
                                 </li>
                                 <li>
@@ -552,6 +597,11 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                                        title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a></span>&nbsp;<span
                                                 class="element-name">sex</span>()
                                         </div>
+                                        <div class="block">Renvoie le sexe du poisson</div>
+                                        <dl class="notes">
+                                            <dt>Returns:</dt>
+                                            <dd>le sexe</dd>
+                                        </dl>
                                     </section>
                                 </li>
                                 <li>
@@ -570,6 +620,8 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                     href="../Living.html"
                                                     title="interface in fr.benco11.javaquarium.living">Living</a></code>
                                             </dd>
+                                            <dt>Returns:</dt>
+                                            <dd>l'âge de l'être</dd>
                                         </dl>
                                     </section>
                                 </li>
@@ -588,6 +640,8 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                                     href="../Living.html"
                                                     title="interface in fr.benco11.javaquarium.living">Living</a></code>
                                             </dd>
+                                            <dt>Returns:</dt>
+                                            <dd>le nombre de pvs</dd>
                                         </dl>
                                     </section>
                                 </li>
@@ -621,13 +675,15 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                         </div>
                                         <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
                                                 href="../Living.html#alive()">Living</a></code></span></div>
-                                        <div class="block">Renvoie vrai si l'être vivant est encore en vie</div>
+                                        <div class="block">Renvoie vrai si l'être est encore en vie</div>
                                         <dl class="notes">
                                             <dt>Specified by:</dt>
                                             <dd><code><a href="../Living.html#alive()">alive</a></code>&nbsp;in
                                                 interface&nbsp;<code><a href="../Living.html"
                                                                         title="interface in fr.benco11.javaquarium.living">Living</a></code>
                                             </dd>
+                                            <dt>Returns:</dt>
+                                            <dd>si l'être est vivant</dd>
                                         </dl>
                                     </section>
                                 </li>
@@ -656,6 +712,11 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                         <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
                                                 class="return-type">boolean</span>&nbsp;<span class="element-name">hungry</span>()
                                         </div>
+                                        <div class="block">Renvoie vrai si le poisson a faim et cherche à manger</div>
+                                        <dl class="notes">
+                                            <dt>Returns:</dt>
+                                            <dd>si le poisson a faim</dd>
+                                        </dl>
                                     </section>
                                 </li>
                                 <li>
@@ -671,6 +732,13 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
                                             <span class="parameters">(<a href="Fish.html"
                                                                          title="class in fr.benco11.javaquarium.living.fish">Fish</a>&nbsp;other)</span>
                                         </div>
+                                        <div class="block">Tente de se reproduire avec un autre poisson</div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>other</code> - autre poisson avec qui se reproduire</dd>
+                                            <dt>Returns:</dt>
+                                            <dd>un <code>Optional</code> contenant ou non un nouveau poisson</dd>
+                                        </dl>
                                     </section>
                                 </li>
                             </ul>

@@ -110,6 +110,7 @@ loadScripts(document, 'script');</script>
                                                                 href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/BufferedWriter.html"
                                                                 title="class or interface in java.io">BufferedWriter</a></span>
                 </div>
+                <div class="block">Classe permettant d'écrire un aquarium</div>
             </section>
             <section class="summary">
                 <ul class="summary-list">
@@ -141,7 +142,9 @@ loadScripts(document, 'script');</script>
                                     (<a class="external-link"
                                         href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Writer.html"
                                         title="class or interface in java.io">Writer</a>&nbsp;out)</code></div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Constructeur à partir d'un <code>Writer</code></div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -182,7 +185,7 @@ loadScripts(document, 'script');</script>
                                                 (<a href="../Aquarium.html" title="interface in fr.benco11.javaquarium">Aquarium</a>&nbsp;aquarium)</code>
                                         </div>
                                         <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Écris un aquarium</div>
                                         </div>
                                         <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>void</code></div>
@@ -196,7 +199,7 @@ loadScripts(document, 'script');</script>
                                                         title="class in fr.benco11.javaquarium.living.fish">Fish</a>&gt;&nbsp;fishes)</code>
                                         </div>
                                         <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Écris une liste de poissons</div>
                                         </div>
                                         <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>void</code></div>
@@ -210,7 +213,7 @@ loadScripts(document, 'script');</script>
                                                         title="interface in fr.benco11.javaquarium.living.kelp">Kelp</a>&gt;&nbsp;kelps)</code>
                                         </div>
                                         <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Écris une liste d'algues</div>
                                         </div>
                                         <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>void</code></div>
@@ -224,7 +227,7 @@ loadScripts(document, 'script');</script>
                                                         title="class in fr.benco11.javaquarium.options">Options</a>&gt;&nbsp;options)</code>
                                         </div>
                                         <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Écris une liste de filtres de poissons à retirer</div>
                                         </div>
                                         <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
                                             <code>void</code></div>
@@ -238,7 +241,7 @@ loadScripts(document, 'script');</script>
                                                         title="class in fr.benco11.javaquarium.options">Options</a>&gt;&nbsp;options)</code>
                                         </div>
                                         <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-                                            &nbsp;
+                                            <div class="block">Écris une liste de filtres d'algues à retirer</div>
                                         </div>
                                     </div>
                                 </div>
@@ -339,6 +342,11 @@ loadScripts(document, 'script');</script>
                                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Writer.html"
                                                                          title="class or interface in java.io">Writer</a>&nbsp;out)</span>
                                         </div>
+                                        <div class="block">Constructeur à partir d'un <code>Writer</code></div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>out</code> - <code>Writer</code> utilisé</dd>
+                                        </dl>
                                     </section>
                                 </li>
                             </ul>
@@ -361,11 +369,15 @@ loadScripts(document, 'script');</script>
                                                                                href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
                                                                                title="class or interface in java.io">IOException</a></span>
                                         </div>
+                                        <div class="block">Écris un aquarium</div>
                                         <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>aquarium</code> - aquarium</dd>
                                             <dt>Throws:</dt>
                                             <dd><code><a class="external-link"
                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
-                                                         title="class or interface in java.io">IOException</a></code>
+                                                         title="class or interface in java.io">IOException</a></code> -
+                                                erreur lors de l'écriture
                                             </dd>
                                         </dl>
                                     </section>
@@ -385,11 +397,15 @@ loadScripts(document, 'script');</script>
                                                                                href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
                                                                                title="class or interface in java.io">IOException</a></span>
                                         </div>
+                                        <div class="block">Écris une liste de poissons</div>
                                         <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>fishes</code> - liste de poissons</dd>
                                             <dt>Throws:</dt>
                                             <dd><code><a class="external-link"
                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
-                                                         title="class or interface in java.io">IOException</a></code>
+                                                         title="class or interface in java.io">IOException</a></code> -
+                                                erreur lors de l'écriture
                                             </dd>
                                         </dl>
                                     </section>
@@ -409,11 +425,15 @@ loadScripts(document, 'script');</script>
                                                                                href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
                                                                                title="class or interface in java.io">IOException</a></span>
                                         </div>
+                                        <div class="block">Écris une liste d'algues</div>
                                         <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>kelps</code> - liste d'algues</dd>
                                             <dt>Throws:</dt>
                                             <dd><code><a class="external-link"
                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
-                                                         title="class or interface in java.io">IOException</a></code>
+                                                         title="class or interface in java.io">IOException</a></code> -
+                                                erreur lors de l'écriture
                                             </dd>
                                         </dl>
                                     </section>
@@ -433,11 +453,15 @@ loadScripts(document, 'script');</script>
                                                                                href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
                                                                                title="class or interface in java.io">IOException</a></span>
                                         </div>
+                                        <div class="block">Écris une liste de filtres de poissons à retirer</div>
                                         <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>options</code> - liste de filtres</dd>
                                             <dt>Throws:</dt>
                                             <dd><code><a class="external-link"
                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
-                                                         title="class or interface in java.io">IOException</a></code>
+                                                         title="class or interface in java.io">IOException</a></code> -
+                                                erreur lors de l'écriture
                                             </dd>
                                         </dl>
                                     </section>
@@ -457,11 +481,15 @@ loadScripts(document, 'script');</script>
                                                                                href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
                                                                                title="class or interface in java.io">IOException</a></span>
                                         </div>
+                                        <div class="block">Écris une liste de filtres d'algues à retirer</div>
                                         <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>options</code> - liste de filtres</dd>
                                             <dt>Throws:</dt>
                                             <dd><code><a class="external-link"
                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/IOException.html"
-                                                         title="class or interface in java.io">IOException</a></code>
+                                                         title="class or interface in java.io">IOException</a></code> -
+                                                erreur lors de l'écriture
                                             </dd>
                                         </dl>
                                     </section>

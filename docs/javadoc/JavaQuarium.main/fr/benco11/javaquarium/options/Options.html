@@ -124,7 +124,9 @@ loadScripts(document, 'script');</script>
                                                                                 href="Options.StandardOption.html"
                                                                                 title="interface in fr.benco11.javaquarium.options">Options.StandardOption</a></code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Option standard</div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -139,7 +141,9 @@ loadScripts(document, 'script');</script>
                                 <div class="col-constructor-name even-row-color"><code><a class="member-name-link"
                                                                                           href="#%3Cinit%3E()">Options</a>()</code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Constructeur par défaut</div>
+                                </div>
                                 <div class="col-constructor-name odd-row-color"><code><a class="member-name-link"
                                                                                          href="#%3Cinit%3E(java.util.Map)">Options</a>
                                     <wbr>
@@ -153,7 +157,9 @@ loadScripts(document, 'script');</script>
                                        href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html"
                                        title="class or interface in java.util">Optional</a>&lt;?&gt;&gt;&nbsp;optionsMap)</code>
                                 </div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Constructeur à partir d'une <code>Map</code> d'options</div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -453,6 +459,7 @@ loadScripts(document, 'script');</script>
                                         <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
                                                 class="element-name">Options</span>()
                                         </div>
+                                        <div class="block">Constructeur par défaut</div>
                                     </section>
                                 </li>
                                 <li>
@@ -471,6 +478,12 @@ loadScripts(document, 'script');</script>
                                                     href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html"
                                                     title="class or interface in java.util">Optional</a>&lt;?&gt;&gt;&nbsp;optionsMap)</span>
                                         </div>
+                                        <div class="block">Constructeur à partir d'une <code>Map</code> d'options</div>
+                                        <dl class="notes">
+                                            <dt>Parameters:</dt>
+                                            <dd><code>optionsMap</code> - <code>Map</code> d'options avec comme clé l'id
+                                                de l'option et comme valeur un <code>Optional</code></dd>
+                                        </dl>
                                     </section>
                                 </li>
                             </ul>
@@ -495,9 +508,15 @@ loadScripts(document, 'script');</script>
                                             ou si l'<code>Optional</code> est vide
                                         </div>
                                         <dl class="notes">
+                                            <dt>Type Parameters:</dt>
+                                            <dd><code>T</code> - type de l'objet</dd>
                                             <dt>Parameters:</dt>
                                             <dd><code>element</code> - objet</dd>
                                             <dd><code>filter</code> - filtre</dd>
+                                            <dt>Returns:</dt>
+                                            <dd>si l'objet correspond à <code>filter</code> ou si <code>filter</code>
+                                                est vide
+                                            </dd>
                                         </dl>
                                     </section>
                                 </li>
@@ -608,6 +627,8 @@ loadScripts(document, 'script');</script>
     title="class or interface in java.lang">Class</a>&lt;T&gt;&nbsp;clazz)</span></div>
                                         <div class="block">Récupère une option id et la cast</div>
                                         <dl class="notes">
+                                            <dt>Type Parameters:</dt>
+                                            <dd><code>T</code> - type que représente <code>clazz</code></dd>
                                             <dt>Parameters:</dt>
                                             <dd><code>id</code> - id de l'option</dd>
                                             <dd><code>clazz</code> - classe de l'option</dd>
@@ -672,6 +693,8 @@ T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-n
     title="class or interface in java.lang">Class</a>&lt;T&gt;&nbsp;clazz)</span></div>
                                         <div class="block">Récupère une option et la cast</div>
                                         <dl class="notes">
+                                            <dt>Type Parameters:</dt>
+                                            <dd><code>T</code> - type que représente <code>clazz</code></dd>
                                             <dt>Parameters:</dt>
                                             <dd><code>id</code> - id de l'option</dd>
                                             <dd><code>clazz</code> - classe de l'option</dd>
@@ -732,6 +755,8 @@ T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-n
                                         <dl class="notes">
                                             <dt>Parameters:</dt>
                                             <dd><code>id</code> - id de l'option</dd>
+                                            <dt>Returns:</dt>
+                                            <dd>si l'option est présente</dd>
                                         </dl>
                                     </section>
                                 </li>
@@ -749,6 +774,8 @@ T&gt;</span>&nbsp;<span class="return-type">T</span>&nbsp;<span class="element-n
                                         <dl class="notes">
                                             <dt>Parameters:</dt>
                                             <dd><code>id</code> - id de l'option</dd>
+                                            <dt>Returns:</dt>
+                                            <dd>si l'option est présente</dd>
                                         </dl>
                                     </section>
                                 </li>

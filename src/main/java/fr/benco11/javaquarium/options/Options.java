@@ -15,6 +15,8 @@ public class Options {
      *
      * @param element objet
      * @param filter  filtre
+     * @param <T>     type de l'objet
+     * @return si l'objet correspond à <code>filter</code> ou si <code>filter</code> est vide
      */
     public static <T> boolean equalsOrEmpty(T element, Optional<?> filter) {
         return element.equals(filter.isEmpty() ? element : filter.get());
@@ -22,10 +24,18 @@ public class Options {
 
     private final Map<String, Optional<?>> optionsMap;
 
+    /**
+     * Constructeur par défaut
+     */
     public Options() {
         this(new HashMap<>());
     }
 
+    /**
+     * Constructeur à partir d'une <code>Map</code> d'options
+     *
+     * @param optionsMap <code>Map</code> d'options avec comme clé l'id de l'option et comme valeur un <code>Optional</code>
+     */
     public Options(Map<String, Optional<?>> optionsMap) {
         this.optionsMap = optionsMap;
     }
@@ -78,6 +88,7 @@ public class Options {
      *
      * @param id    id de l'option
      * @param clazz classe de l'option
+     * @param <T>   type que représente <code>clazz</code>
      * @return l'<code>Optional</code> de l'option cast en <code>clazz</code> (vide si l'option n'existe pas)
      */
     public <T> Optional<T> option(String id, Class<T> clazz) {
@@ -106,6 +117,7 @@ public class Options {
      *
      * @param id    id de l'option
      * @param clazz classe de l'option
+     * @param <T>   type que représente <code>clazz</code>
      * @return l'<code>Optional</code> de l'option cast en <code>clazz</code> (vide si l'option n'existe pas)
      */
     public <T> Optional<T> option(StandardOption id, Class<T> clazz) {
@@ -131,6 +143,7 @@ public class Options {
      * Renvoie vrai si l'option est présente
      *
      * @param id id de l'option
+     * @return si l'option est présente
      */
     public boolean isPresent(String id) {
         return optionsMap.containsKey(id);
@@ -140,6 +153,7 @@ public class Options {
      * Renvoie vrai si l'option est présente
      *
      * @param id id de l'option
+     * @return si l'option est présente
      */
     public boolean isPresent(StandardOption id) {
         return isPresent(id.id());
@@ -158,7 +172,30 @@ public class Options {
      * Énumération des options concernant les êtres vivants
      */
     public enum LivingOption implements StandardOption {
-        SEX("sx"), NAME("n"), SPECIES("sp"), AGE("a"), AMOUNT("amount"), PV("pv");
+        /**
+         * Sexe
+         */
+        SEX("sx"),
+        /**
+         * Nom
+         */
+        NAME("n"),
+        /**
+         * Espèce
+         */
+        SPECIES("sp"),
+        /**
+         * Âge
+         */
+        AGE("a"),
+        /**
+         * Quantité
+         */
+        AMOUNT("amount"),
+        /**
+         * Nombre de pvs
+         */
+        PV("pv");
 
         /**
          * Récupère une <code>LivingOption</code>
@@ -186,7 +223,22 @@ public class Options {
      * Énumération des options concernant les arguments de l'aquarium
      */
     public enum AquariumOption implements StandardOption {
-        INPUT("i"), OUTPUT("o"), ROUNDS("r"), OUTPUT_ROUND("oR");
+        /**
+         * Fichier d'entrée
+         */
+        INPUT("i"),
+        /**
+         * Fichier de sortie
+         */
+        OUTPUT("o"),
+        /**
+         * Nombre de tours
+         */
+        ROUNDS("r"),
+        /**
+         * Tour de sauvegarde
+         */
+        OUTPUT_ROUND("oR");
 
         /**
          * Récupère une <code>AquariumOption</code>
@@ -210,9 +262,14 @@ public class Options {
         }
     }
 
+    /**
+     * Option standard
+     */
     public sealed interface StandardOption permits LivingOption, AquariumOption {
         /**
          * Renvoie l'id de l'option
+         *
+         * @return id de l'option
          */
         String id();
     }

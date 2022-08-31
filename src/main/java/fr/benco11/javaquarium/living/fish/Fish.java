@@ -9,6 +9,9 @@ import java.util.Optional;
 
 import static fr.benco11.javaquarium.JavaQuarium.RANDOM;
 
+/**
+ * Poisson
+ */
 public abstract sealed class Fish implements Living {
     /**
      * Nombre de pvs par défaut d'un poisson
@@ -36,27 +39,66 @@ public abstract sealed class Fish implements Living {
         };
     }
 
+    /**
+     * Nom du poisson
+     */
     protected final String name;
+
+    /**
+     * Sexe du poisson
+     */
     protected Sex sex;
+
+    /**
+     * Âge du poisson
+     */
     protected int age;
+
+    /**
+     * Nombre de pvs du poisson
+     */
     protected int pv;
 
+    /**
+     * Constructeur à partir d'un nom et d'un sexe
+     *
+     * @param name nom
+     * @param sex  sexe
+     */
     protected Fish(String name, Sex sex) {
         this.name = name;
         this.sex = sex;
         pv = DEFAULT_PV;
     }
 
+    /**
+     * Constructeur à partir d'un nom, d'un sexe, de l'âge et du nombre de pvs
+     *
+     * @param name nom
+     * @param sex  sexe
+     * @param age  âge
+     * @param pv   nombre de pvs
+     */
     protected Fish(String name, Sex sex, int age, int pv) {
         this(name, sex);
         this.age = age;
         this.pv = pv;
     }
 
+    /**
+     * Renvoie le nom du poisson
+     *
+     * @return le nom
+     */
     public String name() {
         return name;
     }
 
+    /**
+     * Renvoie le sexe du poisson
+     *
+     * @return le sexe
+     */
     public Sex sex() {
         return sex;
     }
@@ -88,20 +130,40 @@ public abstract sealed class Fish implements Living {
         pv -= 4;
     }
 
+    /**
+     * Renvoie vrai si le poisson a faim et cherche à manger
+     *
+     * @return si le poisson a faim
+     */
     public boolean hungry() {
         return pv <= 5;
     }
 
+    /**
+     * Tente de se reproduire avec un autre poisson
+     *
+     * @param other autre poisson avec qui se reproduire
+     * @return un <code>Optional</code> contenant ou non un nouveau poisson
+     */
     public abstract Optional<Fish> reproduce(Fish other);
 
     /**
      * Énumération des sexes
      */
     public enum Sex {
-        MALE, FEMALE;
+        /**
+         * Sexe mâle
+         */
+        MALE,
+        /**
+         * Sexe femelle
+         */
+        FEMALE;
 
         /**
          * Renvoie un sexe au hasard
+         *
+         * @return sexe aléatoire
          */
         public static Sex randomSex() {
             return values()[RANDOM.nextInt(values().length)];
@@ -111,6 +173,7 @@ public abstract sealed class Fish implements Living {
          * Renvoie le sexe opposé
          *
          * @param sex sexe
+         * @return sexe opposé
          */
         public static Sex opposite(Sex sex) {
             return sex == MALE ? FEMALE : MALE;
@@ -131,12 +194,36 @@ public abstract sealed class Fish implements Living {
      * Énumération des espèces de poissons
      */
     public enum Species {
-        BASS("Bar"), CARP("Carpe"), CLOWN_FISH("Poisson-Clown"), GROUPER("Mérou"), SOLE("Sole"), TUNA("Thon");
+        /**
+         * Bar
+         */
+        BASS("Bar"),
+        /**
+         * Carpe
+         */
+        CARP("Carpe"),
+        /**
+         * Poisson-Clown
+         */
+        CLOWN_FISH("Poisson-Clown"),
+        /**
+         * Mérou
+         */
+        GROUPER("Mérou"),
+        /**
+         * Sole
+         */
+        SOLE("Sole"),
+        /**
+         * Thon
+         */
+        TUNA("Thon");
 
         /**
          * Renvoie l'espèce d'un poisson
          *
          * @param fish poisson
+         * @return le <code>Species</code> correspondant
          */
         public static Species of(Fish fish) {
             return switch(fish) {
@@ -153,6 +240,7 @@ public abstract sealed class Fish implements Living {
          * Renvoie une espèce
          *
          * @param species nom de l'espèce
+         * @return un <code>Optional</code> contenant ou non le <code>Species</code> du poisson
          */
         public static Optional<Species> of(String species) {
             return Arrays.stream(values()).filter(sp -> sp.species().equals(species)).findAny();
@@ -166,17 +254,37 @@ public abstract sealed class Fish implements Living {
 
         /**
          * Renvoie le nom de l'espèce
+         *
+         * @return nom de l'espèce
          */
         public String species() {
             return name;
         }
     }
 
+    /**
+     * Poisson carnivore
+     */
     public abstract static sealed class CarnivorousFish extends Fish implements Eater.Carnivorous permits ClownFish, GrouperFish, TunaFish {
+
+        /**
+         * Constructeur à partir d'un nom et d'un sexe
+         *
+         * @param name nom
+         * @param sex  sexe
+         */
         protected CarnivorousFish(String name, Sex sex) {
             super(name, sex);
         }
 
+        /**
+         * Constructeur à partir d'un nom, d'un sexe, de l'âge et du nombre de pvs
+         *
+         * @param name nom
+         * @param sex  sexe
+         * @param age  âge
+         * @param pv   nombre de pvs
+         */
         protected CarnivorousFish(String name, Sex sex, int age, int pv) {
             super(name, sex, age, pv);
         }
@@ -189,11 +297,29 @@ public abstract sealed class Fish implements Living {
         }
     }
 
+    /**
+     * Poisson herbivore
+     */
     public abstract static sealed class HerbivorousFish extends Fish implements Eater.Herbivorous permits BassFish, CarpFish, SoleFish {
+
+        /**
+         * Constructeur à partir d'un nom et d'un sexe
+         *
+         * @param name nom
+         * @param sex  sexe
+         */
         protected HerbivorousFish(String name, Sex sex) {
             super(name, sex);
         }
 
+        /**
+         * Constructeur à partir d'un nom, d'un sexe, de l'âge et du nombre de pvs
+         *
+         * @param name nom
+         * @param sex  sexe
+         * @param age  âge
+         * @param pv   nombre de pvs
+         */
         protected HerbivorousFish(String name, Sex sex, int age, int pv) {
             super(name, sex, age, pv);
         }

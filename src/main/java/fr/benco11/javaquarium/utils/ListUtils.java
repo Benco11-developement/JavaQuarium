@@ -13,6 +13,7 @@ public final class ListUtils {
      *
      * @param list liste d'entrée
      * @param n    taille de la nouvelle liste
+     * @param <T>  type de la liste
      * @return la nouvelle liste
      */
     public static <T> List<T> pickRandoms(List<T> list, int n) {

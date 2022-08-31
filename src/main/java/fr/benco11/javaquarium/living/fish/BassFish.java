@@ -5,14 +5,28 @@ import fr.benco11.javaquarium.utils.StringUtils;
 import java.util.Optional;
 
 /**
- * Bass (bar)
+ * Bar
  */
 public final class BassFish extends Fish.HerbivorousFish {
 
+    /**
+     * Constructeur à partir d'un nom et d'un sexe
+     *
+     * @param name nom
+     * @param sex  sexe
+     */
     public BassFish(String name, Sex sex) {
         super(name, sex);
     }
 
+    /**
+     * Constructeur à partir d'un nom, d'un sexe, de l'âge et du nombre de pvs
+     *
+     * @param name nom
+     * @param sex  sexe
+     * @param age  âge
+     * @param pv   nombre de pvs
+     */
     public BassFish(String name, Sex sex, int age, int pv) {
         super(name, sex, age, pv);
     }

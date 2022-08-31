@@ -96,6 +96,7 @@ public final class StringUtils {
      * Renvoie vrai si un <code>String</code> est vide ou <code>null</code>
      *
      * @param string le <code>String</code>
+     * @return si <code>string</code> est vide ou <code>null</code>
      */
     public static boolean nullOrEmpty(String string) {
         return string == null || string.isEmpty();

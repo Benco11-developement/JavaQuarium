@@ -149,23 +149,35 @@ loadScripts(document, 'script');</script>
                                 <div class="table-header col-last">Description</div>
                                 <div class="col-first even-row-color"><code><a class="member-name-link" href="#BASS">BASS</a></code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Bar</div>
+                                </div>
                                 <div class="col-first odd-row-color"><code><a class="member-name-link"
                                                                               href="#CARP">CARP</a></code></div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Carpe</div>
+                                </div>
                                 <div class="col-first even-row-color"><code><a class="member-name-link"
                                                                                href="#CLOWN_FISH">CLOWN_FISH</a></code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Poisson-Clown</div>
+                                </div>
                                 <div class="col-first odd-row-color"><code><a class="member-name-link" href="#GROUPER">GROUPER</a></code>
                                 </div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Mérou</div>
+                                </div>
                                 <div class="col-first even-row-color"><code><a class="member-name-link" href="#SOLE">SOLE</a></code>
                                 </div>
-                                <div class="col-last even-row-color">&nbsp;</div>
+                                <div class="col-last even-row-color">
+                                    <div class="block">Sole</div>
+                                </div>
                                 <div class="col-first odd-row-color"><code><a class="member-name-link"
                                                                               href="#TUNA">TUNA</a></code></div>
-                                <div class="col-last odd-row-color">&nbsp;</div>
+                                <div class="col-last odd-row-color">
+                                    <div class="block">Thon</div>
+                                </div>
                             </div>
                         </section>
                     </li>
@@ -349,6 +361,7 @@ loadScripts(document, 'script');</script>
                                                 class="return-type"><a href="Fish.Species.html"
                                                                        title="enum class in fr.benco11.javaquarium.living.fish">Fish.Species</a></span>&nbsp;<span
                                                 class="element-name">BASS</span></div>
+                                        <div class="block">Bar</div>
                                     </section>
                                 </li>
                                 <li>
@@ -358,6 +371,7 @@ loadScripts(document, 'script');</script>
                                                 class="return-type"><a href="Fish.Species.html"
                                                                        title="enum class in fr.benco11.javaquarium.living.fish">Fish.Species</a></span>&nbsp;<span
                                                 class="element-name">CARP</span></div>
+                                        <div class="block">Carpe</div>
                                     </section>
                                 </li>
                                 <li>
@@ -367,6 +381,7 @@ loadScripts(document, 'script');</script>
                                                 class="return-type"><a href="Fish.Species.html"
                                                                        title="enum class in fr.benco11.javaquarium.living.fish">Fish.Species</a></span>&nbsp;<span
                                                 class="element-name">CLOWN_FISH</span></div>
+                                        <div class="block">Poisson-Clown</div>
                                     </section>
                                 </li>
                                 <li>
@@ -376,6 +391,7 @@ loadScripts(document, 'script');</script>
                                                 class="return-type"><a href="Fish.Species.html"
                                                                        title="enum class in fr.benco11.javaquarium.living.fish">Fish.Species</a></span>&nbsp;<span
                                                 class="element-name">GROUPER</span></div>
+                                        <div class="block">Mérou</div>
                                     </section>
                                 </li>
                                 <li>
@@ -385,6 +401,7 @@ loadScripts(document, 'script');</script>
                                                 class="return-type"><a href="Fish.Species.html"
                                                                        title="enum class in fr.benco11.javaquarium.living.fish">Fish.Species</a></span>&nbsp;<span
                                                 class="element-name">SOLE</span></div>
+                                        <div class="block">Sole</div>
                                     </section>
                                 </li>
                                 <li>
@@ -394,6 +411,7 @@ loadScripts(document, 'script');</script>
                                                 class="return-type"><a href="Fish.Species.html"
                                                                        title="enum class in fr.benco11.javaquarium.living.fish">Fish.Species</a></span>&nbsp;<span
                                                 class="element-name">TUNA</span></div>
+                                        <div class="block">Thon</div>
                                     </section>
                                 </li>
                             </ul>
@@ -476,6 +494,8 @@ loadScripts(document, 'script');</script>
                                         <dl class="notes">
                                             <dt>Parameters:</dt>
                                             <dd><code>fish</code> - poisson</dd>
+                                            <dt>Returns:</dt>
+                                            <dd>le <code>Species</code> correspondant</dd>
                                         </dl>
                                     </section>
                                 </li>
@@ -498,6 +518,10 @@ loadScripts(document, 'script');</script>
                                         <dl class="notes">
                                             <dt>Parameters:</dt>
                                             <dd><code>species</code> - nom de l'espèce</dd>
+                                            <dt>Returns:</dt>
+                                            <dd>un <code>Optional</code> contenant ou non le <code>Species</code> du
+                                                poisson
+                                            </dd>
                                         </dl>
                                     </section>
                                 </li>
@@ -511,6 +535,10 @@ loadScripts(document, 'script');</script>
                                                 class="element-name">species</span>()
                                         </div>
                                         <div class="block">Renvoie le nom de l'espèce</div>
+                                        <dl class="notes">
+                                            <dt>Returns:</dt>
+                                            <dd>nom de l'espèce</dd>
+                                        </dl>
                                     </section>
                                 </li>
                             </ul>

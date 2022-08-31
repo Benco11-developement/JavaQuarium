@@ -9,6 +9,9 @@ import fr.benco11.javaquarium.utils.Pair;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Classe représentant un aquarium avec des poissons et des algues
+ */
 public interface Aquarium {
     /**
      * Ajoute un être vivant à l'aquarium
