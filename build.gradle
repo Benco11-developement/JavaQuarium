@@ -34,6 +34,23 @@ test {
     useJUnitPlatform()
 }
 
+javadoc {
+    source = sourceSets.main.allJava
+    options.encoding = 'UTF-8'
+    options.addStringOption('source', '17')
+    options.addBooleanOption('-enable-preview', true)
+    docsDirName = '../docs/'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+}
+
 tasks.withType(JavaCompile) {
     options.compilerArgs += "--enable-preview"
 }

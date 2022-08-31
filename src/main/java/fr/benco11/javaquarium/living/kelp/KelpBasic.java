@@ -3,6 +3,9 @@ package fr.benco11.javaquarium.living.kelp;
 import java.util.Optional;
 
 public final class KelpBasic implements Kelp {
+    /**
+     * Nombre de pvs par défaut d'une algue
+     */
     public static final int DEFAULT_PV = 10;
     private int pv;
     private int age;
@@ -44,5 +47,10 @@ public final class KelpBasic implements Kelp {
     @Override
     public int age() {
         return age;
+    }
+
+    @Override
+    public int pv() {
+        return pv;
     }
 }

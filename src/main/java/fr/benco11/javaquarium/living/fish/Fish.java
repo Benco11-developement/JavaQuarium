@@ -10,8 +10,21 @@ import java.util.Optional;
 import static fr.benco11.javaquarium.JavaQuarium.RANDOM;
 
 public abstract sealed class Fish implements Living {
+    /**
+     * Nombre de pvs par défaut d'un poisson
+     */
     public static final int DEFAULT_PV = 10;
 
+    /**
+     * Retrouve un poisson à partir de ses propriétés
+     *
+     * @param species espèce du poisson
+     * @param name    nom du poisson
+     * @param sex     sexe du poisson
+     * @param age     âge du poisson
+     * @param pv      nombre de pvs du poisson
+     * @return poisson <code>Fish</code>
+     */
     public static Fish reInstantiateFish(Species species, String name, Sex sex, int age, int pv) {
         return switch(species) {
             case BASS -> new BassFish(name, sex, age, pv);
@@ -48,10 +61,12 @@ public abstract sealed class Fish implements Living {
         return sex;
     }
 
+    @Override
     public int age() {
         return age;
     }
 
+    @Override
     public int pv() {
         return pv;
     }
@@ -79,25 +94,50 @@ public abstract sealed class Fish implements Living {
 
     public abstract Optional<Fish> reproduce(Fish other);
 
+    /**
+     * Énumération des sexes
+     */
     public enum Sex {
         MALE, FEMALE;
 
+        /**
+         * Renvoie un sexe au hasard
+         */
         public static Sex randomSex() {
             return values()[RANDOM.nextInt(values().length)];
         }
 
+        /**
+         * Renvoie le sexe opposé
+         *
+         * @param sex sexe
+         */
         public static Sex opposite(Sex sex) {
             return sex == MALE ? FEMALE : MALE;
         }
 
+        /**
+         * Renvoie un sexe
+         *
+         * @param s <code>String</code> du sexe
+         * @return un <code>Optional</code> contenant ou non sexe
+         */
         public static Optional<Sex> of(String s) {
             return Arrays.stream(values()).filter(v -> v.name().equalsIgnoreCase(s)).findAny();
         }
     }
 
+    /**
+     * Énumération des espèces de poissons
+     */
     public enum Species {
         BASS("Bar"), CARP("Carpe"), CLOWN_FISH("Poisson-Clown"), GROUPER("Mérou"), SOLE("Sole"), TUNA("Thon");
 
+        /**
+         * Renvoie l'espèce d'un poisson
+         *
+         * @param fish poisson
+         */
         public static Species of(Fish fish) {
             return switch(fish) {
                 case ClownFish ignored -> CLOWN_FISH;
@@ -109,6 +149,11 @@ public abstract sealed class Fish implements Living {
             };
         }
 
+        /**
+         * Renvoie une espèce
+         *
+         * @param species nom de l'espèce
+         */
         public static Optional<Species> of(String species) {
             return Arrays.stream(values()).filter(sp -> sp.species().equals(species)).findAny();
         }
@@ -119,6 +164,9 @@ public abstract sealed class Fish implements Living {
             this.name = name;
         }
 
+        /**
+         * Renvoie le nom de l'espèce
+         */
         public String species() {
             return name;
         }

@@ -83,7 +83,7 @@ public class AquariumParser {
             return;
         }
 
-        if(line.startsWith("-poisson")) {
+        if(line.startsWith("-poisson") && matcherFishOptions.find()) {
             parseFishRemove(matcherFishOptions, removeOptions, round, lineIndex);
             return;
         }
@@ -102,7 +102,7 @@ public class AquariumParser {
 
     private void parseFishRemove(Matcher matcherFish, Map<Integer, Pair<List<Options>, List<Options>>> removeOptions, AtomicInteger round, AtomicInteger lineIndex) {
         Options options = new Options();
-        while(matcherFish.find()) {
+        do {
             String idString = matcherFish.group(1);
             String valueString = matcherFish.group(2);
 
@@ -118,7 +118,7 @@ public class AquariumParser {
             if(value.isEmpty())
                 throw new AquariumReadException("Erreur de lecture de la valeur de l'option '"+idString+"' à la ligne "+lineIndex.get());
             options.add(id, value);
-        }
+        } while(matcherFish.find());
         removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).second().add(options);
     }
 

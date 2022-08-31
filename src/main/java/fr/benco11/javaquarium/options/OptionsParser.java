@@ -8,7 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static fr.benco11.javaquarium.options.Options.AquariumOption.*;
+
+/**
+ * Un <code>OptionsParser</code> permet de parse les arguments de programme
+ */
 public class OptionsParser {
+    /**
+     * <code>Map</code> des arguments de programme et si l'argument nécessite une valeur
+     */
     public static final Map<String, Boolean> OPTIONS_PARSER_ARGUMENTS_LIST = Map.of(
             INPUT.id(), true,
             OUTPUT.id(), true,
@@ -16,8 +23,17 @@ public class OptionsParser {
             ROUNDS.id(), true
     );
 
+    /**
+     * Regex pour détecter les ids d'arguments
+     */
     private static final Pattern OPTIONS_ID_REGEX = Pattern.compile("-([a-zA-Z]{1,3})");
 
+    /**
+     * Parser un tableau d'arguments en un objet <code>Options</code>
+     *
+     * @param args arguments
+     * @return options
+     */
     public Options parse(String... args) {
         Options options = new Options();
         for(int i = 0; i < args.length; i++) {
