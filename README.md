@@ -140,3 +140,7 @@ Liste des modifications par rapport à l'énoncé original :
 - À la fin de chaque tour, pour chaque poisson, le nom, l'âge, le sexe, la race et le nombre de pvs sont affichés
 - Il est possible de supprimer des êtres vivants selon certains critères
 - La syntaxe des fichiers est plus souple
+
+### JavaDoc
+
+Une [JavaDoc](https://fr.wikipedia.org/wiki/Javadoc) est [<u>à votre disposition.</u>](https://benco11-developement.github.io/JavaQuarium/javadoc)
