@@ -9,7 +9,7 @@ import java.util.List;
  */
 public final class ListUtils {
     /**
-     * Donne une nouvelle liste de taille n composée d'éléments pris au hasard d'une liste
+     * Donne une nouvelle liste de taille <code>n</code> composée d'éléments pris au hasard d'une liste
      *
      * @param list liste d'entrée
      * @param n    taille de la nouvelle liste

@@ -102,7 +102,7 @@ public class Options {
      * Récupère une option et la cast ou renvoie une autre valeur si l'option n'existe pas
      *
      * @param id     id de l'option
-     * @param map    <code>Function</code> qui à partir de la valeur de l'option renvoie une valeur du même type que <code>orElse</code>
+     * @param map    <code>Function</code> qui à partir de la valeur de l'option renvoie une valeur du type <code>T</code>
      * @param clazz  classe de la valeur de l'option
      * @param orElse valeur à renvoyer si l'option n'existe pas
      * @param <K>    type de la valeur de l'option
@@ -130,7 +130,7 @@ public class Options {
      * Récupère une option et la cast ou renvoie une autre valeur si l'option n'existe pas
      *
      * @param id     id de l'option
-     * @param map    <code>Function</code> qui à partir de la valeur de l'option renvoie une valeur du même type que <code>orElse</code>
+     * @param map    <code>Function</code> qui à partir de la valeur de l'option renvoie une valeur du type <code>T</code>
      * @param clazz  classe de la valeur de l'option
      * @param orElse valeur à renvoyer si l'option n'existe pas
      * @param <K>    type de la valeur de l'option
