@@ -14,7 +14,7 @@ public class AquariumReadException extends RuntimeException {
     }
 
     /**
-     * Constructeur avec un numéro de ligne
+     * Construit avec un numéro de ligne
      *
      * @param line ligne de l'erreur
      */
@@ -23,7 +23,7 @@ public class AquariumReadException extends RuntimeException {
     }
 
     /**
-     * Constructeur avec un message et un numéro de ligne (message + ligne)
+     * Construit avec un message et un numéro de ligne (message + ligne)
      *
      * @param message message de l'exception
      * @param line    ligne de l'erreur
