@@ -41,7 +41,7 @@ public class AquariumWriter extends BufferedWriter {
     }
 
     /**
-     * Écris un aquarium
+     * Écrit un aquarium
      *
      * @param aquarium aquarium
      * @throws IOException erreur lors de l'écriture
@@ -76,7 +76,7 @@ public class AquariumWriter extends BufferedWriter {
     }
 
     /**
-     * Écris une liste de poissons
+     * Écrit une liste de poissons
      *
      * @param fishes liste de poissons
      * @throws IOException erreur lors de l'écriture
@@ -87,7 +87,7 @@ public class AquariumWriter extends BufferedWriter {
     }
 
     /**
-     * Écris une liste d'algues
+     * Écrit une liste d'algues
      *
      * @param kelps liste d'algues
      * @throws IOException erreur lors de l'écriture
@@ -98,7 +98,7 @@ public class AquariumWriter extends BufferedWriter {
     }
 
     /**
-     * Écris une liste de filtres de poissons à retirer
+     * Écrit une liste de filtres de poissons à retirer
      *
      * @param options liste de filtres
      * @throws IOException erreur lors de l'écriture
@@ -110,7 +110,7 @@ public class AquariumWriter extends BufferedWriter {
     }
 
     /**
-     * Écris une liste de filtres d'algues à retirer
+     * Écrit une liste de filtres d'algues à retirer
      *
      * @param options liste de filtres
      * @throws IOException erreur lors de l'écriture

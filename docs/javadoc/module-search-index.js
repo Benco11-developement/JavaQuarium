@@ -1,2 +1,1 @@
-moduleSearchIndex = [{"l": "JavaQuarium.main"}];
-updateSearchResults();
+moduleSearchIndex = [{"l":"JavaQuarium.main"}];updateSearchResults();

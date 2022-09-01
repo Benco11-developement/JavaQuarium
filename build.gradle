@@ -26,7 +26,7 @@ application {
 
 jar {
     manifest {
-        attributes 'Main-Class': application.mainClassName
+        attributes 'Main-Class': application.mainClass
     }
 }
 
