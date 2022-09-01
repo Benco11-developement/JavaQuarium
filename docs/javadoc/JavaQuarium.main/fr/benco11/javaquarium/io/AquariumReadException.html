@@ -106,11 +106,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">AquariumReadException</a><wbr>(int&nbsp;line)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Constructeur à partir d'une ligne</div>
+<div class="block">Constructeur avec un numéro de ligne</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">AquariumReadException</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Constructeur à partir d'un message</div>
+<div class="block">Construit avec un message</div>
+</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,int)" class="member-name-link">AquariumReadException</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
+ int&nbsp;line)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Constructeur avec un message et un numéro de ligne (message + ligne)</div>
 </div>
 </div>
 </section>
@@ -140,7 +145,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>AquariumReadException</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AquariumReadException</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message)</span></div>
-<div class="block">Constructeur à partir d'un message</div>
+<div class="block">Construit avec un message</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>message</code> - message de l'exception</dd>
@@ -151,9 +156,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>AquariumReadException</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AquariumReadException</span><wbr><span class="parameters">(int&nbsp;line)</span></div>
-<div class="block">Constructeur à partir d'une ligne</div>
+<div class="block">Constructeur avec un numéro de ligne</div>
 <dl class="notes">
 <dt>Parameters:</dt>
+<dd><code>line</code> - ligne de l'erreur</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="&lt;init&gt;(java.lang.String,int)">
+<h3>AquariumReadException</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AquariumReadException</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;message,
+ int&nbsp;line)</span></div>
+<div class="block">Constructeur avec un message et un numéro de ligne (message + ligne)</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>message</code> - message de l'exception</dd>
 <dd><code>line</code> - ligne de l'erreur</dd>
 </dl>
 </section>

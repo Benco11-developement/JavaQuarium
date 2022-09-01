@@ -5,7 +5,7 @@ package fr.benco11.javaquarium.io;
  */
 public class AquariumReadException extends RuntimeException {
     /**
-     * Constructeur à partir d'un message
+     * Construit avec un message
      *
      * @param message message de l'exception
      */
@@ -14,11 +14,21 @@ public class AquariumReadException extends RuntimeException {
     }
 
     /**
-     * Constructeur à partir d'une ligne
+     * Constructeur avec un numéro de ligne
      *
      * @param line ligne de l'erreur
      */
     public AquariumReadException(int line) {
-        super("Erreur de lecture de la ligne " + line);
+        this("Erreur de lecture", line);
+    }
+
+    /**
+     * Constructeur avec un message et un numéro de ligne (message + ligne)
+     *
+     * @param message message de l'exception
+     * @param line    ligne de l'erreur
+     */
+    public AquariumReadException(String message, int line) {
+        this(message + " à la ligne " + line);
     }
 }

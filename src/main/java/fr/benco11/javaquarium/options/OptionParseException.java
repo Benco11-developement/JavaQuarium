@@ -5,7 +5,7 @@ package fr.benco11.javaquarium.options;
  */
 public class OptionParseException extends RuntimeException {
     /**
-     * Constructeur à partir du nom de l'option
+     * Construit avec le nom de l'option
      *
      * @param optionName nom de l'option
      */
@@ -14,7 +14,7 @@ public class OptionParseException extends RuntimeException {
     }
 
     /**
-     * Constructeur à partir de l'id de l'option
+     * Construit avec id de l'option
      *
      * @param option id de l'option
      */
@@ -23,7 +23,7 @@ public class OptionParseException extends RuntimeException {
     }
 
     /**
-     * Constructeur à partir d'un message et d'une exception parente
+     * Construit avec un message et une exception parente
      *
      * @param message   message de l'exception
      * @param exception exception parente
