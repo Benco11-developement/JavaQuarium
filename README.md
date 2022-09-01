@@ -123,12 +123,12 @@ Carotte, Poisson-Clown,  MALE, 11 ans
 
 ### Table
 
-| Instruction | Description, Arguments                                                                                                                                                     |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -poisson    | Retire des poissons selon certains filtres :<br/>**n:x** -> Nom du poisson<br/>**sp:x** -> Espèce du poisson<br/>**sx:x** -> Sexe du poisson<br/>**a:x** -> Âge du poisson |
-| -algue      | Retire des algues selon certains filtres :<br/> -**[x]**_?_ algue(s) **[x]**_?_ an(s)                                                                                      |
-| algue       | Ajoute des algues :<br/>**[x]** algue(s) **[x]** an(s)                                                                                                                     |
-| poisson     | Ajoute un poisson :<br/>**[nom]**, **[espèce]**, **[sexe]**, **[age]**_?_, **[pv]**_?_                                                                                     |
+| Instruction | Description, Arguments                                                                                                                                                             |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -poisson    | Retire des poissons selon certains filtres :<br/>**n:[x]** -> Nom du poisson<br/>**sp:[x]** -> Espèce du poisson<br/>**sx:[x]** -> Sexe du poisson<br/>**a:[x]** -> Âge du poisson |
+| -algue      | Retire des algues selon certains filtres :<br/> -**[x]**_?_ algue(s) **[x]**_?_ an(s)                                                                                              |
+| algue       | Ajoute des algues :<br/>**[x]** algue(s) **[x]** an(s)                                                                                                                             |
+| poisson     | Ajoute un poisson :<br/>**[nom]**, **[espèce]**, **[sexe]**, **[age]**_?_, **[pv]**_?_                                                                                             |
 
 ### Modifications
 
