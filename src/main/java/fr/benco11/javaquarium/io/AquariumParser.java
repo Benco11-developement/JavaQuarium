@@ -60,7 +60,8 @@ public class AquariumParser {
      */
     public Aquarium parseAquarium() {
         // Récupère toutes les lignes
-        List<String> lines = in.lines().toList();
+        List<String> lines = in.lines()
+                               .toList();
 
         List<Kelp> kelps = new ArrayList<>();
         List<Fish> fishes = new ArrayList<>();
@@ -98,7 +99,9 @@ public class AquariumParser {
         return new JavaQuarium(kelps, fishes, livingsToAdd, removeOptions);
     }
 
-    private void parseLineRemove(String line, Map<Integer, Pair<List<Options>, List<Options>>> removeOptions, AtomicInteger round, AtomicInteger lineIndex) {
+    private void parseLineRemove(String line,
+            Map<Integer, Pair<List<Options>, List<Options>>> removeOptions, AtomicInteger round,
+            AtomicInteger lineIndex) {
         Matcher matcherKelp = PATTERN_REMOVE_KELP.matcher(line);
         Matcher matcherFishOptions = PATTERN_REMOVE_FISH_OPTION.matcher(line);
 
@@ -119,18 +122,24 @@ public class AquariumParser {
 
     }
 
-    private void parseKelpRemove(Matcher matcherKelp, Map<Integer, Pair<List<Options>, List<Options>>> removeOptions, AtomicInteger round, AtomicInteger lineIndex) {
+    private void parseKelpRemove(Matcher matcherKelp,
+            Map<Integer, Pair<List<Options>, List<Options>>> removeOptions, AtomicInteger round,
+            AtomicInteger lineIndex) {
         // Récupère les filtres de suppression d'algues
         Optional<Integer> count = IntegerUtils.of(matcherKelp.group(1));
         Optional<Integer> age = IntegerUtils.of(matcherKelp.group(3));
         if(count.isEmpty() && age.isEmpty())
-            throw new AquariumReadException("Erreur de lecture de(s) l'algue(s) à supprimer à la ligne "+lineIndex.get());
+            throw new AquariumReadException("Erreur de lecture de(s) l'algue(s) à supprimer à la ligne " + lineIndex.get());
 
         // Les ajoute à la liste des filtres de suppression d'algues du round 'round'
-        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).first().add(new Options(Map.of(AMOUNT.id(), count, AGE.id(), age)));
+        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>()))
+                     .first()
+                     .add(new Options(Map.of(AMOUNT.id(), count, AGE.id(), age)));
     }
 
-    private void parseFishRemove(Matcher matcherFish, Map<Integer, Pair<List<Options>, List<Options>>> removeOptions, AtomicInteger round, AtomicInteger lineIndex) {
+    private void parseFishRemove(Matcher matcherFish,
+            Map<Integer, Pair<List<Options>, List<Options>>> removeOptions, AtomicInteger round,
+            AtomicInteger lineIndex) {
         Options options = new Options();
         do {
             // Récupère pour chaque option de suppression le nom et la valeur
@@ -138,27 +147,32 @@ public class AquariumParser {
             String valueString = matcherFish.group(2);
 
             // Récupère l'id de l'option et lève une exception si l'id est inconnue
-            Options.LivingOption id = Options.LivingOption.of(idString).orElseThrow(() -> new AquariumReadException("Erreur de lecture de l'option de suppression '"+idString+"' à la ligne "+lineIndex.get()));
+            Options.LivingOption id = Options.LivingOption.of(idString)
+                                                          .orElseThrow(() -> new AquariumReadException("Erreur de lecture de l'option de suppression '" + idString + "' à la ligne " + lineIndex.get()));
 
             // Récupère la valeur selon l'option
             Optional<?> value = switch(id) {
                 case AGE, PV -> IntegerUtils.of(valueString.replaceAll("\\D+", ""));
-                case NAME, SPECIES -> Optional.of(valueString).filter(n -> !nullOrEmpty(n));
+                case NAME, SPECIES -> Optional.of(valueString)
+                                              .filter(n -> !nullOrEmpty(n));
                 case SEX -> Fish.Sex.of(valueString);
                 case AMOUNT ->
-                        throw new AquariumReadException("Erreur de lecture de l'option de suppression '"+idString+"' à la ligne "+lineIndex.get());
+                        throw new AquariumReadException("Erreur de lecture de l'option de suppression '" + idString + "' à la ligne " + lineIndex.get());
             };
 
             if(value.isEmpty())
-                throw new AquariumReadException("Erreur de lecture de la valeur de l'option de suppression '"+idString+"' à la ligne "+lineIndex.get());
+                throw new AquariumReadException("Erreur de lecture de la valeur de l'option de suppression '" + idString + "' à la ligne " + lineIndex.get());
             options.add(id, value);
         } while(matcherFish.find());
 
         // Ajoute les filtres aux filtres de suppressions de poissons du round 'round'
-        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>())).second().add(options);
+        removeOptions.computeIfAbsent(round.get(), k -> new Pair<>(new ArrayList<>(), new ArrayList<>()))
+                     .second()
+                     .add(options);
     }
 
-    private void parseLineAdd(String line, List<Kelp> kelps, List<Fish> fishes, Map<Integer, List<Living>> livingsToAdd, AtomicInteger round, AtomicInteger lineIndex) {
+    private void parseLineAdd(String line, List<Kelp> kelps, List<Fish> fishes,
+            Map<Integer, List<Living>> livingsToAdd, AtomicInteger round, AtomicInteger lineIndex) {
         Matcher matcherKelp = PATTERN_KELP.matcher(line);
         Matcher matcherFish = PATTERN_FISH.matcher(line);
 
@@ -177,50 +191,62 @@ public class AquariumParser {
         throw new AquariumReadException(lineIndex.get());
     }
 
-    private void parseKelpAdd(Matcher matcherKelp, List<Kelp> kelps, Map<Integer, List<Living>> livingsToAdd, AtomicInteger round, AtomicInteger lineIndex) {
+    private void parseKelpAdd(Matcher matcherKelp, List<Kelp> kelps,
+            Map<Integer, List<Living>> livingsToAdd, AtomicInteger round, AtomicInteger lineIndex) {
         // Récupère les propriétés de l'algue
         Optional<Integer> count = IntegerUtils.of(matcherKelp.group(1));
         Optional<Integer> age = IntegerUtils.of(matcherKelp.group(2));
         if(count.isEmpty())
-            throw new AquariumReadException("Erreur de lecture du nombres d'algues à la ligne "+lineIndex.get());
-        if(age.isEmpty()) throw new AquariumReadException("Erreur de lecture de l'âge à la ligne "+lineIndex.get());
+            throw new AquariumReadException("Erreur de lecture du nombres d'algues à la ligne " + lineIndex.get());
+        if(age.isEmpty())
+            throw new AquariumReadException("Erreur de lecture de l'âge à la ligne " + lineIndex.get());
 
         // Si pas de round particulier, ajoute directement l'algue à la liste des êtres vivants
-        if(round.get() == -1) IntStream.range(0, count.get()).forEach(i -> kelps.add(new KelpBasic(age.get())));
-        else
-            livingsToAdd.computeIfAbsent(round.get(), k -> new ArrayList<>()).addAll(IntStream.range(0, count.get()).mapToObj(i -> new KelpBasic(age.get())).toList());
+        if(round.get() == -1) IntStream.range(0, count.get())
+                                       .forEach(i -> kelps.add(new KelpBasic(age.get())));
+        else livingsToAdd.computeIfAbsent(round.get(), k -> new ArrayList<>())
+                         .addAll(IntStream.range(0, count.get())
+                                          .mapToObj(i -> new KelpBasic(age.get()))
+                                          .toList());
     }
 
-    private void parseFishAdd(Matcher matcherFish, List<Fish> fishes, Map<Integer, List<Living>> livingsToAdd, AtomicInteger round, AtomicInteger lineIndex) {
+    private void parseFishAdd(Matcher matcherFish, List<Fish> fishes,
+            Map<Integer, List<Living>> livingsToAdd, AtomicInteger round, AtomicInteger lineIndex) {
         // Récupère les propriétés du poisson
 
         String name = matcherFish.group(1);
         if(nullOrEmpty(name))
-            throw new AquariumReadException("Erreur de lecture du nom du poisson à la ligne "+lineIndex.get());
+            throw new AquariumReadException("Erreur de lecture du nom du poisson à la ligne " + lineIndex.get());
 
-        Optional<Fish.Species> species = Optional.of(matcherFish.group(2)).filter(sp -> !nullOrEmpty(sp)).flatMap(Fish.Species::of);
+        Optional<Fish.Species> species = Optional.of(matcherFish.group(2))
+                                                 .filter(sp -> !nullOrEmpty(sp))
+                                                 .flatMap(Fish.Species::of);
         if(species.isEmpty())
-            throw new AquariumReadException("Erreur de lecture de l'espèce du poisson à la ligne "+lineIndex.get());
+            throw new AquariumReadException("Erreur de lecture de l'espèce du poisson à la ligne " + lineIndex.get());
 
         Optional<Fish.Sex> sex = Fish.Sex.of(matcherFish.group(3));
-        if(sex.isEmpty()) throw new AquariumReadException("Erreur de lecture du sexe à la ligne "+lineIndex.get());
+        if(sex.isEmpty())
+            throw new AquariumReadException("Erreur de lecture du sexe à la ligne " + lineIndex.get());
 
-        int age = IntegerUtils.of(matcherFish.group(5)).orElse(0);
+        int age = IntegerUtils.of(matcherFish.group(5))
+                              .orElse(0);
 
-        int pv = IntegerUtils.of(matcherFish.group(7)).orElse(Fish.DEFAULT_PV);
+        int pv = IntegerUtils.of(matcherFish.group(7))
+                             .orElse(Fish.DEFAULT_PV);
 
         // Récupère le poisson à partir des propriétés
         Fish fish = Fish.reInstantiateFish(species.get(), name, sex.get(), age, pv);
 
         // Si pas de round particulier, ajoute directement le poisson à la liste de poissons
         if(round.get() == -1) fishes.add(fish);
-        else livingsToAdd.computeIfAbsent(round.get(), k -> new ArrayList<>()).add(fish);
+        else livingsToAdd.computeIfAbsent(round.get(), k -> new ArrayList<>())
+                         .add(fish);
     }
 
     private void parseRound(Matcher matcherRound, AtomicInteger round, AtomicInteger lineIndex) {
         Optional<Integer> roundTempOptional = IntegerUtils.of(matcherRound.group(1));
         if(roundTempOptional.isEmpty())
-            throw new AquariumReadException("Erreur de lecture du numéro de tour à la ligne "+lineIndex.get());
+            throw new AquariumReadException("Erreur de lecture du numéro de tour à la ligne " + lineIndex.get());
         // Change de round
         round.set(roundTempOptional.get());
     }

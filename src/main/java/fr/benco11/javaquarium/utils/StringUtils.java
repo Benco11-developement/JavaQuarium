@@ -21,7 +21,8 @@ public final class StringUtils {
     static {
         // Récupère la liste des noms de poissons depuis le fichier ressource gutenberg.txt contenant tous les mots de la langue française
         try(BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(StringUtils.class.getResourceAsStream("/gutenberg.txt"))))) {
-            NAMES.addAll(reader.lines().toList());
+            NAMES.addAll(reader.lines()
+                               .toList());
         } catch(IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -35,7 +36,8 @@ public final class StringUtils {
      * @return le nom
      */
     public static String getFishName(Fish parent) {
-        return NAMES.get(Math.abs(parent.name().hashCode()%NAMES.size()));
+        return NAMES.get(Math.abs(parent.name()
+                                        .hashCode()%NAMES.size()));
     }
 
     /**
@@ -46,7 +48,7 @@ public final class StringUtils {
      * @return le mot au pluriel ou non
      */
     public static String plural(String word, long number) {
-        return number > 1 ? word+"s" : word;
+        return number > 1 ? word + "s" : word;
     }
 
     /**
@@ -57,7 +59,7 @@ public final class StringUtils {
      * @return le quantificateur et le mot au pluriel ou non
      */
     public static String pluralInsert(String word, long number) {
-        return number+" "+plural(word, number);
+        return number + " " + plural(word, number);
     }
 
     /**
@@ -78,7 +80,7 @@ public final class StringUtils {
      * @return l'article indéfini avec le mot
      */
     public static String indefiniteArticleAppend(String word, Fish.Sex sex) {
-        return indefiniteArticle(sex)+" "+word;
+        return indefiniteArticle(sex) + " " + word;
     }
 
     /**
@@ -89,7 +91,7 @@ public final class StringUtils {
      * @return le mot accordé
      */
     public static String sex(String word, Fish.Sex sex) {
-        return word+((sex == Fish.Sex.MALE) ? "" : "e");
+        return word + ((sex == Fish.Sex.MALE) ? "" : "e");
     }
 
     /**

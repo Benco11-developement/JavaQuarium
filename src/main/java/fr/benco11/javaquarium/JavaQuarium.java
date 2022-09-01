@@ -54,8 +54,12 @@ public class JavaQuarium implements Aquarium {
         Aquarium aquarium = loadAquarium(options);
 
         // Récupère le nombre de rounds et le fichier de sortie
-        int rounds = (options.isPresent(ROUNDS)) ? options.option(ROUNDS, Integer.class).orElseThrow(() -> new OptionParseException(ROUNDS)) : DEFAULT_ROUND_NUMBER;
-        Optional<File> output = options.option(OUTPUT, String.class).map(File::new);
+        int rounds = (options.isPresent(ROUNDS))
+                     ? options.option(ROUNDS, Integer.class)
+                              .orElseThrow(() -> new OptionParseException(ROUNDS))
+                     : DEFAULT_ROUND_NUMBER;
+        Optional<File> output = options.option(OUTPUT, String.class)
+                                       .map(File::new);
         if(options.isPresent(OUTPUT) && output.isEmpty()) throw new OptionParseException(OUTPUT);
 
         // Récupère le tour de sauvegarde, par défaut le nombre de rounds de simulation
@@ -71,7 +75,8 @@ public class JavaQuarium implements Aquarium {
                     writer.writeAquarium(aquarium);
                     writer.flush();
                 } catch(IOException e) {
-                    throw new OptionParseException("Erreur d'écriture du fichier '"+output.get().getPath()+"'", e);
+                    throw new OptionParseException("Erreur d'écriture du fichier '" + output.get()
+                                                                                            .getPath() + "'", e);
                 }
             }
         }
@@ -87,11 +92,13 @@ public class JavaQuarium implements Aquarium {
     private static Aquarium loadAquarium(Options options) {
         Aquarium aquarium;
         if(options.isPresent(INPUT)) {
-            try(FileReader reader = new FileReader(options.option(INPUT, String.class).orElseThrow(() -> new OptionParseException(INPUT)))) {
+            try(FileReader reader = new FileReader(options.option(INPUT, String.class)
+                                                          .orElseThrow(() -> new OptionParseException(INPUT)))) {
                 AquariumParser parser = new AquariumParser(reader);
                 aquarium = parser.parseAquarium();
             } catch(IOException e) {
-                throw new OptionParseException("Erreur de lecture du fichier '"+options.option(INPUT).orElse(null)+"'", e);
+                throw new OptionParseException("Erreur de lecture du fichier '" + options.option(INPUT)
+                                                                                         .orElse(null) + "'", e);
             }
         } else {
             aquarium = new JavaQuarium();
@@ -127,8 +134,9 @@ public class JavaQuarium implements Aquarium {
      * @param livingsToAddPerRound  liste des êtres vivants à ajouter par tour
      * @param removeOptionsPerRound liste des filtres de suppression par tour
      */
-    public JavaQuarium(List<Kelp> kelps, List<Fish> fishes, Map<Integer, List<Living>> livingsToAddPerRound,
-                       Map<Integer, Pair<List<Options>, List<Options>>> removeOptionsPerRound) {
+    public JavaQuarium(List<Kelp> kelps, List<Fish> fishes,
+            Map<Integer, List<Living>> livingsToAddPerRound,
+            Map<Integer, Pair<List<Options>, List<Options>>> removeOptionsPerRound) {
         this.kelps = kelps;
         this.fishes = fishes;
         this.livingsToAddPerRound = livingsToAddPerRound;
@@ -159,8 +167,14 @@ public class JavaQuarium implements Aquarium {
 
         // Initialise des listes avec les poissons et algues à ajouter à la fin du tour
         List<Living> livingsToAdd = livingsToAddPerRound.getOrDefault(round, new ArrayList<>());
-        List<Fish> fishesToAdd = new ArrayList<>(livingsToAdd.stream().filter(Fish.class::isInstance).map(Fish.class::cast).toList());
-        List<Kelp> kelpsToAdd = new ArrayList<>(livingsToAdd.stream().filter(Kelp.class::isInstance).map(Kelp.class::cast).toList());
+        List<Fish> fishesToAdd = new ArrayList<>(livingsToAdd.stream()
+                                                             .filter(Fish.class::isInstance)
+                                                             .map(Fish.class::cast)
+                                                             .toList());
+        List<Kelp> kelpsToAdd = new ArrayList<>(livingsToAdd.stream()
+                                                            .filter(Kelp.class::isInstance)
+                                                            .map(Kelp.class::cast)
+                                                            .toList());
 
         fishes.forEach(fish -> {
             tryToEatIfHungry(fish);
@@ -170,35 +184,49 @@ public class JavaQuarium implements Aquarium {
         kelps.forEach(kelp -> tryToReproduce(kelp).ifPresent(kelpsToAdd::add));
 
         // Concatène les poissons vivants avec les poissons à ajouter (pareil pour les algues)
-        fishes = new ArrayList<>(Stream.concat(fishes.stream().filter(Fish::tick), fishesToAdd.stream()).toList());
-        kelps = new ArrayList<>(Stream.concat(kelps.stream().filter(Kelp::tick), kelpsToAdd.stream()).toList());
+        fishes = new ArrayList<>(Stream.concat(fishes.stream()
+                                                     .filter(Fish::tick), fishesToAdd.stream())
+                                       .toList());
+        kelps = new ArrayList<>(Stream.concat(kelps.stream()
+                                                   .filter(Kelp::tick), kelpsToAdd.stream())
+                                      .toList());
 
         // Applique les filtres de suppression définis dans le fichier d'entrée ou non
         Pair<List<Options>, List<Options>> removeOptions = removeOptionsPerRound.getOrDefault(round, new Pair<>(new ArrayList<>(), new ArrayList<>()));
-        removeOptions.first().forEach(option -> removeKelp(option, kelps));
-        removeOptions.second().forEach(option -> removeFish(option, fishes));
+        removeOptions.first()
+                     .forEach(option -> removeKelp(option, kelps));
+        removeOptions.second()
+                     .forEach(option -> removeFish(option, fishes));
 
         census();
     }
 
     @Override
     public void census() {
-        System.out.println("\n----- Tour "+round+" -----");
-        System.out.println("\nIl y a actuellement "+pluralInsert("algue", kelps.size())+" dans l'aquarium");
-        System.out.println("Il y a actuellement "+pluralInsert("poisson", fishes.size())+" dans l'aquarium");
+        System.out.println("\n----- Tour " + round + " -----");
+        System.out.println("\nIl y a actuellement " + pluralInsert("algue", kelps.size()) + " dans l'aquarium");
+        System.out.println("Il y a actuellement " + pluralInsert("poisson", fishes.size()) + " dans l'aquarium");
         System.out.println("Recensement des poissons :\n");
-        fishes.forEach(fish -> System.out.println(fish.name()+" est "+indefiniteArticleAppend(fish.sex().name(), fish.sex())+" "+
-                Fish.Species.of(fish).species()+" "+sex("âgé", fish.sex())+" de "+pluralInsert("an", fish.age())+" avec "+pluralInsert("pv", fish.pv())));
+        fishes.forEach(fish -> System.out.println(fish.name() + " est " + indefiniteArticleAppend(fish.sex()
+                                                                                                      .name(), fish.sex()) + " " +
+                Fish.Species.of(fish)
+                            .species() + " " + sex("âgé", fish.sex()) + " de " + pluralInsert("an", fish.age()) + " avec " + pluralInsert("pv", fish.pv())));
     }
 
     @Override
     public Map<Integer, List<Living>> remainingLivingsToAdd() {
-        return livingsToAddPerRound.entrySet().stream().filter(entry -> entry.getKey() > round).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return livingsToAddPerRound.entrySet()
+                                   .stream()
+                                   .filter(entry -> entry.getKey() > round)
+                                   .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     @Override
     public Map<Integer, Pair<List<Options>, List<Options>>> remainingRemoveOptions() {
-        return removeOptionsPerRound.entrySet().stream().filter(entry -> entry.getKey() > round).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return removeOptionsPerRound.entrySet()
+                                    .stream()
+                                    .filter(entry -> entry.getKey() > round)
+                                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     @Override
@@ -234,7 +262,10 @@ public class JavaQuarium implements Aquarium {
      */
     private Optional<Fish> tryToReproduce(Fish fish) {
         Optional<Fish> other = randomFishExcludingOne(true, fish);
-        return other.isEmpty() ? Optional.empty() : other.get().reproduce(fish);
+        return other.isEmpty()
+               ? Optional.empty()
+               : other.get()
+                      .reproduce(fish);
     }
 
     /**
@@ -255,7 +286,9 @@ public class JavaQuarium implements Aquarium {
      * @return un <code>Optional</code> contenant ou non un poisson
      */
     private Optional<Fish> randomFishExcludingOne(boolean living, Fish excludeFish) {
-        return randomLiving(living, fishes.stream().filter(fish -> fish != excludeFish).toList());
+        return randomLiving(living, fishes.stream()
+                                          .filter(fish -> fish != excludeFish)
+                                          .toList());
     }
 
     /**
@@ -277,8 +310,12 @@ public class JavaQuarium implements Aquarium {
      * @return un <code>Optional</code> contenant ou non un être
      */
     private <T extends Living> Optional<T> randomLiving(boolean isLiving, List<T> originalList) {
-        List<T> livingFiltered = originalList.stream().filter(living -> !isLiving || living.alive()).toList();
-        return (livingFiltered.isEmpty()) ? Optional.empty() : Optional.of(livingFiltered.get(RANDOM.nextInt(livingFiltered.size())));
+        List<T> livingFiltered = originalList.stream()
+                                             .filter(living -> !isLiving || living.alive())
+                                             .toList();
+        return (livingFiltered.isEmpty())
+               ? Optional.empty()
+               : Optional.of(livingFiltered.get(RANDOM.nextInt(livingFiltered.size())));
     }
 
     /**
@@ -288,8 +325,11 @@ public class JavaQuarium implements Aquarium {
      * @param kelps   liste des algues
      */
     private void removeKelp(Options options, List<Kelp> kelps) {
-        List<Kelp> kelpsFiltered = kelps.stream().filter(kelp -> filterRemove(kelp.age(), AGE, options)).toList();
-        kelps.removeAll(ListUtils.pickRandoms(kelpsFiltered, options.option(AMOUNT, Integer.class).orElse(kelpsFiltered.size())));
+        List<Kelp> kelpsFiltered = kelps.stream()
+                                        .filter(kelp -> removeFilter(kelp.age(), AGE, options))
+                                        .toList();
+        kelps.removeAll(ListUtils.pickRandoms(kelpsFiltered, options.option(AMOUNT, Integer.class)
+                                                                    .orElse(kelpsFiltered.size())));
     }
 
     /**
@@ -299,16 +339,18 @@ public class JavaQuarium implements Aquarium {
      * @param fishes  liste des poissons
      */
     private void removeFish(Options options, List<Fish> fishes) {
-        fishes.removeIf(fish -> Arrays.stream(Options.LivingOption.values()).allMatch(o -> filterRemove(
-                switch(o) {
-                    case SEX -> fish.sex();
-                    case PV -> fish.pv();
-                    case NAME -> fish.name();
-                    case AGE -> fish.age();
-                    case SPECIES -> Fish.Species.of(fish).species();
-                    case AMOUNT -> null;
-                }
-                , o, options)));
+        fishes.removeIf(fish -> Arrays.stream(Options.LivingOption.values())
+                                      .allMatch(o -> removeFilter(
+                                              switch(o) {
+                                                  case SEX -> fish.sex();
+                                                  case PV -> fish.pv();
+                                                  case NAME -> fish.name();
+                                                  case AGE -> fish.age();
+                                                  case SPECIES -> Fish.Species.of(fish)
+                                                                              .species();
+                                                  case AMOUNT -> null;
+                                              }
+                                              , o, options)));
     }
 
     /**
@@ -319,7 +361,7 @@ public class JavaQuarium implements Aquarium {
      * @param options  options
      * @return si l'objet est <code>null</code> ou si l'objet correspond à l'option ou si l'option est vide
      */
-    private boolean filterRemove(Object f, Options.StandardOption optionId, Options options) {
+    private boolean removeFilter(Object f, Options.StandardOption optionId, Options options) {
         return f == null || equalsOrEmpty(f, options.option(optionId));
     }
 }

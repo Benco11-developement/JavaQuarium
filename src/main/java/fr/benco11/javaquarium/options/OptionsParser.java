@@ -20,8 +20,7 @@ public class OptionsParser {
             INPUT.id(), true,
             OUTPUT.id(), true,
             OUTPUT_ROUND.id(), true,
-            ROUNDS.id(), true
-    );
+            ROUNDS.id(), true);
 
     /**
      * Regex pour détecter les ids d'arguments
@@ -42,9 +41,14 @@ public class OptionsParser {
             if(!matcher.find()) continue;
             String id = matcher.group(1);
             if(!OPTIONS_PARSER_ARGUMENTS_LIST.containsKey(id)) throw new OptionParseException(id);
-            Optional<?> value = (i+1 >= args.length) ? Optional.of(true) : IntegerUtils.of(args[i+1]);
-            if(value.isEmpty()) value = Optional.of(args[i+1]);
-            if(value.get().equals(true) && Boolean.TRUE.equals(OPTIONS_PARSER_ARGUMENTS_LIST.get(id)))
+            Optional<?> value = (i + 1 >= args.length)
+                                ? Optional.of(true)
+                                : IntegerUtils.of(args[i + 1]);
+            if(value.isEmpty()) value = Optional.of(args[i + 1]);
+
+            // Lève une exception si l'argument nécessite une valeur qui n'a pas été trouvée
+            if(value.get()
+                    .equals(true) && Boolean.TRUE.equals(OPTIONS_PARSER_ARGUMENTS_LIST.get(id)))
                 throw new OptionParseException(id);
 
             options.add(id, value);

@@ -93,7 +93,9 @@ public class Options {
      */
     public <T> Optional<T> option(String id, Class<T> clazz) {
         Optional<?> optional = option(id);
-        return (optional.isEmpty() || !(clazz.isInstance(optional.get()))) ? Optional.empty() : optional.map(clazz::cast);
+        return (optional.isEmpty() || !(clazz.isInstance(optional.get())))
+               ? Optional.empty()
+               : optional.map(clazz::cast);
     }
 
     /**
@@ -204,7 +206,10 @@ public class Options {
          * @return un <code>Optional</code> contenant ou non une <code>LivingOption</code>
          */
         public static Optional<LivingOption> of(String id) {
-            return Arrays.stream(values()).filter(o -> o.id().equals(id)).findAny();
+            return Arrays.stream(values())
+                         .filter(o -> o.id()
+                                       .equals(id))
+                         .findAny();
         }
 
         private final String id;
@@ -247,7 +252,10 @@ public class Options {
          * @return un <code>Optional</code> contenant ou non une <code>AquariumOption</code>
          */
         public static Optional<AquariumOption> of(String id) {
-            return Arrays.stream(values()).filter(o -> o.id().equals(id)).findAny();
+            return Arrays.stream(values())
+                         .filter(o -> o.id()
+                                       .equals(id))
+                         .findAny();
         }
 
         private final String id;

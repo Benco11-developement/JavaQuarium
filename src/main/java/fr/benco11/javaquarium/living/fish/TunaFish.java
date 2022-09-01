@@ -33,7 +33,8 @@ public final class TunaFish extends Fish.CarnivorousFish {
 
     @Override
     public Optional<Fish> reproduce(Fish other) {
-        if(!(other instanceof TunaFish) || other.sex() == sex || other == this) return Optional.empty();
+        if(!(other instanceof TunaFish) || other.sex() == sex || other == this)
+            return Optional.empty();
         return Optional.of(new TunaFish(StringUtils.getFishName(this), Fish.Sex.randomSex()));
     }
 }

@@ -40,7 +40,8 @@ public final class GrouperFish extends Fish.CarnivorousFish {
 
     @Override
     public Optional<Fish> reproduce(Fish other) {
-        if(!(other instanceof GrouperFish) || other.sex() == sex || other == this) return Optional.empty();
+        if(!(other instanceof GrouperFish) || other.sex() == sex || other == this)
+            return Optional.empty();
         return Optional.of(new GrouperFish(StringUtils.getFishName(this), Fish.Sex.randomSex()));
     }
 }

@@ -19,6 +19,6 @@ public class AquariumReadException extends RuntimeException {
      * @param line ligne de l'erreur
      */
     public AquariumReadException(int line) {
-        super("Erreur de lecture de la ligne "+line);
+        super("Erreur de lecture de la ligne " + line);
     }
 }

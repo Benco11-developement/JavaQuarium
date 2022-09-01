@@ -104,16 +104,6 @@ public abstract sealed class Fish implements Living {
     }
 
     @Override
-    public int age() {
-        return age;
-    }
-
-    @Override
-    public int pv() {
-        return pv;
-    }
-
-    @Override
     public boolean tick() {
         pv--;
         age++;
@@ -128,6 +118,16 @@ public abstract sealed class Fish implements Living {
     @Override
     public void bitten() {
         pv -= 4;
+    }
+
+    @Override
+    public int age() {
+        return age;
+    }
+
+    @Override
+    public int pv() {
+        return pv;
     }
 
     /**
@@ -186,7 +186,10 @@ public abstract sealed class Fish implements Living {
          * @return un <code>Optional</code> contenant ou non sexe
          */
         public static Optional<Sex> of(String s) {
-            return Arrays.stream(values()).filter(v -> v.name().equalsIgnoreCase(s)).findAny();
+            return Arrays.stream(values())
+                         .filter(v -> v.name()
+                                       .equalsIgnoreCase(s))
+                         .findAny();
         }
     }
 
@@ -243,7 +246,10 @@ public abstract sealed class Fish implements Living {
          * @return un <code>Optional</code> contenant ou non le <code>Species</code> du poisson
          */
         public static Optional<Species> of(String species) {
-            return Arrays.stream(values()).filter(sp -> sp.species().equals(species)).findAny();
+            return Arrays.stream(values())
+                         .filter(sp -> sp.species()
+                                         .equals(species))
+                         .findAny();
         }
 
         private final String name;
@@ -291,7 +297,8 @@ public abstract sealed class Fish implements Living {
 
         @Override
         public void eat(Fish fish) {
-            if(fish.getClass().equals(getClass())) return;
+            if(fish.getClass()
+                   .equals(getClass())) return;
             fish.bitten();
             pv += 5;
         }

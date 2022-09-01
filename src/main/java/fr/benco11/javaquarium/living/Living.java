@@ -28,12 +28,14 @@ public sealed interface Living permits Fish, Kelp {
 
     /**
      * Renvoie l'âge de l'être vivant
+     *
      * @return l'âge de l'être
      */
     int age();
 
     /**
      * Renvoie le nombre de pvs de l'être vivant
+     *
      * @return le nombre de pvs
      */
     int pv();

@@ -10,7 +10,7 @@ public class OptionParseException extends RuntimeException {
      * @param optionName nom de l'option
      */
     public OptionParseException(String optionName) {
-        super("Erreur de parsing de l'option '"+optionName+"'");
+        super("Erreur de parsing de l'option '" + optionName + "'");
     }
 
     /**

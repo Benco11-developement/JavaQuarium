@@ -32,7 +32,8 @@ public final class CarpFish extends Fish.HerbivorousFish {
 
     @Override
     public Optional<Fish> reproduce(Fish other) {
-        if(!(other instanceof CarpFish) || other.sex() == sex || other == this) return Optional.empty();
+        if(!(other instanceof CarpFish) || other.sex() == sex || other == this)
+            return Optional.empty();
         return Optional.of(new CarpFish(StringUtils.getFishName(this), Fish.Sex.randomSex()));
     }
 }

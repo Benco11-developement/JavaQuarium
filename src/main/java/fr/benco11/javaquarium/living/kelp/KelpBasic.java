@@ -47,15 +47,6 @@ public final class KelpBasic implements Kelp {
     }
 
     @Override
-    public Optional<Kelp> reproduce() {
-        if(pv >= 10) {
-            pv /= 2;
-            return Optional.of(new KelpBasic(pv));
-        }
-        return Optional.empty();
-    }
-
-    @Override
     public int age() {
         return age;
     }
@@ -63,5 +54,14 @@ public final class KelpBasic implements Kelp {
     @Override
     public int pv() {
         return pv;
+    }
+
+    @Override
+    public Optional<Kelp> reproduce() {
+        if(pv >= 10) {
+            pv /= 2;
+            return Optional.of(new KelpBasic(pv));
+        }
+        return Optional.empty();
     }
 }

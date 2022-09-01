@@ -402,34 +402,6 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
 </section>
 </li>
 <li>
-<section class="detail" id="age()">
-<h3>age</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">age</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../Living.html#age()">Living</a></code></span></div>
-<div class="block">Renvoie l'âge de l'être vivant</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Living.html#age()">age</a></code>&nbsp;in interface&nbsp;<code><a href="../Living.html" title="interface in fr.benco11.javaquarium.living">Living</a></code></dd>
-<dt>Returns:</dt>
-<dd>l'âge de l'être</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="pv()">
-<h3>pv</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">pv</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../Living.html#pv()">Living</a></code></span></div>
-<div class="block">Renvoie le nombre de pvs de l'être vivant</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Living.html#pv()">pv</a></code>&nbsp;in interface&nbsp;<code><a href="../Living.html" title="interface in fr.benco11.javaquarium.living">Living</a></code></dd>
-<dt>Returns:</dt>
-<dd>le nombre de pvs</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="tick()">
 <h3>tick</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">tick</span>()</div>
@@ -447,45 +419,104 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
 <section class="detail" id="alive()">
 <h3>alive</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">alive</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../Living.html#alive()">Living</a></code></span></div>
-<div class="block">Renvoie vrai si l'être est encore en vie</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Living.html#alive()">alive</a></code>&nbsp;in interface&nbsp;<code><a href="../Living.html" title="interface in fr.benco11.javaquarium.living">Living</a></code></dd>
-<dt>Returns:</dt>
-<dd>si l'être est vivant</dd>
-</dl>
+<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
+        href="../Living.html#alive()">Living</a></code></span></div>
+    <div class="block">Renvoie vrai si l'être est encore en vie</div>
+    <dl class="notes">
+        <dt>Specified by:</dt>
+        <dd><code><a href="../Living.html#alive()">alive</a></code>&nbsp;in interface&nbsp;<code><a
+                href="../Living.html" title="interface in fr.benco11.javaquarium.living">Living</a></code>
+        </dd>
+        <dt>Returns:</dt>
+        <dd>si l'être est vivant</dd>
+    </dl>
 </section>
 </li>
-<li>
-<section class="detail" id="bitten()">
-<h3>bitten</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">bitten</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../Living.html#bitten()">Living</a></code></span></div>
-<div class="block">Simule que l'être vivant se fasse mordre</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code><a href="../Living.html#bitten()">bitten</a></code>&nbsp;in interface&nbsp;<code><a href="../Living.html" title="interface in fr.benco11.javaquarium.living">Living</a></code></dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="hungry()">
-<h3>hungry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hungry</span>()</div>
-<div class="block">Renvoie vrai si le poisson a faim et cherche à manger</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>si le poisson a faim</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="reproduce(fr.benco11.javaquarium.living.fish.Fish)">
-<h3>reproduce</h3>
-<div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util">Optional</a>&lt;<a href="Fish.html" title="class in fr.benco11.javaquarium.living.fish">Fish</a>&gt;</span>&nbsp;<span class="element-name">reproduce</span><wbr><span class="parameters">(<a href="Fish.html" title="class in fr.benco11.javaquarium.living.fish">Fish</a>&nbsp;other)</span></div>
-<div class="block">Tente de se reproduire avec un autre poisson</div>
-<dl class="notes">
+    <li>
+        <section class="detail" id="bitten()">
+            <h3>bitten</h3>
+            <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
+                    class="return-type">void</span>&nbsp;<span class="element-name">bitten</span>()
+            </div>
+            <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
+                    href="../Living.html#bitten()">Living</a></code></span></div>
+            <div class="block">Simule que l'être vivant se fasse mordre</div>
+            <dl class="notes">
+                <dt>Specified by:</dt>
+                <dd><code><a href="../Living.html#bitten()">bitten</a></code>&nbsp;in interface&nbsp;<code><a
+                        href="../Living.html" title="interface in fr.benco11.javaquarium.living">Living</a></code>
+                </dd>
+            </dl>
+        </section>
+    </li>
+    <li>
+        <section class="detail" id="age()">
+            <h3>age</h3>
+            <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
+                    class="return-type">int</span>&nbsp;<span class="element-name">age</span>()
+            </div>
+            <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
+                    href="../Living.html#age()">Living</a></code></span></div>
+            <div class="block">Renvoie l'âge de l'être vivant</div>
+            <dl class="notes">
+                <dt>Specified by:</dt>
+                <dd><code><a href="../Living.html#age()">age</a></code>&nbsp;in
+                    interface&nbsp;<code><a href="../Living.html"
+                                            title="interface in fr.benco11.javaquarium.living">Living</a></code>
+                </dd>
+                <dt>Returns:</dt>
+                <dd>l'âge de l'être</dd>
+            </dl>
+        </section>
+    </li>
+    <li>
+        <section class="detail" id="pv()">
+            <h3>pv</h3>
+            <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
+                    class="return-type">int</span>&nbsp;<span class="element-name">pv</span>()
+            </div>
+            <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
+                    href="../Living.html#pv()">Living</a></code></span></div>
+            <div class="block">Renvoie le nombre de pvs de l'être vivant</div>
+            <dl class="notes">
+                <dt>Specified by:</dt>
+                <dd><code><a href="../Living.html#pv()">pv</a></code>&nbsp;in
+                    interface&nbsp;<code><a href="../Living.html"
+                                            title="interface in fr.benco11.javaquarium.living">Living</a></code>
+                </dd>
+                <dt>Returns:</dt>
+                <dd>le nombre de pvs</dd>
+            </dl>
+        </section>
+    </li>
+    <li>
+        <section class="detail" id="hungry()">
+            <h3>hungry</h3>
+            <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
+                    class="return-type">boolean</span>&nbsp;<span class="element-name">hungry</span>()
+            </div>
+            <div class="block">Renvoie vrai si le poisson a faim et cherche à manger</div>
+            <dl class="notes">
+                <dt>Returns:</dt>
+                <dd>si le poisson a faim</dd>
+            </dl>
+        </section>
+    </li>
+    <li>
+        <section class="detail" id="reproduce(fr.benco11.javaquarium.living.fish.Fish)">
+            <h3>reproduce</h3>
+            <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span
+                    class="return-type"><a class="external-link"
+                                           href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html"
+                                           title="class or interface in java.util">Optional</a>&lt;<a
+                    href="Fish.html" title="class in fr.benco11.javaquarium.living.fish">Fish</a>&gt;</span>&nbsp;<span
+                    class="element-name">reproduce</span>
+                <wbr>
+                <span class="parameters">(<a href="Fish.html"
+                                             title="class in fr.benco11.javaquarium.living.fish">Fish</a>&nbsp;other)</span>
+            </div>
+            <div class="block">Tente de se reproduire avec un autre poisson</div>
+            <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>other</code> - autre poisson avec qui se reproduire</dd>
 <dt>Returns:</dt>
