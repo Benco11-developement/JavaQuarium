@@ -143,4 +143,4 @@ Liste des modifications par rapport à l'énoncé original :
 
 ### JavaDoc
 
-Une [JavaDoc](https://fr.wikipedia.org/wiki/Javadoc) est [<u>à votre disposition.</u>](https://benco11-developement.github.io/JavaQuarium/javadoc)
+Une [JavaDoc](https://fr.wikipedia.org/wiki/Javadoc) est [<ins>à votre disposition.</ins>](https://benco11-developement.github.io/JavaQuarium/javadoc)
