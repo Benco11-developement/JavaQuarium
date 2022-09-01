@@ -54,7 +54,7 @@ public final class KelpBasic implements Kelp {
 
     @Override
     public void bitten() {
-        pv -= BITING_DAMAGE;
+        pv -= KelpBasic.BITING_DAMAGE;
     }
 
     @Override

@@ -132,7 +132,7 @@ public abstract sealed class Fish implements Living {
 
     @Override
     public void bitten() {
-        pv -= BITING_DAMAGE;
+        pv -= Fish.BITING_DAMAGE;
     }
 
     @Override
