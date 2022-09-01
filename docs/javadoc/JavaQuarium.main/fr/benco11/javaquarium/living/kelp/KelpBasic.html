@@ -114,11 +114,12 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a class="member-name-link" href="#%3Cinit%3E()">KelpBasic</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Constructeur par défaut</div>
+<div class="block">Constructeur par défaut, définit le nombre de pv à <a href="#DEFAULT_PV">10</a>
+</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a class="member-name-link" href="#%3Cinit%3E(int)">KelpBasic</a><wbr>(int&nbsp;pv)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Constructeur à partir du nombre de pvs</div>
+    <div class="block">Construit avec le nombre de pvs</div>
 </div>
 </div>
 </section>
@@ -205,17 +206,20 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;()">
-<h3>KelpBasic</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">KelpBasic</span>()</div>
-<div class="block">Constructeur par défaut</div>
-</section>
+    <section class="detail" id="&lt;init&gt;()">
+        <h3>KelpBasic</h3>
+        <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
+                class="element-name">KelpBasic</span>()
+        </div>
+        <div class="block">Constructeur par défaut, définit le nombre de pv à <a
+                href="#DEFAULT_PV">10</a></div>
+    </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>KelpBasic</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">KelpBasic</span><wbr><span class="parameters">(int&nbsp;pv)</span></div>
-<div class="block">Constructeur à partir du nombre de pvs</div>
+    <div class="block">Construit avec le nombre de pvs</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>pv</code> - nombre de pvs</dd>
@@ -271,20 +275,25 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
 </section>
 </li>
 <li>
-<section class="detail" id="age()">
-<h3>age</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">age</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../Living.html#age()">Living</a></code></span></div>
-<div class="block">Renvoie l'âge de l'être vivant</div>
-<dl class="notes">
-    <dt>Specified by:</dt>
-    <dd><code><a href="../Living.html#age()">age</a></code>&nbsp;in interface&nbsp;<code><a
-            href="../Living.html"
-            title="interface in fr.benco11.javaquarium.living">Living</a></code></dd>
-    <dt>Returns:</dt>
-    <dd>l'âge de l'être</dd>
-</dl>
-</section>
+    <section class="detail" id="age()">
+        <h3>age</h3>
+        <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
+                class="return-type">int</span>&nbsp;<span class="element-name">age</span>()
+        </div>
+        <div class="block"><span
+                class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
+                href="../Living.html#age()">Living</a></code></span></div>
+        <div class="block">Renvoie l'âge de l'être vivant</div>
+        <dl class="notes">
+            <dt>Specified by:</dt>
+            <dd><code><a href="../Living.html#age()">age</a></code>&nbsp;in interface&nbsp;<code><a
+                    href="../Living.html"
+                    title="interface in fr.benco11.javaquarium.living">Living</a></code>
+            </dd>
+            <dt>Returns:</dt>
+            <dd>l'âge de l'être</dd>
+        </dl>
+    </section>
 </li>
     <li>
         <section class="detail" id="pv()">
@@ -292,16 +301,14 @@ implements <a href="Kelp.html" title="interface in fr.benco11.javaquarium.living
             <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
                     class="return-type">int</span>&nbsp;<span class="element-name">pv</span>()
             </div>
-            <div class="block"><span
-                    class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
+            <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
                     href="../Living.html#pv()">Living</a></code></span></div>
             <div class="block">Renvoie le nombre de pvs de l'être vivant</div>
             <dl class="notes">
                 <dt>Specified by:</dt>
                 <dd><code><a href="../Living.html#pv()">pv</a></code>&nbsp;in
-                    interface&nbsp;<code><a
-                            href="../Living.html"
-                            title="interface in fr.benco11.javaquarium.living">Living</a></code>
+                    interface&nbsp;<code><a href="../Living.html"
+                                            title="interface in fr.benco11.javaquarium.living">Living</a></code>
                 </dd>
                 <dt>Returns:</dt>
                 <dd>le nombre de pvs</dd>

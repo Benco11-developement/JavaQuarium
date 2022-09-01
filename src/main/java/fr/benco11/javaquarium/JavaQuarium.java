@@ -120,14 +120,14 @@ public class JavaQuarium implements Aquarium {
     private int round;
 
     /**
-     * Constructeur par défaut
+     * Constructeur par défaut, définit la liste des êtres vivants (et à ajouter) et des filtres de suppression comme vide
      */
     public JavaQuarium() {
         this(new ArrayList<>(), new ArrayList<>(), new HashMap<>(), new HashMap<>());
     }
 
     /**
-     * Constructeur à partir de la liste des poissons et algues, des êtres à ajouter par tour et des filtres de suppression par tour
+     * Construit à partir de la liste des poissons et algues, des êtres vivants à ajouter par tour et des filtres de suppression par tour
      *
      * @param kelps                 liste des algues
      * @param fishes                liste des poissons
@@ -247,9 +247,9 @@ public class JavaQuarium implements Aquarium {
     private void tryToEatIfHungry(Fish fish) {
         if(fish.hungry()) {
             if(fish instanceof Eater.Carnivorous carnivorous) {
-                randomFishExcludingOne(true, fish).ifPresent(carnivorous::eat);
+                randomFishExcludingOne(fish).ifPresent(carnivorous::eat);
             } else if(fish instanceof Eater.Herbivorous herbivorous) {
-                randomKelp(true).ifPresent(herbivorous::eat);
+                randomKelp().ifPresent(herbivorous::eat);
             }
         }
     }
@@ -261,7 +261,7 @@ public class JavaQuarium implements Aquarium {
      * @return un <code>Optional</code> contenant ou non un nouveau poisson
      */
     private Optional<Fish> tryToReproduce(Fish fish) {
-        Optional<Fish> other = randomFishExcludingOne(true, fish);
+        Optional<Fish> other = randomFishExcludingOne(fish);
         return other.isEmpty()
                ? Optional.empty()
                : other.get()
@@ -279,39 +279,36 @@ public class JavaQuarium implements Aquarium {
     }
 
     /**
-     * Renvoie un poisson au hasard en excluant un
+     * Renvoie un poisson vivant au hasard en excluant un
      *
-     * @param living      si le poisson tiré doit être vivant
      * @param excludeFish poisson à exclure
      * @return un <code>Optional</code> contenant ou non un poisson
      */
-    private Optional<Fish> randomFishExcludingOne(boolean living, Fish excludeFish) {
-        return randomLiving(living, fishes.stream()
-                                          .filter(fish -> fish != excludeFish)
-                                          .toList());
+    private Optional<Fish> randomFishExcludingOne(Fish excludeFish) {
+        return randomLiving(fishes.stream()
+                                  .filter(fish -> fish != excludeFish)
+                                  .toList());
     }
 
     /**
-     * Renvoie une algue au hasard
+     * Renvoie une algue vivante au hasard
      *
-     * @param living si l'algue tirée doit être vivante
      * @return un <code>Optional</code> contenant ou non une algue
      */
-    private Optional<Kelp> randomKelp(boolean living) {
-        return randomLiving(living, kelps);
+    private Optional<Kelp> randomKelp() {
+        return randomLiving(kelps);
     }
 
     /**
      * Renvoie un être vivant au hasard
      *
-     * @param isLiving     si l'être tiré doit être vivant
      * @param originalList liste des êtres parmis lequel l'être sera tiré
      * @param <T>          type de l'être
      * @return un <code>Optional</code> contenant ou non un être
      */
-    private <T extends Living> Optional<T> randomLiving(boolean isLiving, List<T> originalList) {
+    private <T extends Living> Optional<T> randomLiving(List<T> originalList) {
         List<T> livingFiltered = originalList.stream()
-                                             .filter(living -> !isLiving || living.alive())
+                                             .filter(Living::alive)
                                              .toList();
         return (livingFiltered.isEmpty())
                ? Optional.empty()

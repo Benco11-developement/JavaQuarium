@@ -119,15 +119,20 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a class="member-name-link" href="#%3Cinit%3E()">JavaQuarium</a>()</code></div>
 <div class="col-last even-row-color">
-<div class="block">Constructeur par défaut</div>
+<div class="block">Constructeur par défaut, définit la liste des êtres vivants (et à ajouter) et des
+    filtres de suppression comme vide
+</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a class="member-name-link" href="#%3Cinit%3E(java.util.List,java.util.List,java.util.Map,java.util.Map)">JavaQuarium</a><wbr>(<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="living/kelp/Kelp.html" title="interface in fr.benco11.javaquarium.living.kelp">Kelp</a>&gt;&nbsp;kelps,
  <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="living/fish/Fish.html" title="class in fr.benco11.javaquarium.living.fish">Fish</a>&gt;&nbsp;fishes,
  <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util">Map</a>&lt;<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang">Integer</a>,<wbr><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="living/Living.html" title="interface in fr.benco11.javaquarium.living">Living</a>&gt;&gt;&nbsp;livingsToAddPerRound,
  <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util">Map</a>&lt;<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang">Integer</a>,<wbr><a href="utils/Pair.html" title="class in fr.benco11.javaquarium.utils">Pair</a>&lt;<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="options/Options.html" title="class in fr.benco11.javaquarium.options">Options</a>&gt;,<wbr><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="options/Options.html" title="class in fr.benco11.javaquarium.options">Options</a>&gt;&gt;&gt;&nbsp;removeOptionsPerRound)</code></div>
-<div class="col-last odd-row-color">
-<div class="block">Constructeur à partir de la liste des poissons et algues, des êtres à ajouter par tour et des filtres de suppression par tour</div>
-</div>
+    <div class="col-last odd-row-color">
+        <div class="block">Construit à partir de la liste des poissons et algues, des êtres vivants
+            à
+            ajouter par tour et des filtres de suppression par tour
+        </div>
+    </div>
 </div>
 </section>
 </li>
@@ -235,28 +240,71 @@ implements <a href="Aquarium.html" title="interface in fr.benco11.javaquarium">A
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;()">
-<h3>JavaQuarium</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">JavaQuarium</span>()</div>
-<div class="block">Constructeur par défaut</div>
-</section>
+    <section class="detail" id="&lt;init&gt;()">
+        <h3>JavaQuarium</h3>
+        <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
+                class="element-name">JavaQuarium</span>()
+        </div>
+        <div class="block">Constructeur par défaut, définit la liste des êtres vivants (et à
+            ajouter) et
+            des filtres de suppression comme vide
+        </div>
+    </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(java.util.List,java.util.List,java.util.Map,java.util.Map)">
-<h3>JavaQuarium</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">JavaQuarium</span><wbr><span class="parameters">(<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="living/kelp/Kelp.html" title="interface in fr.benco11.javaquarium.living.kelp">Kelp</a>&gt;&nbsp;kelps,
- <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="living/fish/Fish.html" title="class in fr.benco11.javaquarium.living.fish">Fish</a>&gt;&nbsp;fishes,
- <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util">Map</a>&lt;<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang">Integer</a>,<wbr><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="living/Living.html" title="interface in fr.benco11.javaquarium.living">Living</a>&gt;&gt;&nbsp;livingsToAddPerRound,
- <a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html" title="class or interface in java.util">Map</a>&lt;<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang">Integer</a>,<wbr><a href="utils/Pair.html" title="class in fr.benco11.javaquarium.utils">Pair</a>&lt;<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="options/Options.html" title="class in fr.benco11.javaquarium.options">Options</a>&gt;,<wbr><a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util">List</a>&lt;<a href="options/Options.html" title="class in fr.benco11.javaquarium.options">Options</a>&gt;&gt;&gt;&nbsp;removeOptionsPerRound)</span></div>
-<div class="block">Constructeur à partir de la liste des poissons et algues, des êtres à ajouter par tour et des filtres de suppression par tour</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>kelps</code> - liste des algues</dd>
-<dd><code>fishes</code> - liste des poissons</dd>
-<dd><code>livingsToAddPerRound</code> - liste des êtres vivants à ajouter par tour</dd>
-<dd><code>removeOptionsPerRound</code> - liste des filtres de suppression par tour</dd>
-</dl>
-</section>
+    <section class="detail"
+             id="&lt;init&gt;(java.util.List,java.util.List,java.util.Map,java.util.Map)">
+        <h3>JavaQuarium</h3>
+        <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
+                class="element-name">JavaQuarium</span>
+            <wbr>
+            <span class="parameters">(<a class="external-link"
+                                         href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html"
+                                         title="class or interface in java.util">List</a>&lt;<a
+                    href="living/kelp/Kelp.html"
+                    title="interface in fr.benco11.javaquarium.living.kelp">Kelp</a>&gt;&nbsp;kelps,
+ <a class="external-link"
+    href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html"
+    title="class or interface in java.util">List</a>&lt;<a href="living/fish/Fish.html"
+                                                           title="class in fr.benco11.javaquarium.living.fish">Fish</a>&gt;&nbsp;fishes,
+ <a class="external-link"
+    href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html"
+    title="class or interface in java.util">Map</a>&lt;<a class="external-link"
+                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html"
+                                                          title="class or interface in java.lang">Integer</a>,<wbr><a
+                        class="external-link"
+                        href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html"
+                        title="class or interface in java.util">List</a>&lt;<a
+                        href="living/Living.html"
+                        title="interface in fr.benco11.javaquarium.living">Living</a>&gt;&gt;&nbsp;livingsToAddPerRound,
+ <a class="external-link"
+    href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html"
+    title="class or interface in java.util">Map</a>&lt;<a class="external-link"
+                                                          href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html"
+                                                          title="class or interface in java.lang">Integer</a>,<wbr><a
+                        href="utils/Pair.html"
+                        title="class in fr.benco11.javaquarium.utils">Pair</a>&lt;<a
+                        class="external-link"
+                        href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html"
+                        title="class or interface in java.util">List</a>&lt;<a
+                        href="options/Options.html" title="class in fr.benco11.javaquarium.options">Options</a>&gt;,<wbr><a
+                        class="external-link"
+                        href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html"
+                        title="class or interface in java.util">List</a>&lt;<a
+                        href="options/Options.html" title="class in fr.benco11.javaquarium.options">Options</a>&gt;&gt;&gt;&nbsp;removeOptionsPerRound)</span>
+        </div>
+        <div class="block">Construit à partir de la liste des poissons et algues, des êtres vivants
+            à
+            ajouter par tour et des filtres de suppression par tour
+        </div>
+        <dl class="notes">
+            <dt>Parameters:</dt>
+            <dd><code>kelps</code> - liste des algues</dd>
+            <dd><code>fishes</code> - liste des poissons</dd>
+            <dd><code>livingsToAddPerRound</code> - liste des êtres vivants à ajouter par tour</dd>
+            <dd><code>removeOptionsPerRound</code> - liste des filtres de suppression par tour</dd>
+        </dl>
+    </section>
 </li>
 </ul>
 </section>

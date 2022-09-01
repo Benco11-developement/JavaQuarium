@@ -25,14 +25,14 @@ public class Options {
     private final Map<String, Optional<?>> optionsMap;
 
     /**
-     * Constructeur par défaut
+     * Constructeur par défaut créant une <code>Map</code> vide
      */
     public Options() {
         this(new HashMap<>());
     }
 
     /**
-     * Constructeur à partir d'une <code>Map</code> d'options
+     * Construit à partir d'une <code>Map</code> d'options
      *
      * @param optionsMap <code>Map</code> d'options avec comme clé l'id de l'option et comme valeur un <code>Optional</code>
      */

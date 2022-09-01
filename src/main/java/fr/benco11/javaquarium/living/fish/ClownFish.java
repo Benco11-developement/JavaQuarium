@@ -10,7 +10,7 @@ import java.util.Optional;
 public final class ClownFish extends Fish.CarnivorousFish {
 
     /**
-     * Constructeur à partir d'un nom et d'un sexe
+     * Construit avec un nom et un sexe et définit l'âge à 0 et le nombre de pvs à {@value DEFAULT_PV}
      *
      * @param name nom
      * @param sex  sexe
@@ -20,7 +20,7 @@ public final class ClownFish extends Fish.CarnivorousFish {
     }
 
     /**
-     * Constructeur à partir d'un nom, d'un sexe, de l'âge et du nombre de pvs
+     * Construit avec un nom, un sexe, l'âge et le nombre de pvs
      *
      * @param name nom
      * @param sex  sexe

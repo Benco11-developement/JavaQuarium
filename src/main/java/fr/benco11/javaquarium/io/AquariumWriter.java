@@ -33,7 +33,7 @@ public class AquariumWriter extends BufferedWriter {
                                               """;
 
     /**
-     * Constructeur à partir d'un <code>Writer</code>
+     * Construit avec un <code>Writer</code>
      *
      * @param out <code>Writer</code> utilisé
      */

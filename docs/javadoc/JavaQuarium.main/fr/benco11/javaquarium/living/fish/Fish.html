@@ -174,7 +174,8 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
 <div class="col-constructor-name even-row-color"><code><a class="member-name-link" href="#%3Cinit%3E(java.lang.String,fr.benco11.javaquarium.living.fish.Fish.Sex)">Fish</a><wbr>(<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a>&nbsp;name,
  <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Constructeur à partir d'un nom et d'un sexe</div>
+<div class="block">Construit avec un nom et un sexe et définit l'âge à 0 et le nombre de pvs à <a
+        href="#DEFAULT_PV">10</a></div>
 </div>
 <div class="col-first odd-row-color"><code>protected </code></div>
 <div class="col-constructor-name odd-row-color"><code><a class="member-name-link" href="#%3Cinit%3E(java.lang.String,fr.benco11.javaquarium.living.fish.Fish.Sex,int,int)">Fish</a><wbr>(<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a>&nbsp;name,
@@ -321,17 +322,26 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.lang.String,fr.benco11.javaquarium.living.fish.Fish.Sex)">
-<h3>Fish</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">Fish</span><wbr><span class="parameters">(<a class="external-link" href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang">String</a>&nbsp;name,
- <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex)</span></div>
-<div class="block">Constructeur à partir d'un nom et d'un sexe</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>name</code> - nom</dd>
-<dd><code>sex</code> - sexe</dd>
-</dl>
-</section>
+    <section class="detail"
+             id="&lt;init&gt;(java.lang.String,fr.benco11.javaquarium.living.fish.Fish.Sex)">
+        <h3>Fish</h3>
+        <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span
+                class="element-name">Fish</span>
+            <wbr>
+            <span class="parameters">(<a class="external-link"
+                                         href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html"
+                                         title="class or interface in java.lang">String</a>&nbsp;name,
+ <a href="Fish.Sex.html" title="enum class in fr.benco11.javaquarium.living.fish">Fish.Sex</a>&nbsp;sex)</span>
+        </div>
+        <div class="block">Construit avec un nom et un sexe et définit l'âge à 0 et le nombre de pvs
+            à
+            <a href="#DEFAULT_PV">10</a></div>
+        <dl class="notes">
+            <dt>Parameters:</dt>
+            <dd><code>name</code> - nom</dd>
+            <dd><code>sex</code> - sexe</dd>
+        </dl>
+    </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.lang.String,fr.benco11.javaquarium.living.fish.Fish.Sex,int,int)">
@@ -415,23 +425,26 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
 </dl>
 </section>
 </li>
-<li>
-<section class="detail" id="alive()">
-<h3>alive</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">alive</span>()</div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
-        href="../Living.html#alive()">Living</a></code></span></div>
-    <div class="block">Renvoie vrai si l'être est encore en vie</div>
-    <dl class="notes">
-        <dt>Specified by:</dt>
-        <dd><code><a href="../Living.html#alive()">alive</a></code>&nbsp;in interface&nbsp;<code><a
-                href="../Living.html" title="interface in fr.benco11.javaquarium.living">Living</a></code>
-        </dd>
-        <dt>Returns:</dt>
-        <dd>si l'être est vivant</dd>
-    </dl>
-</section>
-</li>
+    <li>
+        <section class="detail" id="alive()">
+            <h3>alive</h3>
+            <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span
+                    class="return-type">boolean</span>&nbsp;<span class="element-name">alive</span>()
+            </div>
+            <div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a
+                    href="../Living.html#alive()">Living</a></code></span></div>
+            <div class="block">Renvoie vrai si l'être est encore en vie</div>
+            <dl class="notes">
+                <dt>Specified by:</dt>
+                <dd><code><a href="../Living.html#alive()">alive</a></code>&nbsp;in
+                    interface&nbsp;<code><a href="../Living.html"
+                                            title="interface in fr.benco11.javaquarium.living">Living</a></code>
+                </dd>
+                <dt>Returns:</dt>
+                <dd>si l'être est vivant</dd>
+            </dl>
+        </section>
+    </li>
     <li>
         <section class="detail" id="bitten()">
             <h3>bitten</h3>
@@ -517,13 +530,13 @@ implements <a href="../Living.html" title="interface in fr.benco11.javaquarium.l
             </div>
             <div class="block">Tente de se reproduire avec un autre poisson</div>
             <dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>other</code> - autre poisson avec qui se reproduire</dd>
-<dt>Returns:</dt>
-<dd>un <code>Optional</code> contenant ou non un nouveau poisson</dd>
-</dl>
-</section>
-</li>
+                <dt>Parameters:</dt>
+                <dd><code>other</code> - autre poisson avec qui se reproduire</dd>
+                <dt>Returns:</dt>
+                <dd>un <code>Optional</code> contenant ou non un nouveau poisson</dd>
+            </dl>
+        </section>
+    </li>
 </ul>
 </section>
 </li>

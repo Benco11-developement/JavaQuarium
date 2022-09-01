@@ -60,7 +60,7 @@ public abstract sealed class Fish implements Living {
     protected int pv;
 
     /**
-     * Constructeur à partir d'un nom et d'un sexe
+     * Construit avec un nom et un sexe et définit l'âge à 0 et le nombre de pvs à {@value DEFAULT_PV}
      *
      * @param name nom
      * @param sex  sexe
@@ -274,7 +274,7 @@ public abstract sealed class Fish implements Living {
     public abstract static sealed class CarnivorousFish extends Fish implements Eater.Carnivorous permits ClownFish, GrouperFish, TunaFish {
 
         /**
-         * Constructeur à partir d'un nom et d'un sexe
+         * Construit avec un nom et un sexe et définit l'âge à 0 et le nombre de pvs à {@value DEFAULT_PV}
          *
          * @param name nom
          * @param sex  sexe
@@ -284,7 +284,7 @@ public abstract sealed class Fish implements Living {
         }
 
         /**
-         * Constructeur à partir d'un nom, d'un sexe, de l'âge et du nombre de pvs
+         * Construit avec un nom, un sexe, l'âge et le nombre de pvs
          *
          * @param name nom
          * @param sex  sexe
@@ -310,7 +310,7 @@ public abstract sealed class Fish implements Living {
     public abstract static sealed class HerbivorousFish extends Fish implements Eater.Herbivorous permits BassFish, CarpFish, SoleFish {
 
         /**
-         * Constructeur à partir d'un nom et d'un sexe
+         * Construit avec un nom et un sexe et définit l'âge à 0 et le nombre de pvs à {@value DEFAULT_PV}
          *
          * @param name nom
          * @param sex  sexe
@@ -320,7 +320,7 @@ public abstract sealed class Fish implements Living {
         }
 
         /**
-         * Constructeur à partir d'un nom, d'un sexe, de l'âge et du nombre de pvs
+         * Construit avec un nom, un sexe, l'âge et le nombre de pvs
          *
          * @param name nom
          * @param sex  sexe

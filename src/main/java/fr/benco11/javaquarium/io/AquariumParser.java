@@ -36,7 +36,7 @@ public class AquariumParser {
     private final BufferedReader in;
 
     /**
-     * Constructeur à partir d'un <code>BufferedReader</code>
+     * Construit avec un <code>BufferedReader</code>
      *
      * @param in <code>Reader</code> utilisé
      */
@@ -45,7 +45,7 @@ public class AquariumParser {
     }
 
     /**
-     * Constructeur à partir d'un <code>Reader</code>
+     * Construit avec un BufferedReader basé sur un <code>Reader</code>
      *
      * @param in <code>Reader</code> utilisé
      */

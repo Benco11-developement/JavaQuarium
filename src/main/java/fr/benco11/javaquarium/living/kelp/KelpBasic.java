@@ -14,14 +14,14 @@ public final class KelpBasic implements Kelp {
     private int age;
 
     /**
-     * Constructeur par défaut
+     * Constructeur par défaut, définit le nombre de pv à {@value DEFAULT_PV}
      */
     public KelpBasic() {
         this.pv = DEFAULT_PV;
     }
 
     /**
-     * Constructeur à partir du nombre de pvs
+     * Construit avec le nombre de pvs
      *
      * @param pv nombre de pvs
      */
