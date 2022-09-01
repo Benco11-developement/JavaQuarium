@@ -19,6 +19,21 @@ public abstract sealed class Fish implements Living {
     public static final int DEFAULT_PV = 10;
 
     /**
+     * Seuil sous lequel un poisson a faim (maximum inclusif)
+     */
+    public static final int HUNGER_THRESHOLD = 5;
+
+    /**
+     * Nombre de pvs que perd un poisson lorsqu'il se fait mordre
+     */
+    public static final int BITING_DAMAGE = 4;
+
+    /**
+     * Âge maximal d'un poisson (inclusif)
+     */
+    public static final int MAX_AGE = 20;
+
+    /**
      * Retrouve un poisson à partir de ses propriétés
      *
      * @param species espèce du poisson
@@ -112,12 +127,12 @@ public abstract sealed class Fish implements Living {
 
     @Override
     public boolean alive() {
-        return pv > 0 && age <= 20;
+        return pv > 0 && age <= MAX_AGE;
     }
 
     @Override
     public void bitten() {
-        pv -= 4;
+        pv -= BITING_DAMAGE;
     }
 
     @Override
@@ -136,7 +151,7 @@ public abstract sealed class Fish implements Living {
      * @return si le poisson a faim
      */
     public boolean hungry() {
-        return pv <= 5;
+        return pv <= HUNGER_THRESHOLD;
     }
 
     /**
