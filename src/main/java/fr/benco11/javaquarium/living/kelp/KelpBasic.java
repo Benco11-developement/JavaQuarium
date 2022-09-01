@@ -10,6 +10,17 @@ public final class KelpBasic implements Kelp {
      * Nombre de pvs par défaut d'une algue
      */
     public static final int DEFAULT_PV = 10;
+
+    /**
+     * Dégâts que subit l'algue lorsqu'elle se fait mordre
+     */
+    public static final int BITING_DAMAGE = 2;
+
+    /**
+     * Âge maximum d'une algue (inclusif)
+     */
+    public static final int MAX_AGE = 20;
+
     private int pv;
     private int age;
 
@@ -38,12 +49,12 @@ public final class KelpBasic implements Kelp {
 
     @Override
     public boolean alive() {
-        return pv > 0 && age <= 20;
+        return pv > 0 && age <= MAX_AGE;
     }
 
     @Override
     public void bitten() {
-        pv -= 2;
+        pv -= BITING_DAMAGE;
     }
 
     @Override

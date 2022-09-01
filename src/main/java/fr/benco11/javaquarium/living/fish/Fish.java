@@ -24,7 +24,7 @@ public abstract sealed class Fish implements Living {
     public static final int HUNGER_THRESHOLD = 5;
 
     /**
-     * Nombre de pvs que perd un poisson lorsqu'il se fait mordre
+     * Dégâts que subit un poisson lorsqu'il se fait mordre
      */
     public static final int BITING_DAMAGE = 4;
 
