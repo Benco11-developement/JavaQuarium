@@ -127,7 +127,7 @@ public class JavaQuarium implements Aquarium {
     }
 
     /**
-     * Construit à partir de la liste des poissons et algues, des êtres vivants à ajouter par tour et des filtres de suppression par tour
+     * Construit avec de la liste des poissons et algues, des êtres vivants à ajouter par tour et des filtres de suppression par tour
      *
      * @param kelps                 liste des algues
      * @param fishes                liste des poissons
