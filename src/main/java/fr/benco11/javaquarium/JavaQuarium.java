@@ -54,18 +54,13 @@ public class JavaQuarium implements Aquarium {
         Aquarium aquarium = loadAquarium(options);
 
         // Récupère le nombre de rounds et le fichier de sortie
-        int rounds = (options.isPresent(ROUNDS))
-                     ? options.option(ROUNDS, Integer.class)
-                              .orElseThrow(() -> new OptionParseException(ROUNDS))
-                     : DEFAULT_ROUND_NUMBER;
-        Optional<File> output = options.option(OUTPUT, String.class)
+        int rounds = options.optionCastOrThrow(ROUNDS, Integer.class, new OptionParseException(ROUNDS))
+                            .orElse(DEFAULT_ROUND_NUMBER);
+        Optional<File> output = options.optionCastOrThrow(ROUNDS, String.class, new OptionParseException(OUTPUT))
                                        .map(File::new);
-        if(options.isPresent(OUTPUT) && output.isEmpty()) throw new OptionParseException(OUTPUT);
 
         // Récupère le tour de sauvegarde, par défaut le nombre de rounds de simulation
-        Optional<Integer> outputRound = options.option(OUTPUT_ROUND, Integer.class);
-        if(options.isPresent(OUTPUT_ROUND) && outputRound.isEmpty())
-            throw new OptionParseException(OUTPUT_ROUND);
+        Optional<Integer> outputRound = options.optionCastOrThrow(OUTPUT_ROUND, Integer.class, new OptionParseException(OUTPUT_ROUND));
 
         for(int round = 1; round <= rounds; round++) {
             // À chaque tour, simule un nouveau tour de l'aquarium et si c'est le tour d'enregistrement, enregistre dans le fichier de sortie
@@ -91,9 +86,10 @@ public class JavaQuarium implements Aquarium {
      */
     private static Aquarium loadAquarium(Options options) {
         Aquarium aquarium;
-        if(options.isPresent(INPUT)) {
-            try(FileReader reader = new FileReader(options.option(INPUT, String.class)
-                                                          .orElseThrow(() -> new OptionParseException(INPUT)))) {
+        Optional<File> inputFile = options.optionCastOrThrow(INPUT, String.class, new OptionParseException(INPUT))
+                                          .map(File::new);
+        if(inputFile.isPresent()) {
+            try(FileReader reader = new FileReader(inputFile.get())) {
                 AquariumParser parser = new AquariumParser(reader);
                 aquarium = parser.parseAquarium();
             } catch(IOException e) {

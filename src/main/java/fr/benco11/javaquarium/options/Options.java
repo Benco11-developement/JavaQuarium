@@ -63,13 +63,7 @@ public class Options {
         return this;
     }
 
-    /**
-     * Récupère une option
-     *
-     * @param id id de l'option
-     * @return l'<code>Optional</code> de l'option (vide si l'option n'existe pas)
-     */
-    public Optional<?> option(String id) {
+    private Optional<?> optionWildcard(String id) {
         return optionsMap.getOrDefault(id, Optional.empty());
     }
 
@@ -77,9 +71,19 @@ public class Options {
      * Récupère une option
      *
      * @param id id de l'option
-     * @return l'<code>Optional</code> de l'option (vide si l'option n'existe pas)
+     * @return un <code>Optional</code> contenant ou non l'option
      */
-    public Optional<?> option(StandardOption id) {
+    public Optional<Object> option(String id) {
+        return option(id, Object.class);
+    }
+
+    /**
+     * Récupère une option
+     *
+     * @param id id de l'option
+     * @return un <code>Optional</code> contenant ou non l'option
+     */
+    public Optional<Object> option(StandardOption id) {
         return option(id.id());
     }
 
@@ -87,40 +91,24 @@ public class Options {
      * Récupère une option id et la cast
      *
      * @param id    id de l'option
-     * @param clazz classe de l'option
+     * @param clazz classe de la valeur de l'option
      * @param <T>   type que représente <code>clazz</code>
-     * @return l'<code>Optional</code> de l'option cast en <code>clazz</code> (vide si l'option n'existe pas)
+     * @return un <code>Optional</code> contenant ou non l'option de type <code>T</code>
      */
     public <T> Optional<T> option(String id, Class<T> clazz) {
-        Optional<?> optional = option(id);
+        Optional<?> optional = optionWildcard(id);
         return (optional.isEmpty() || !(clazz.isInstance(optional.get())))
                ? Optional.empty()
                : optional.map(clazz::cast);
     }
 
     /**
-     * Récupère une option et la cast ou renvoie une autre valeur si l'option n'existe pas
-     *
-     * @param id     id de l'option
-     * @param map    <code>Function</code> qui à partir de la valeur de l'option renvoie une valeur du type <code>T</code>
-     * @param clazz  classe de la valeur de l'option
-     * @param orElse valeur à renvoyer si l'option n'existe pas
-     * @param <K>    type de la valeur de l'option
-     * @param <T>    type de <code>orElse</code> et du résultat de <code>map</code>
-     * @return le résultat de <code>map</code> ou <code>orElse</code>
-     */
-    public <K, T> T ifPresentOr(String id, Function<K, T> map, Class<K> clazz, T orElse) {
-        Optional<K> k = option(id, clazz);
-        return k.isEmpty() ? orElse : map.apply(k.get());
-    }
-
-    /**
      * Récupère une option et la cast
      *
      * @param id    id de l'option
-     * @param clazz classe de l'option
+     * @param clazz classe de la valeur de l'option
      * @param <T>   type que représente <code>clazz</code>
-     * @return l'<code>Optional</code> de l'option cast en <code>clazz</code> (vide si l'option n'existe pas)
+     * @return un <code>Optional</code> contenant ou non l'option de type <code>T</code>
      */
     public <T> Optional<T> option(StandardOption id, Class<T> clazz) {
         return option(id.id(), clazz);
@@ -133,12 +121,57 @@ public class Options {
      * @param map    <code>Function</code> qui à partir de la valeur de l'option renvoie une valeur du type <code>T</code>
      * @param clazz  classe de la valeur de l'option
      * @param orElse valeur à renvoyer si l'option n'existe pas
-     * @param <K>    type de la valeur de l'option
+     * @param <K>    type que représente <code>clazz</code>
+     * @param <T>    type de <code>orElse</code> et du résultat de <code>map</code>
+     * @return le résultat de <code>map</code> ou <code>orElse</code>
+     */
+    public <K, T> T ifPresentOr(String id, Function<K, T> map, Class<K> clazz, T orElse) {
+        Optional<K> k = option(id, clazz);
+        return k.isEmpty() ? orElse : map.apply(k.get());
+    }
+
+    /**
+     * Récupère une option et la cast ou renvoie une autre valeur si l'option n'existe pas
+     *
+     * @param id     id de l'option
+     * @param map    <code>Function</code> qui à partir de la valeur de l'option renvoie une valeur du type <code>T</code>
+     * @param clazz  classe de la valeur de l'option
+     * @param orElse valeur à renvoyer si l'option n'existe pas
+     * @param <K>    type que représente <code>clazz</code>
      * @param <T>    type de <code>orElse</code> et du résultat de <code>map</code>
      * @return le résultat de <code>map</code> ou <code>orElse</code>
      */
     public <K, T> T ifPresentOr(StandardOption id, Function<K, T> map, Class<K> clazz, T orElse) {
         return ifPresentOr(id.id(), map, clazz, orElse);
+    }
+
+    /**
+     * Récupère une option et la cast ou lève une exception si le cast a échoué
+     *
+     * @param id      id de l'option
+     * @param clazz   classe de l'option
+     * @param toThrow exception à lever si le cast échoue
+     * @param <T>     type que représente <code>clazz</code>
+     * @return un <code>Optional</code> contenant ou non l'option de type <code>T</code>
+     */
+    public <T> Optional<T> optionCastOrThrow(String id, Class<T> clazz, RuntimeException toThrow) {
+        Optional<?> optional = optionWildcard(id);
+        return (optional.isEmpty()) ? Optional.empty() : Optional.of(option(id, clazz))
+                                                                 .orElseThrow(() -> toThrow);
+    }
+
+    /**
+     * Récupère une option et la cast ou lève une exception si le cast a échoué
+     *
+     * @param id      id de l'option
+     * @param clazz   classe de l'option
+     * @param toThrow exception à lever si le cast échoue
+     * @param <T>     type que représente <code>clazz</code>
+     * @return un <code>Optional</code> contenant ou non l'option de type <code>T</code>
+     */
+    public <T> Optional<T> optionCastOrThrow(StandardOption id, Class<T> clazz,
+            RuntimeException toThrow) {
+        return optionCastOrThrow(id.id(), clazz, toThrow);
     }
 
     /**
